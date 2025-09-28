@@ -316,7 +316,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloatingHealthbar1
   slider: {fileID: 7383090568209768724}
-  camera1: {fileID: 0}
   target: {fileID: 4546443853933198495}
   offset: {x: 0, y: 2.5, z: 0}
 --- !u!1 &9004218079912198724
@@ -448,7 +447,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
