@@ -380,13 +380,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08185149, y: 0, z: 0, w: 0.9966446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 186, z: -223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1227918979}
-  m_LocalEulerAnglesHint: {x: 9.39, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,14 +1044,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227918978}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.20364177, y: 0, z: 0, w: 0.97904545}
   m_LocalPosition: {x: 491, y: 0, z: 104.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 23.5, y: 0, z: 0}
 --- !u!114 &1227918980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,15 +1064,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec2e3e93e6c0e6418d8278c7f97f0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  maxSpeed: 30
+  maxSpeed: 120
   acceleration: 20
-  damping: 15
-  stepSize: 2
+  damping: 10
+  zoomStepSize: 5
   zoomDampening: 7.5
-  minHeight: 1
-  maxHeight: 100
-  zoomSpeed: 4
+  minFOV: 20
+  maxFOV: 60
+  zoomSpeed: 100
   maxRotationSpeed: 0.7
+  dragSpeed: 0.07
+  dragDampening: 20
 --- !u!1 &1768040542
 GameObject:
   m_ObjectHideFlags: 0
