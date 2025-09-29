@@ -26,12 +26,6 @@ public class CameraController : MonoBehaviour
     private float minFOV = 20f;
     [SerializeField]
     private float maxFOV = 60f;
-    [SerializeField]
-    private float zoomSpeed = 2f;
-
-    // Rotation
-    [SerializeField]
-    private float maxRotationSpeed = 1f;
 
     // Drag motion
     [SerializeField]
@@ -51,22 +45,21 @@ public class CameraController : MonoBehaviour
         cameraActions = new CameraControlActions();
         camera = this.GetComponentInChildren<Camera>();
         cameraTransform = camera.transform;
+        // Set initial camera orientation
+        cameraTransform.localRotation = Quaternion.identity;
     }
 
     private void OnEnable()
     {
         targetFOV = camera.fieldOfView;
-        cameraTransform.LookAt(this.transform);
         lastPosition = this.transform.position;
         movement = cameraActions.Camera.Movement;
-        cameraActions.Camera.RotateCamera.performed += RotateCamera;
         cameraActions.Camera.ZoomCamera.performed += ZoomCamera;
         cameraActions.Camera.Enable();
     }
 
     private void OnDisable()
     {
-        cameraActions.Camera.RotateCamera.performed -= RotateCamera;
         cameraActions.Camera.ZoomCamera.performed -= ZoomCamera;
         cameraActions.Disable();
     }
@@ -126,22 +119,11 @@ public class CameraController : MonoBehaviour
         targetPosition = Vector3.zero;
     }
 
-    private void RotateCamera(InputAction.CallbackContext inputValue)
-    {
-        if (!Mouse.current.middleButton.isPressed)
-        {
-            return;
-        }
-        float value = inputValue.ReadValue<Vector2>().x;
-        transform.rotation = Quaternion.Euler(0f, value * maxRotationSpeed + transform.rotation.eulerAngles.y, 0f);
-    }
-
     private void ZoomCamera(InputAction.CallbackContext inputValue)
     {
         float value = -inputValue.ReadValue<Vector2>().y * zoomStepSize;
         if (Mathf.Abs(value) > 0.01f)
         {
-            Debug.Log($"Zoom input: {value}, targetFOV: {targetFOV}");
             targetFOV = camera.fieldOfView + value;
             targetFOV = Mathf.Clamp(targetFOV, minFOV, maxFOV);
         }
@@ -149,8 +131,8 @@ public class CameraController : MonoBehaviour
 
     private void UpdateCameraPosition()
     {
+        // Update FOV only, let the camera inherit rotation from the parent
         camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetFOV, Time.deltaTime * zoomDampening);
-        cameraTransform.LookAt(this.transform);
     }
 
     private void DragCamera()
