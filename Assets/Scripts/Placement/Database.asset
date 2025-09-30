@@ -16,12 +16,12 @@ MonoBehaviour:
   - <Name>k__BackingField: Swordmen
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 9004218079912198724, guid: f37882d05b75c82488ac7f3bb1b114c3, type: 3}
+    <Prefab>k__BackingField: {fileID: 4369148051819618765, guid: 91793c54b9d44e84c97405f73240d06b, type: 3}
   - <Name>k__BackingField: Archer
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 6481102387247209894, guid: 693461098007d9f48bd347e2cbdce97c, type: 3}
+    <Prefab>k__BackingField: {fileID: 4369148051819618765, guid: 87c64c537c6f96c4484317224a463568, type: 3}
   - <Name>k__BackingField: Giant
     <ID>k__BackingField: 3
-    <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 5987151210666922726, guid: fa15175029542b3438f7f55bb065e062, type: 3}
+    <Size>k__BackingField: {x: 2, y: 2}
+    <Prefab>k__BackingField: {fileID: 714145467849837881, guid: bd8c40487b84ab846a44901d42668c4d, type: 3}
