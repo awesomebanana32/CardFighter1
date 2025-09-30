@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 8773436111529128563}
   - component: {fileID: 2636716165523417910}
   m_Layer: 0
-  m_Name: Giant Green  1
+  m_Name: Giant Green
   m_TagString: TeamGreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
