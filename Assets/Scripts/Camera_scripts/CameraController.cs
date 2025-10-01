@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
 {
     private CameraControlActions cameraActions;
     private InputAction movement;
-    private Camera camera;
+    private Camera mainCamera;
     private Transform cameraTransform;
 
     // Horizontal motion
@@ -43,15 +43,15 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         cameraActions = new CameraControlActions();
-        camera = this.GetComponentInChildren<Camera>();
-        cameraTransform = camera.transform;
+        mainCamera = this.GetComponentInChildren<Camera>();
+        cameraTransform = mainCamera.transform;
         // Set initial camera orientation
         cameraTransform.localRotation = Quaternion.identity;
     }
 
     private void OnEnable()
     {
-        targetFOV = camera.fieldOfView;
+        targetFOV = mainCamera.fieldOfView;
         lastPosition = this.transform.position;
         movement = cameraActions.Camera.Movement;
         cameraActions.Camera.ZoomCamera.performed += ZoomCamera;
@@ -124,7 +124,7 @@ public class CameraController : MonoBehaviour
         float value = -inputValue.ReadValue<Vector2>().y * zoomStepSize;
         if (Mathf.Abs(value) > 0.01f)
         {
-            targetFOV = camera.fieldOfView + value;
+            targetFOV = mainCamera.fieldOfView + value;
             targetFOV = Mathf.Clamp(targetFOV, minFOV, maxFOV);
         }
     }
@@ -132,7 +132,7 @@ public class CameraController : MonoBehaviour
     private void UpdateCameraPosition()
     {
         // Update FOV only, let the camera inherit rotation from the parent
-        camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetFOV, Time.deltaTime * zoomDampening);
+        mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, Time.deltaTime * zoomDampening);
     }
 
     private void DragCamera()
