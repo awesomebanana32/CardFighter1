@@ -4,19 +4,19 @@ using UnityEngine.TextCore;
 
 public class MainMenuController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void StartGame()
     {
+        // if it is the first time log in to first play scene
+        if (SaveManager.hasSave())
+        {
+            //load scene with save data
+        }
+        else
+        {
+            //load scene for time playing
+        }
+        CampaignData data = SaveManager.LoadGame();
+        SaveManager.SaveGame(data);
         Debug.Log("GameStarted");
         SceneManager.LoadScene("Battle");
 
