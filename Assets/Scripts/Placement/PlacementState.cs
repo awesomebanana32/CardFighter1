@@ -14,8 +14,9 @@ public class PlacementState : IBuildingState
     private Renderer cellIndicatorRenderer;
     private Color validColor;
     private Color invalidColor;
+    private PlacementSystem placementSystem;  // New reference to PlacementSystem
 
-    public PlacementState(int id, Grid grid, ObjectDatabaseSO database, ObjectPlacer objectPlacer, GridData gridData, GameObject cellIndicator, InputManager inputManager)
+    public PlacementState(int id, Grid grid, ObjectDatabaseSO database, ObjectPlacer objectPlacer, GridData gridData, GameObject cellIndicator, InputManager inputManager, PlacementSystem placementSystem)
     {
         this.ID = id;
         this.grid = grid;
@@ -24,6 +25,7 @@ public class PlacementState : IBuildingState
         this.gridData = gridData;
         this.cellIndicator = cellIndicator;
         this.inputManager = inputManager;
+        this.placementSystem = placementSystem;  // Assign the new parameter
 
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == id);
 
@@ -52,14 +54,23 @@ public class PlacementState : IBuildingState
 
     public void OnAction(Vector3Int gridPosition)
     {
-        if (CheckPlacementValidity(gridPosition, selectedObjectIndex))
+        if (!CheckPlacementValidity(gridPosition, selectedObjectIndex))
         {
-            int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, grid.CellToWorld(gridPosition));
-            if (index >= 0)
-            {
-                gridData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size, database.objectsData[selectedObjectIndex].ID, index);
-                lastGridPosition = gridPosition;
-            }
+            return;
+        }
+
+        int cost = database.objectsData[selectedObjectIndex].PopulationCost;
+        if (placementSystem.CurrentPopulation + cost > placementSystem.MaxPopulation)
+        {
+            return;  // Cannot place due to population limit
+        }
+
+        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, grid.CellToWorld(gridPosition));
+        if (index >= 0)
+        {
+            gridData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size, database.objectsData[selectedObjectIndex].ID, index);
+            placementSystem.AddToPopulation(cost);  // Add to population after successful placement
+            lastGridPosition = gridPosition;
         }
     }
 
@@ -70,7 +81,10 @@ public class PlacementState : IBuildingState
 
         cellIndicator.transform.position = grid.CellToWorld(gridPosition);
 
-        bool isValid = CheckPlacementValidity(gridPosition, selectedObjectIndex);
+        bool gridValid = CheckPlacementValidity(gridPosition, selectedObjectIndex);
+        int cost = database.objectsData[selectedObjectIndex].PopulationCost;
+        bool populationValid = (placementSystem.CurrentPopulation + cost <= placementSystem.MaxPopulation);
+        bool isValid = gridValid && populationValid;
         cellIndicatorRenderer.material.color = isValid ? validColor : invalidColor;
 
         if (gridPosition != lastGridPosition && Input.GetMouseButton(0) && !inputManager.IsPointerOverUI())

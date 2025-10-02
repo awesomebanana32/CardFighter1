@@ -1,3 +1,4 @@
+// GridData.cs
 using UnityEngine;
 using System.Collections.Generic;
 using System;
@@ -42,7 +43,7 @@ public class GridData
         return true;
     }
 
-    internal bool GetRepresentationIndex(Vector3Int gridPosition, out int index)
+    public bool GetRepresentationIndex(Vector3Int gridPosition, out int index)
     {
         if (!placedObjects.ContainsKey(gridPosition))
         {
@@ -51,6 +52,11 @@ public class GridData
         }
         index = placedObjects[gridPosition].placedObjectIndex;
         return true;
+    }
+
+    public bool TryGetPlacementData(Vector3Int gridPosition, out PlacementData data)
+    {
+        return placedObjects.TryGetValue(gridPosition, out data);
     }
 
     internal void RemoveObjectAt(Vector3Int gridPosition)
