@@ -19,7 +19,10 @@ public class AttackState : State
         Vector3 dir = (target.position - transform.position).normalized;
         transform.forward = dir;
 
-        float distance = Vector3.Distance(transform.position, target.position);
+        float distance = Vector3.Distance(
+        transform.position,
+        target.GetComponent<Collider>().ClosestPoint(transform.position)
+        );
 
         // Attack if in range and cooldown passed
         if (distance <= attackRange && Time.time - lastAttackTime >= attackCooldown)

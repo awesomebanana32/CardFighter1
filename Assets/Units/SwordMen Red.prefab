@@ -447,7 +447,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6964637346258731643}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackState
   attackCooldown: 1
-  attackRange: 2
+  attackRange: 3
   damage: 10
   chaseState: {fileID: 857638416877367963}
 --- !u!114 &857638416877367963
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChaseState
   attackState: {fileID: 3659232240516409856}
-  attackRange: 2
+  attackRange: 3
   visionRange: 10
   enemyTag: TeamGreen
 --- !u!114 &7795123632158606091

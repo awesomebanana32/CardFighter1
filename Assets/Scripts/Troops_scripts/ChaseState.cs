@@ -26,17 +26,28 @@ public class ChaseState : State
             return this;
         }
 
-        float distance = Vector3.Distance(transform.position, nearestEnemy.position);
+        Collider enemyCollider = nearestEnemy.GetComponent<Collider>();
+        if (enemyCollider == null)
+        {
+            Debug.LogWarning("Nearest enemy has no collider!");
+            return this;
+        }
 
+        // Use collider closest point instead of pivot
+        Vector3 closestPoint = enemyCollider.ClosestPoint(transform.position);
+        float distance = Vector3.Distance(transform.position, closestPoint);
+
+        // If within attack range, stop and switch to attack
         if (distance <= attackRange)
         {
-            agent.ResetPath();
+            agent.ResetPath(); // stop moving
             attackState.SetTarget(nearestEnemy);
             return attackState;
         }
         else
         {
-            agent.SetDestination(nearestEnemy.position);
+            // Move toward the closest point on the enemy collider
+            agent.SetDestination(closestPoint);
         }
 
         return this;
@@ -50,7 +61,13 @@ public class ChaseState : State
 
         foreach (GameObject enemy in enemies)
         {
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            Collider enemyCollider = enemy.GetComponent<Collider>();
+            if (enemyCollider == null) continue;
+
+            // Use closest point to respect enemy size
+            Vector3 closestPoint = enemyCollider.ClosestPoint(transform.position);
+            float distance = Vector3.Distance(transform.position, closestPoint);
+
             if (distance < shortestDistance)
             {
                 shortestDistance = distance;

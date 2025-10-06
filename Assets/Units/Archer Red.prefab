@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3af31fa83784b4497f2d8f36f52e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackState
-  attackCooldown: 0.5
+  attackCooldown: 0.7
   attackRange: 25
   damage: 10
   chaseState: {fileID: 7329904950169982582}
