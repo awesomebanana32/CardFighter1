@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackState
   attackCooldown: 1
-  attackRange: 3
+  attackRange: 4
   damage: 10
   chaseState: {fileID: 857638416877367963}
 --- !u!114 &857638416877367963
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChaseState
   attackState: {fileID: 3659232240516409856}
-  attackRange: 3
+  attackRange: 4
   visionRange: 10
   enemyTag: TeamGreen
 --- !u!114 &7795123632158606091
