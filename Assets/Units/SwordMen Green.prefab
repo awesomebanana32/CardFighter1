@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 857638416877367963, guid: 5b32c9abe7f726247ad697b8b4ad1627, type: 3}
       propertyPath: attackRange
-      value: 2.5
+      value: 4.2
       objectReference: {fileID: 0}
     - target: {fileID: 1146288480838203150, guid: 5b32c9abe7f726247ad697b8b4ad1627, type: 3}
       propertyPath: m_AnchorMax.x
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3659232240516409856, guid: 5b32c9abe7f726247ad697b8b4ad1627, type: 3}
       propertyPath: attackRange
-      value: 2.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4516691981237125233, guid: 5b32c9abe7f726247ad697b8b4ad1627, type: 3}
       propertyPath: m_Color.b
@@ -127,45 +127,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6964637346258731643, guid: 5b32c9abe7f726247ad697b8b4ad1627, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7099373036822722343}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b32c9abe7f726247ad697b8b4ad1627, type: 3}
 --- !u!4 &4064430917101312343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7182131829123829775, guid: 5b32c9abe7f726247ad697b8b4ad1627, type: 3}
   m_PrefabInstance: {fileID: 6614605577345796440}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4281956217404279587 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6964637346258731643, guid: 5b32c9abe7f726247ad697b8b4ad1627, type: 3}
-  m_PrefabInstance: {fileID: 6614605577345796440}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &7099373036822722343
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4281956217404279587}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0

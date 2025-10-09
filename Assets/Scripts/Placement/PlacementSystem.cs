@@ -8,13 +8,14 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Grid grid;
     [SerializeField] private ObjectDatabaseSO database;
     [SerializeField] private ObjectPlacer objectPlacer;
-    [SerializeField] private int maxPopulation = 100;  // The population cap, editable in Inspector
+    [SerializeField] private int maxPopulation = 100;
+    [SerializeField] private LayerMask unplaceableLayerMask; // Added for unplaceable objects
 
     private IBuildingState buildingState;
     private GridData gridData;
     private Renderer previewRenderer;
     private Color validColor;
-    private int currentPopulation = 0;  // Tracks current total population
+    private int currentPopulation = 0;
 
     public int MaxPopulation => maxPopulation;
     public int CurrentPopulation => currentPopulation;
@@ -22,7 +23,7 @@ public class PlacementSystem : MonoBehaviour
     public void AddToPopulation(int amount)
     {
         currentPopulation += amount;
-        if (currentPopulation < 0) currentPopulation = 0;  // Prevent negative population
+        if (currentPopulation < 0) currentPopulation = 0;
     }
 
     private void Start()
@@ -40,7 +41,7 @@ public class PlacementSystem : MonoBehaviour
     public void StartPlacement(int ID)
     {
         StopPlacement();
-        buildingState = new PlacementState(ID, grid, database, objectPlacer, gridData, cellIndicator, inputManager, this);
+        buildingState = new PlacementState(ID, grid, database, objectPlacer, gridData, cellIndicator, inputManager, this, unplaceableLayerMask);
         inputManager.OnClicked += OnInputClicked;
         inputManager.OnExit += StopPlacement;
     }

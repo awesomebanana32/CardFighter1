@@ -14,9 +14,11 @@ public class PlacementState : IBuildingState
     private Renderer cellIndicatorRenderer;
     private Color validColor;
     private Color invalidColor;
-    private PlacementSystem placementSystem;  // New reference to PlacementSystem
+    private PlacementSystem placementSystem;
+    private LayerMask unplaceableLayerMask; // Field to store the layer mask
 
-    public PlacementState(int id, Grid grid, ObjectDatabaseSO database, ObjectPlacer objectPlacer, GridData gridData, GameObject cellIndicator, InputManager inputManager, PlacementSystem placementSystem)
+    // Updated constructor to accept unplaceableLayerMask
+    public PlacementState(int id, Grid grid, ObjectDatabaseSO database, ObjectPlacer objectPlacer, GridData gridData, GameObject cellIndicator, InputManager inputManager, PlacementSystem placementSystem, LayerMask unplaceableLayerMask)
     {
         this.ID = id;
         this.grid = grid;
@@ -25,7 +27,8 @@ public class PlacementState : IBuildingState
         this.gridData = gridData;
         this.cellIndicator = cellIndicator;
         this.inputManager = inputManager;
-        this.placementSystem = placementSystem;  // Assign the new parameter
+        this.placementSystem = placementSystem;
+        this.unplaceableLayerMask = unplaceableLayerMask; // Assign the layer mask
 
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == id);
 
@@ -62,14 +65,14 @@ public class PlacementState : IBuildingState
         int cost = database.objectsData[selectedObjectIndex].PopulationCost;
         if (placementSystem.CurrentPopulation + cost > placementSystem.MaxPopulation)
         {
-            return;  // Cannot place due to population limit
+            return; // Cannot place due to population limit
         }
 
         int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, grid.CellToWorld(gridPosition));
         if (index >= 0)
         {
             gridData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size, database.objectsData[selectedObjectIndex].ID, index);
-            placementSystem.AddToPopulation(cost);  // Add to population after successful placement
+            placementSystem.AddToPopulation(cost); // Add to population after successful placement
             lastGridPosition = gridPosition;
         }
     }
@@ -102,6 +105,26 @@ public class PlacementState : IBuildingState
     {
         if (selectedObjectIndex < 0 || selectedObjectIndex >= database.objectsData.Count)
             return false;
-        return gridData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
+
+        bool isGridValid = gridData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
+        if (!isGridValid)
+            return false;
+
+        Vector2Int objectSize = database.objectsData[selectedObjectIndex].Size;
+        Vector3 worldPosition = grid.CellToWorld(gridPosition);
+        Vector3 boxSize = new Vector3(objectSize.x * grid.cellSize.x, 1f, objectSize.y * grid.cellSize.z) * 0.5f;
+        Vector3 boxCenter = worldPosition + new Vector3(boxSize.x, 0.5f, boxSize.z);
+
+        Collider[] colliders = Physics.OverlapBox(boxCenter, boxSize, Quaternion.identity);
+        foreach (var collider in colliders)
+        {
+            if (collider.CompareTag("Unplaceable"))
+            {
+                Debug.Log($"Overlap detected with: {collider.gameObject.name}");
+                return false;
+            }
+        }
+
+        return true;
     }
 }
