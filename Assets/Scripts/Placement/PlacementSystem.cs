@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private ObjectDatabaseSO database;
     [SerializeField] private ObjectPlacer objectPlacer;
     [SerializeField] private int maxPopulation = 100;
-    [SerializeField] private LayerMask unplaceableLayerMask;
+    [SerializeField] private LayerMask unplaceableLayerMask; // Added for unplaceable objects
 
     private IBuildingState buildingState;
     private GridData gridData;
@@ -16,22 +17,13 @@ public class PlacementSystem : MonoBehaviour
     private Color validColor;
     private int currentPopulation = 0;
 
-    // Singleton instance
-    public static PlacementSystem Instance { get; private set; }
-
     public int MaxPopulation => maxPopulation;
     public int CurrentPopulation => currentPopulation;
 
-    private void Awake()
+    public void AddToPopulation(int amount)
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        currentPopulation += amount;
+        if (currentPopulation < 0) currentPopulation = 0;
     }
 
     private void Start()
@@ -44,17 +36,6 @@ public class PlacementSystem : MonoBehaviour
             ColorUtility.TryParseHtmlString("#A7FFA5", out validColor);
             previewRenderer.material.color = validColor;
         }
-
-        ToggleUnplaceableMeshes(false);
-    }
-
-    /// <summary>
-    /// Safely adds population, clamped to [0, maxPopulation]
-    /// </summary>
-    public void AddToPopulation(int amount)
-    {
-        currentPopulation += amount;
-        currentPopulation = Mathf.Clamp(currentPopulation, 0, maxPopulation);
     }
 
     public void StartPlacement(int ID)
@@ -63,8 +44,6 @@ public class PlacementSystem : MonoBehaviour
         buildingState = new PlacementState(ID, grid, database, objectPlacer, gridData, cellIndicator, inputManager, this, unplaceableLayerMask);
         inputManager.OnClicked += OnInputClicked;
         inputManager.OnExit += StopPlacement;
-
-        ToggleUnplaceableMeshes(true);
     }
 
     public void StartRemoving()
@@ -73,60 +52,40 @@ public class PlacementSystem : MonoBehaviour
         buildingState = new RemovingState(grid, objectPlacer, gridData, cellIndicator, inputManager, database, this);
         inputManager.OnClicked += OnInputClicked;
         inputManager.OnExit += StopPlacement;
-
-        ToggleUnplaceableMeshes(true);
     }
 
     private void OnInputClicked()
     {
-        if (buildingState == null || inputManager == null || inputManager.IsPointerOverUI())
+        if (buildingState == null || inputManager.IsPointerOverUI())
             return;
 
         if (inputManager.GetSelectedMapPosition(out Vector3 mousePosition))
         {
             Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-            buildingState?.OnAction(gridPosition);
+            buildingState.OnAction(gridPosition);
         }
     }
 
-    public void StopPlacementButton() => StopPlacement();
-
     private void StopPlacement()
     {
-        if (buildingState == null) return;
+        if (buildingState == null)
+            return;
 
         buildingState.EndState();
         inputManager.OnClicked -= OnInputClicked;
         inputManager.OnExit -= StopPlacement;
         buildingState = null;
-
-        ToggleUnplaceableMeshes(false);
     }
 
     private void Update()
     {
-        if (buildingState == null || inputManager == null) return;
+        if (buildingState == null || inputManager == null)
+            return;
 
         if (inputManager.GetSelectedMapPosition(out Vector3 mousePosition))
         {
             Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-            buildingState?.UpdateState(gridPosition);
-        }
-    }
-
-    private void ToggleUnplaceableMeshes(bool visible)
-    {
-        Collider[] unplaceableColliders = Physics.OverlapSphere(Vector3.zero, float.MaxValue, unplaceableLayerMask);
-        foreach (var collider in unplaceableColliders)
-        {
-            if (collider.CompareTag("Unplaceable"))
-            {
-                Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
-                foreach (var renderer in renderers)
-                {
-                    renderer.enabled = visible;
-                }
-            }
+            buildingState.UpdateState(gridPosition);
         }
     }
 }

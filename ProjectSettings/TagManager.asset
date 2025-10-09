@@ -7,8 +7,6 @@ TagManager:
   - TeamRed
   - TeamGreen
   - Unplaceable
-  - TroopModel
-  - MinimapCamera
   layers:
   - Default
   - TransparentFX
@@ -17,12 +15,12 @@ TagManager:
   - Water
   - UI
   - Obstacles
-  - Unplaceable
-  - Ground
-  - AlwaysWhite
-  - Camera
-  - Enviorment
-  - MinimapMarker
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
