@@ -10,15 +10,15 @@ public class MainMenuController : MonoBehaviour
         if (SaveManager.hasSave())
         {
             //load scene with save data
+            CampaignData data = SaveManager.LoadGame();
+            SceneManager.LoadScene("Campaign");
         }
         else
         {
             //load scene for time playing
+            //SaveManager.SaveGame(data);
         }
-        CampaignData data = SaveManager.LoadGame();
-        SaveManager.SaveGame(data);
         Debug.Log("GameStarted");
-        SceneManager.LoadScene("Battle");
 
     }
 
