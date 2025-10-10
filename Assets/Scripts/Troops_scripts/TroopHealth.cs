@@ -3,31 +3,34 @@ using UnityEngine;
 public class TroopHealth : MonoBehaviour
 {
     [SerializeField] private FloatingHealthbar healthbar; // Reference to your healthbar
-    [SerializeField] private float maxHealth = 100f; // Maximum health
-    [SerializeField] private float damageAmount = 10f; // How much damage each key press does
+    [SerializeField] private float maxHealth = 100f;      // Maximum health
+    [SerializeField] private int populationCost = 1;      // Population cost of this troop
     private float currentHealth;
+
+    private PlacementSystem placementSystem;
 
     void Start()
     {
         currentHealth = maxHealth;
-        healthbar.UpdateHealthBar(currentHealth, maxHealth);
+        healthbar?.UpdateHealthBar(currentHealth, maxHealth);
 
-    }
-
-    void Update()
-    {
-        // Check if the 1 key is pressed
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        // Automatically find the PlacementSystem in the scene if not assigned
+        if (placementSystem == null)
         {
-            TakeDamage(damageAmount);
+            placementSystem = Object.FindFirstObjectByType<PlacementSystem>();
+            if (placementSystem == null)
+            {
+                Debug.LogError("PlacementSystem not found in scene for " + gameObject.name);
+            }
         }
     }
+
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthbar.UpdateHealthBar(currentHealth, maxHealth);
+        healthbar?.UpdateHealthBar(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
         {
@@ -39,14 +42,19 @@ public class TroopHealth : MonoBehaviour
     {
         currentHealth += healAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthbar.UpdateHealthBar(currentHealth, maxHealth);
+        healthbar?.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     private void Die()
     {
         Debug.Log(gameObject.name + " has died.");
-        // Optional: Add death logic here
-        
+
+        // Reduce population if the troop is tagged as TeamGreen
+        if (gameObject.CompareTag("TeamGreen") && placementSystem != null)
+        {
+            placementSystem.AddToPopulation(-populationCost);
+        }
+
         Destroy(gameObject);
     }
 }

@@ -546,7 +546,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TroopHealth
   healthbar: {fileID: 9088786084774739940}
   maxHealth: 500
-  damageAmount: 12
+  populationCost: 2
+  placementSystem: {fileID: 0}
 --- !u!1 &6156454510579752202
 GameObject:
   m_ObjectHideFlags: 0
