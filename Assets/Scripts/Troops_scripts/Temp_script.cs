@@ -1,14 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Temp_script : MonoBehaviour
 {
-    [SerializeField] private GameObject replacementObject; // Object to replace this one with
+    [SerializeField] private GameObject replacementObject;
+    [SerializeField] private string buttonName = "StartButton"; // Name of your button in the Hierarchy
+    private Button startButton;
 
-    void Update()
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha7))
+        // Try to find the button in the scene
+        startButton = GameObject.Find(buttonName)?.GetComponent<Button>();
+
+        if (startButton != null)
         {
-            ReplaceSelf();
+            startButton.onClick.AddListener(ReplaceSelf);
+        }
+        else
+        {
+            Debug.LogWarning($"Button named '{buttonName}' not found in the scene!");
         }
     }
 
@@ -16,10 +26,7 @@ public class Temp_script : MonoBehaviour
     {
         if (replacementObject != null)
         {
-            // Instantiate the replacement at the same position and rotation
             Instantiate(replacementObject, transform.position, transform.rotation);
-
-            // Destroy this object
             Destroy(gameObject);
         }
         else

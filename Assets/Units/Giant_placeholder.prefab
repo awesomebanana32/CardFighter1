@@ -157,3 +157,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Temp_script
   replacementObject: {fileID: 5987151210666922726, guid: fa15175029542b3438f7f55bb065e062, type: 3}
+  buttonName: Start

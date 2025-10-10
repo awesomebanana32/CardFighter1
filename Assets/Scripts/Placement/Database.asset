@@ -28,3 +28,8 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 714145467849837881, guid: bd8c40487b84ab846a44901d42668c4d, type: 3}
     <PopulationCost>k__BackingField: 2
+  - <Name>k__BackingField: Tower
+    <ID>k__BackingField: 4
+    <Size>k__BackingField: {x: 2, y: 2}
+    <Prefab>k__BackingField: {fileID: 4369148051819618765, guid: edfc92f6b57043340b764a161c6c441a, type: 3}
+    <PopulationCost>k__BackingField: 7

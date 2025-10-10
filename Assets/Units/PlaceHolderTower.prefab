@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 691077093803344491}
   - component: {fileID: 1119949771027825626}
   m_Layer: 0
-  m_Name: PlaceHolderArcher
+  m_Name: PlaceHolderTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8260957498536614070}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8aa4f4af03a4945a9d429313868be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Temp_script
-  replacementObject: {fileID: 6481102387247209894, guid: 693461098007d9f48bd347e2cbdce97c, type: 3}
+  replacementObject: {fileID: 3813753915969858596, guid: 9db08cbc7192dd445ae588cb04af53d6, type: 3}
   buttonName: Start
 --- !u!1 &4479541377768901415
 GameObject:

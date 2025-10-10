@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Temp_script
   replacementObject: {fileID: 6279969244863477208, guid: f37882d05b75c82488ac7f3bb1b114c3, type: 3}
+  buttonName: Start
 --- !u!1 &4479541377768901415
 GameObject:
   m_ObjectHideFlags: 0
