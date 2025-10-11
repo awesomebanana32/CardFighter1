@@ -16,10 +16,6 @@ public class Temp_script : MonoBehaviour
         {
             startButton.onClick.AddListener(ReplaceSelf);
         }
-        else
-        {
-            Debug.LogWarning($"Button named '{buttonName}' not found in the scene!");
-        }
     }
 
     private void ReplaceSelf()
@@ -28,10 +24,6 @@ public class Temp_script : MonoBehaviour
         {
             Instantiate(replacementObject, transform.position, transform.rotation);
             Destroy(gameObject);
-        }
-        else
-        {
-            Debug.LogWarning("Replacement object not assigned!");
         }
     }
 }

@@ -11,9 +11,5 @@ public class Placement_button_disapear : MonoBehaviour
         {
             targetObject.SetActive(false); // Makes the object disappear
         }
-        else
-        {
-            Debug.LogWarning("No target object assigned!");
-        }
     }
 }

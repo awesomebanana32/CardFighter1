@@ -38,7 +38,6 @@ public class CountdownTimer : MonoBehaviour
             else
             {
                 isCountingDown = false;
-                Debug.Log("Countdown finished!");
             }
         }
     }
@@ -47,7 +46,6 @@ public class CountdownTimer : MonoBehaviour
     {
         remainingTime = startMinutes * 60 + startSeconds;
         isCountingDown = true;
-        Debug.Log("Countdown started!");
     }
 
     void UpdateTimerDisplay()
@@ -61,6 +59,5 @@ public class CountdownTimer : MonoBehaviour
     public void StopCountdown()
     {
         isCountingDown = false;
-        Debug.Log("Countdown stopped at: " + timerText.text);
     }
 }

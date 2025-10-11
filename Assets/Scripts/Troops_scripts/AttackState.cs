@@ -32,7 +32,6 @@ public class AttackState : State
                 health.TakeDamage(damage);
 
             lastAttackTime = Time.time;
-            Debug.Log($"{gameObject.name} attacked {target.name} for {damage} damage.");
         }
 
         // Return to chase if target moves away

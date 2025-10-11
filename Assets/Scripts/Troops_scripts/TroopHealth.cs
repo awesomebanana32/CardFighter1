@@ -18,10 +18,6 @@ public class TroopHealth : MonoBehaviour
         if (placementSystem == null)
         {
             placementSystem = Object.FindFirstObjectByType<PlacementSystem>();
-            if (placementSystem == null)
-            {
-                Debug.LogError("PlacementSystem not found in scene for " + gameObject.name);
-            }
         }
     }
 

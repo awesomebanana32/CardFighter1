@@ -29,20 +29,12 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
 {
-    Debug.Log($"Projectile hit: {other.name} with tag '{other.tag}'"); // This will spam in Console—check if it fires and what tag it sees
-
     if (other.CompareTag(targetTag))
     {
-        Debug.Log("Tag match! Applying damage."); // Confirm this logs
         TroopHealth health = other.GetComponent<TroopHealth>();
         if (health != null)
         {
             health.TakeDamage(damage);
-            Debug.Log($"{gameObject.name} hit {other.name} for {damage} damage.");
-        }
-        else
-        {
-            Debug.LogWarning("TroopHealth component missing on hit target!");
         }
         Destroy(gameObject);
     }

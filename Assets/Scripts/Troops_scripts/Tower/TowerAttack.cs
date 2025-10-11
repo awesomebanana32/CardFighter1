@@ -62,7 +62,5 @@ public class TowerAttack : MonoBehaviour
         {
             projectileScript.damage = damage;
         }
-
-        Debug.Log($"{gameObject.name} fired a projectile at {currentTarget.name}.");
     }
 }

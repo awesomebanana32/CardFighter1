@@ -34,7 +34,6 @@ public class PlacementState : IBuildingState
 
         if (selectedObjectIndex == -1)
         {
-            Debug.LogError($"Object with ID {id} not found in database.");
             return;
         }
 
@@ -120,7 +119,6 @@ public class PlacementState : IBuildingState
         {
             if (collider.CompareTag("Unplaceable"))
             {
-                Debug.Log($"Overlap detected with: {collider.gameObject.name}");
                 return false;
             }
         }

@@ -74,6 +74,11 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
+    public void StopPlacementButton()
+    {
+        StopPlacement();
+    }
+
     private void StopPlacement()
     {
         if (buildingState == null)

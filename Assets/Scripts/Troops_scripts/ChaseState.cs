@@ -29,7 +29,6 @@ public class ChaseState : State
         Collider enemyCollider = nearestEnemy.GetComponent<Collider>();
         if (enemyCollider == null)
         {
-            Debug.LogWarning("Nearest enemy has no collider!");
             return this;
         }
 
