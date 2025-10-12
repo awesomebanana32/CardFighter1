@@ -9,29 +9,20 @@ public class CameraController : MonoBehaviour
     private Transform cameraTransform;
 
     // Horizontal motion
-    [SerializeField]
-    private float maxSpeed = 5f;
+    [SerializeField] private float maxSpeed = 5f;
     private float speed;
-    [SerializeField]
-    private float acceleration = 10f;
-    [SerializeField]
-    private float damping = 15f;
+    [SerializeField] private float acceleration = 10f;
+    [SerializeField] private float damping = 15f;
 
     // FOV zoom
-    [SerializeField]
-    private float zoomStepSize = 2f;
-    [SerializeField]
-    private float zoomDampening = 7.5f;
-    [SerializeField]
-    private float minFOV = 20f;
-    [SerializeField]
-    private float maxFOV = 60f;
+    [SerializeField] private float zoomStepSize = 2f;
+    [SerializeField] private float zoomDampening = 7.5f;
+    [SerializeField] private float minFOV = 20f;
+    [SerializeField] private float maxFOV = 60f;
 
     // Drag motion
-    [SerializeField]
-    private float dragSpeed = 0.01f; // New variable for drag sensitivity
-    [SerializeField]
-    private float dragDampening = 10f; // New variable for drag smoothing
+    [SerializeField] private float dragSpeed = 0.01f; // New variable for drag sensitivity
+    [SerializeField] private float dragDampening = 10f; // New variable for drag smoothing
 
     private Vector3 targetPosition;
     private float targetFOV;
@@ -66,6 +57,10 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+       
+        if (Time.timeScale == 0f)
+            return;
+
         GetKeyboardMovement();
         DragCamera();
         UpdateVelocity();
@@ -75,6 +70,10 @@ public class CameraController : MonoBehaviour
 
     private void UpdateVelocity()
     {
+        // Prevent division by zero (NaN) if deltaTime is zero
+        if (Time.deltaTime <= 0f)
+            return;
+
         horizontalVelocity = (this.transform.position - lastPosition) / Time.deltaTime;
         horizontalVelocity.y = 0;
         lastPosition = this.transform.position;
@@ -82,8 +81,10 @@ public class CameraController : MonoBehaviour
 
     private void GetKeyboardMovement()
     {
-        Vector3 inputValue = movement.ReadValue<Vector2>().x * GetCameraRight() + movement.ReadValue<Vector2>().y * GetCameraForward();
+        Vector2 inputVec = movement.ReadValue<Vector2>();
+        Vector3 inputValue = inputVec.x * GetCameraRight() + inputVec.y * GetCameraForward();
         inputValue = inputValue.normalized;
+
         if (inputValue.sqrMagnitude > 0.01f)
         {
             targetPosition += inputValue;
@@ -106,6 +107,9 @@ public class CameraController : MonoBehaviour
 
     private void UpdateBasePosition()
     {
+        if (Time.deltaTime <= 0f)
+            return;
+
         if (targetPosition.sqrMagnitude > 0.1f)
         {
             speed = Mathf.Lerp(speed, maxSpeed, Time.deltaTime * acceleration);
@@ -116,6 +120,7 @@ public class CameraController : MonoBehaviour
             horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero, Time.deltaTime * damping);
             transform.position += horizontalVelocity * Time.deltaTime;
         }
+
         targetPosition = Vector3.zero;
     }
 
@@ -132,11 +137,17 @@ public class CameraController : MonoBehaviour
     private void UpdateCameraPosition()
     {
         // Update FOV only, let the camera inherit rotation from the parent
-        mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, Time.deltaTime * zoomDampening);
+        if (Time.deltaTime > 0f)
+        {
+            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, Time.deltaTime * zoomDampening);
+        }
     }
 
     private void DragCamera()
     {
+        if (Time.deltaTime <= 0f)
+            return;
+
         if (!Mouse.current.rightButton.isPressed)
         {
             dragVelocity = Vector3.Lerp(dragVelocity, Vector3.zero, Time.deltaTime * dragDampening);
