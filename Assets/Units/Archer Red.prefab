@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateManager
   startingState: {fileID: 7329904950169982582}
+  moveState: {fileID: 0}
 --- !u!114 &1390650570709631146
 MonoBehaviour:
   m_ObjectHideFlags: 0

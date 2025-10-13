@@ -370,9 +370,11 @@ GameObject:
   - component: {fileID: 748459644901747037}
   - component: {fileID: 7926616961140857436}
   - component: {fileID: 2130844826209981818}
-  - component: {fileID: 1107762795094067753}
-  - component: {fileID: 1703737018763425281}
   - component: {fileID: 4736885859536797195}
+  - component: {fileID: 298438496356417292}
+  - component: {fileID: 1703737018763425281}
+  - component: {fileID: 1107762795094067753}
+  - component: {fileID: 4819863088574964969}
   - component: {fileID: 2866793614695263452}
   m_Layer: 0
   m_Name: Archer Green
@@ -474,7 +476,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &2130844826209981818
@@ -499,7 +501,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1107762795094067753
+--- !u!114 &4736885859536797195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -508,13 +510,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 6481102387247209894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef3af31fa83784b4497f2d8f36f52e52, type: 3}
+  m_Script: {fileID: 11500000, guid: bed0d3a949babb84b93f7813c13a825e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackState
-  attackCooldown: 0.7
-  attackRange: 25
-  damage: 10
+  m_EditorClassIdentifier: Assembly-CSharp::StateManager
+  startingState: {fileID: 1703737018763425281}
+  moveState: {fileID: 4819863088574964969}
+--- !u!114 &298438496356417292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481102387247209894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bc1ad3c50c03f49b0f7e4709dd70b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IdleState
   chaseState: {fileID: 1703737018763425281}
+  visionRange: 10
+  enemyTag: TeamRed
 --- !u!114 &1703737018763425281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,7 +546,7 @@ MonoBehaviour:
   attackRange: 25
   visionRange: 10
   enemyTag: TeamRed
---- !u!114 &4736885859536797195
+--- !u!114 &1107762795094067753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -540,10 +555,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 6481102387247209894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed0d3a949babb84b93f7813c13a825e, type: 3}
+  m_Script: {fileID: 11500000, guid: ef3af31fa83784b4497f2d8f36f52e52, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StateManager
-  startingState: {fileID: 1703737018763425281}
+  m_EditorClassIdentifier: Assembly-CSharp::AttackState
+  attackCooldown: 0.7
+  attackRange: 25
+  damage: 10
+  chaseState: {fileID: 1703737018763425281}
+--- !u!114 &4819863088574964969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481102387247209894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab5f7ec0d3d31946a4a460e554225f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveState
+  idleState: {fileID: 298438496356417292}
 --- !u!114 &2866793614695263452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TroopHealth
   healthbar: {fileID: 2334266932179381197}
   maxHealth: 50
-  damageAmount: 10
+  populationCost: 1
 --- !u!1 &7231111389313893923
 GameObject:
   m_ObjectHideFlags: 0

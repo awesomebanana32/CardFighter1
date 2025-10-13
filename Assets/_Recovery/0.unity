@@ -3509,6 +3509,54 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bd6f17b3fadb4a42bba99cd6dfb0e61, type: 3}
+--- !u!1 &1379315999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1379316000}
+  - component: {fileID: 1379316001}
+  m_Layer: 0
+  m_Name: SelectionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1379316000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379315999}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 433.68857, y: 15.61499, z: 423.01663}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1379316001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379315999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6665719e224bfcb46bf805438bd14434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  playerTroopTag: TeamGreen
 --- !u!1001 &1393548949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3978,7 +4026,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 31.43, z: 1}
+  m_Size: {x: 1, y: 8, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1565089066
 MeshRenderer:
@@ -3987,7 +4035,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565089064}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4045,7 +4093,7 @@ Transform:
   m_GameObject: {fileID: 1565089064}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: -0.1, z: 686}
+  m_LocalPosition: {x: 500, y: 0.7, z: 686}
   m_LocalScale: {x: 1010, y: 1, z: 710.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4529,7 +4577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6124720052490014648, guid: 29a9cbb03f17fff45b84896062ab135e, type: 3}
       propertyPath: m_Name
-      value: 'RedSpawner '
+      value: RedSpawner 1
       objectReference: {fileID: 0}
     - target: {fileID: 7433778221407361093, guid: 29a9cbb03f17fff45b84896062ab135e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4872,7 +4920,7 @@ GameObject:
   - component: {fileID: 1844844447}
   - component: {fileID: 1844844446}
   - component: {fileID: 1844844449}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5698,7 +5746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6124720052490014648, guid: 29a9cbb03f17fff45b84896062ab135e, type: 3}
       propertyPath: m_Name
-      value: RedSpawner  (1)
+      value: RedSpawner 2
       objectReference: {fileID: 0}
     - target: {fileID: 7433778221407361093, guid: 29a9cbb03f17fff45b84896062ab135e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6301,3 +6349,4 @@ SceneRoots:
   - {fileID: 1565089068}
   - {fileID: 1671639404}
   - {fileID: 2013062475}
+  - {fileID: 1379316000}
