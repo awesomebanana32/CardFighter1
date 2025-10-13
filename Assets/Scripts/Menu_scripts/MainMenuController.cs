@@ -25,6 +25,7 @@ public class MainMenuController : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quit");
+        SaveManager.DeleteSaveFile();
         Application.Quit();
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;

@@ -39,11 +39,13 @@ public static class SaveManager
             catch (System.Exception e)
             {
                 Debug.Log("Failed Reading Save File" + e.Message);
+                Debug.Log("Creating New Save File");
                 return new CampaignData("BLANK");
             }
         }
         else
         {
+            Debug.Log("Creating New Save File");
             return new CampaignData("BLANK");
         }
 

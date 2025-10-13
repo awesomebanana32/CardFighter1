@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class CampaignNodeEffects : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float raycastDistance = 1000f;
     void Update()
     {
         // 2. Create a Ray
@@ -18,7 +18,7 @@ public class CampaignNodeEffects : MonoBehaviour
         // - 'ray' is the starting line.
         // - 'out hit' means if it hits something, put the info in the 'hit' variable.
         // - '100f' is the max distance the ray can travel (optional).
-        if (Physics.Raycast(ray, out hit, 500f))
+        if (Physics.Raycast(ray, out hit, raycastDistance))
         {
             // We successfully hit a 3D object!
             // 5. Access the Hit Object
@@ -28,17 +28,31 @@ public class CampaignNodeEffects : MonoBehaviour
             {
                 if (GetComponent<Renderer>() != null)
                 {
-                    GetComponent<Renderer>().material.color = Color.gold;
+                    if (GetComponent<CampaignLevelOpener>().getState() == CampaignLevelType.UNLOCKED)
+                    {
+                        GetComponent<Renderer>().material.color = Color.gold;
+                    }
+                    else
+                    {
+                        GetComponent<Renderer>().material.color = Color.black;
+                    }
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
                     if (clickedObject.transform == transform)
                     {
-                        OnClick();
-                    }
-                    if (GetComponent<Renderer>() != null)
-                    {
-                        this.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+                        if (GetComponent<Renderer>() != null)
+                        {
+                            if (GetComponent<CampaignLevelOpener>().getState() == CampaignLevelType.UNLOCKED)
+                            {
+                                OnClick();
+                                this.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+                            }
+                            else
+                            {
+                                this.GetComponent<Renderer>().material.color = Color.black;
+                            }
+                        }
                     }
                 }
             }
