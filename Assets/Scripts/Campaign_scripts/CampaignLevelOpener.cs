@@ -1,24 +1,37 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System.Data.Common;
 
 public class CampaignLevelOpener : MonoBehaviour
 {
     public string nextScene;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int currentLevel;
+    private CampaignLevelType currentState;
     void Start()
     {
         Scene scene = SceneManager.GetSceneByName(nextScene);
-        if (!scene.IsValid())
+        CampaignData data = SaveManager.LoadGame();
+        Debug.Log(data.levelReached);
+        if(data.levelReached >= currentLevel)
         {
-            //throw Error
-            Debug.Log("Scene is Valid");
+            currentState = CampaignLevelType.UNLOCKED;
+        }
+        else
+        {
+            currentState = CampaignLevelType.LOCKED;
+        }
+        if (scene.IsValid())
+        {
+            throw new System.Exception();
         }
     }
-
-    // Update is called once per frame
     public void playScene()
     {
         SceneManager.LoadScene(nextScene);
+    }
+    public CampaignLevelType getState()
+    {
+        return currentState;
     }
 }

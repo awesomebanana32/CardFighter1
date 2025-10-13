@@ -27,9 +27,7 @@ public class NoiseMapGeneration
                     normal += wave.amplitude;
                 }
                 noise /= normal;
-                noiseMap[i, j] = noise;/*Random.Range(0, 3);*/
-                // Debug.Log(Mathf.PerlinNoise(j / scale, i / scale));
-                // Debug.Log(Mathf.PerlinNoise(j / scale, i / scale));
+                noiseMap[i, j] = noise;
             }
         }
         return noiseMap;
