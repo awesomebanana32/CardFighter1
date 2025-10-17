@@ -7,6 +7,7 @@ TagManager:
   - TeamRed
   - TeamGreen
   - Unplaceable
+  - TroopModel
   layers:
   - Default
   - TransparentFX

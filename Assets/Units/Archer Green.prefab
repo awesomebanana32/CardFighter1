@@ -475,7 +475,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -515,6 +515,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StateManager
   startingState: {fileID: 1703737018763425281}
   moveState: {fileID: 4819863088574964969}
+  chaseState: {fileID: 1703737018763425281}
+  enemyTag: TeamRed
 --- !u!114 &298438496356417292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,7 +546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChaseState
   attackState: {fileID: 1107762795094067753}
   attackRange: 25
-  visionRange: 10
+  visionRange: 25
   enemyTag: TeamRed
 --- !u!114 &1107762795094067753
 MonoBehaviour:
@@ -693,6 +695,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0dd0a91f45f55b7429f728a331e0871a, type: 3}
       propertyPath: m_Name
       value: archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0dd0a91f45f55b7429f728a331e0871a, type: 3}
+      propertyPath: m_TagString
+      value: TroopModel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

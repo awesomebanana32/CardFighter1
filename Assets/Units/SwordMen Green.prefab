@@ -491,6 +491,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StateManager
   startingState: {fileID: 7121486090877048824}
   moveState: {fileID: 4705569815627227754}
+  chaseState: {fileID: 7121486090877048824}
+  enemyTag: TeamRed
 --- !u!114 &4705569815627227754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
   chaseState: {fileID: 7121486090877048824}
-  visionRange: 10
+  visionRange: 25
   enemyTag: TeamRed
 --- !u!1 &6279969244863477208
 GameObject:

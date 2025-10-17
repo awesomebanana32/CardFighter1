@@ -20,30 +20,38 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float minFOV = 20f;
     [SerializeField] private float maxFOV = 60f;
 
-    // Drag motion
-    [SerializeField] private float dragSpeed = 0.01f; // New variable for drag sensitivity
-    [SerializeField] private float dragDampening = 10f; // New variable for drag smoothing
+    // Edge scrolling
+    [SerializeField] private float edgeTolerance = 0.05f;
+
+    // Drag motion (COMMENTED OUT)
+    /*
+    [SerializeField] private float dragSpeed = 0.01f;
+    [SerializeField] private float dragDampening = 10f;
+    */
 
     private Vector3 targetPosition;
     private float targetFOV;
     private Vector3 horizontalVelocity;
     private Vector3 lastPosition;
+
+    // Drag variables (COMMENTED OUT)
+    /*
     private Vector3 startDrag;
-    private Vector3 dragVelocity; // For smoothing drag movement
+    private Vector3 dragVelocity;
+    */
 
     private void Awake()
     {
         cameraActions = new CameraControlActions();
-        mainCamera = this.GetComponentInChildren<Camera>();
+        mainCamera = GetComponentInChildren<Camera>();
         cameraTransform = mainCamera.transform;
-        // Set initial camera orientation
         cameraTransform.localRotation = Quaternion.identity;
     }
 
     private void OnEnable()
     {
         targetFOV = mainCamera.fieldOfView;
-        lastPosition = this.transform.position;
+        lastPosition = transform.position;
         movement = cameraActions.Camera.Movement;
         cameraActions.Camera.ZoomCamera.performed += ZoomCamera;
         cameraActions.Camera.Enable();
@@ -57,26 +65,23 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-       
-        if (Time.timeScale == 0f)
-            return;
+        if (Time.timeScale == 0f) return;
 
         GetKeyboardMovement();
-        DragCamera();
+        // DragCamera(); // Commented out
         UpdateVelocity();
         UpdateCameraPosition();
+        CheckMouseAtScreenEdge();
         UpdateBasePosition();
     }
 
     private void UpdateVelocity()
     {
-        // Prevent division by zero (NaN) if deltaTime is zero
-        if (Time.deltaTime <= 0f)
-            return;
+        if (Time.deltaTime <= 0f) return;
 
-        horizontalVelocity = (this.transform.position - lastPosition) / Time.deltaTime;
-        horizontalVelocity.y = 0;
-        lastPosition = this.transform.position;
+        horizontalVelocity = (transform.position - lastPosition) / Time.deltaTime;
+        horizontalVelocity.y = 0f;
+        lastPosition = transform.position;
     }
 
     private void GetKeyboardMovement()
@@ -86,29 +91,26 @@ public class CameraController : MonoBehaviour
         inputValue = inputValue.normalized;
 
         if (inputValue.sqrMagnitude > 0.01f)
-        {
             targetPosition += inputValue;
-        }
     }
 
     private Vector3 GetCameraRight()
     {
         Vector3 right = cameraTransform.right;
-        right.y = 0;
-        return right;
+        right.y = 0f;
+        return right.normalized;
     }
 
     private Vector3 GetCameraForward()
     {
         Vector3 forward = cameraTransform.forward;
-        forward.y = 0;
-        return forward;
+        forward.y = 0f;
+        return forward.normalized;
     }
 
     private void UpdateBasePosition()
     {
-        if (Time.deltaTime <= 0f)
-            return;
+        if (Time.deltaTime <= 0f) return;
 
         if (targetPosition.sqrMagnitude > 0.1f)
         {
@@ -129,24 +131,46 @@ public class CameraController : MonoBehaviour
         float value = -inputValue.ReadValue<Vector2>().y * zoomStepSize;
         if (Mathf.Abs(value) > 0.01f)
         {
-            targetFOV = mainCamera.fieldOfView + value;
-            targetFOV = Mathf.Clamp(targetFOV, minFOV, maxFOV);
+            targetFOV = Mathf.Clamp(mainCamera.fieldOfView + value, minFOV, maxFOV);
         }
     }
 
     private void UpdateCameraPosition()
     {
-        // Update FOV only, let the camera inherit rotation from the parent
         if (Time.deltaTime > 0f)
         {
             mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, Time.deltaTime * zoomDampening);
         }
     }
 
+    private void CheckMouseAtScreenEdge()
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Vector2 viewportPos = mainCamera.ScreenToViewportPoint(mousePosition);
+        Vector3 moveDirection = Vector3.zero;
+
+        if (viewportPos.x < edgeTolerance)
+            moveDirection -= GetCameraRight();
+        else if (viewportPos.x > 1f - edgeTolerance)
+            moveDirection += GetCameraRight();
+
+        if (viewportPos.y < edgeTolerance)
+            moveDirection -= GetCameraForward();
+        else if (viewportPos.y > 1f - edgeTolerance)
+            moveDirection += GetCameraForward();
+
+        // Normalize diagonal movement
+        if (moveDirection.sqrMagnitude > 0.01f)
+            moveDirection.Normalize();
+
+        targetPosition += moveDirection;
+    }
+
+    // DragCamera method (COMMENTED OUT)
+    /*
     private void DragCamera()
     {
-        if (Time.deltaTime <= 0f)
-            return;
+        if (Time.deltaTime <= 0f) return;
 
         if (!Mouse.current.rightButton.isPressed)
         {
@@ -155,14 +179,12 @@ public class CameraController : MonoBehaviour
         }
 
         Plane plane = new Plane(Vector3.up, Vector3.zero);
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         if (plane.Raycast(ray, out float distance))
         {
             if (Mouse.current.rightButton.wasPressedThisFrame)
-            {
                 startDrag = ray.GetPoint(distance);
-            }
             else
             {
                 Vector3 dragDelta = (startDrag - ray.GetPoint(distance)) * dragSpeed;
@@ -171,4 +193,5 @@ public class CameraController : MonoBehaviour
             }
         }
     }
+    */
 }

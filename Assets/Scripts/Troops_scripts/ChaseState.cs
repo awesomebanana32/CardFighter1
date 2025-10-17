@@ -6,7 +6,7 @@ public class ChaseState : State
     public AttackState attackState;
     public float attackRange = 2f;
     public float visionRange = 10f;
-    public string enemyTag = ""; // set this per prefab (TeamRed targets TeamGreen, and vice versa)
+    public string enemyTag = ""; // Set this per prefab or via CommandChase
 
     private NavMeshAgent agent;
     private Transform nearestEnemy;
@@ -14,6 +14,27 @@ public class ChaseState : State
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    public override void OnEnterState()
+    {
+        // Ensure agent is initialized
+        if (agent == null)
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+
+        // Reset path to start fresh
+        if (agent != null)
+        {
+            agent.ResetPath();
+        }
+
+        // Clear previous target
+        nearestEnemy = null;
+
+        // Log for debugging
+        Debug.Log($"{gameObject.name} entered ChaseState targeting {enemyTag}");
     }
 
     public override State RunCurrentState()
@@ -39,7 +60,7 @@ public class ChaseState : State
         // If within attack range, stop and switch to attack
         if (distance <= attackRange)
         {
-            agent.ResetPath(); // stop moving
+            agent.ResetPath(); // Stop moving
             attackState.SetTarget(nearestEnemy);
             return attackState;
         }

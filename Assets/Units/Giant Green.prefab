@@ -503,6 +503,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StateManager
   startingState: {fileID: 6017374493426044232}
   moveState: {fileID: -4804194563910900748}
+  chaseState: {fileID: 6017374493426044232}
+  enemyTag: TeamRed
 --- !u!114 &-759567221389841009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
   chaseState: {fileID: 6017374493426044232}
-  visionRange: 10
+  visionRange: 25
   enemyTag: TeamRed
 --- !u!114 &6017374493426044232
 MonoBehaviour:
@@ -787,6 +789,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d2332255a7bf86140bc7f622540d72ad, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d2332255a7bf86140bc7f622540d72ad, type: 3}
+      propertyPath: m_TagString
+      value: TroopModel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

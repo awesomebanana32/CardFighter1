@@ -1,45 +1,185 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class SelectionManager : MonoBehaviour
 {
-    private Transform selectedTroop;
+    [Header("Troop Settings")]
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask troopLayer;
     [SerializeField] private string playerTroopTag = "TeamGreen";
+
+    [Header("UI")]
+    [SerializeField] private Button selectionModeButton;
+
+    private bool isSelectionActive = false;
+    private List<Transform> selectedTroops = new List<Transform>();
+    private Vector2 mouseStartPos;
+    private bool isDragging = false;
+    private Rect selectionRect;
+
+    void Start()
+    {
+        if (selectionModeButton != null)
+        {
+            selectionModeButton.onClick.AddListener(ToggleSelectionMode);
+        }
+        else
+        {
+            Debug.LogWarning("SelectionModeButton not assigned in inspector!");
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (selectionModeButton != null)
+            selectionModeButton.onClick.RemoveListener(ToggleSelectionMode);
+    }
+
+    private void ToggleSelectionMode()
+    {
+        isSelectionActive = !isSelectionActive;
+
+        if (selectionModeButton != null)
+        {
+            ColorBlock colors = selectionModeButton.colors;
+            colors.normalColor = isSelectionActive ? Color.green : Color.white;
+            selectionModeButton.colors = colors;
+        }
+
+        if (!isSelectionActive)
+        {
+            isDragging = false;
+            selectedTroops.Clear();
+        }
+
+        Debug.Log($"Selection mode {(isSelectionActive ? "ACTIVATED" : "DEACTIVATED")}");
+    }
 
     void Update()
     {
-        if (Mouse.current == null || Camera.main == null)
-            return;
+        if (!isSelectionActive || Mouse.current == null || Camera.main == null) return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        HandleSelection();
+        HandleMoveCommand();
+    }
+
+    private void HandleSelection()
+    {
+        // Start drag selection
+        if (Mouse.current.leftButton.wasPressedThisFrame && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-                return;
+            mouseStartPos = Mouse.current.position.ReadValue();
+            isDragging = true;
+            selectedTroops.Clear();
+        }
 
-            Vector2 mousePosition = Mouse.current.position.ReadValue();
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        if (isDragging)
+        {
+            Vector2 currentMousePos = Mouse.current.position.ReadValue();
+            selectionRect = new Rect(
+                Mathf.Min(mouseStartPos.x, currentMousePos.x),
+                Mathf.Min(mouseStartPos.y, currentMousePos.y),
+                Mathf.Abs(currentMousePos.x - mouseStartPos.x),
+                Mathf.Abs(currentMousePos.y - mouseStartPos.y)
+            );
 
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ~0))
+            if (Mouse.current.leftButton.wasReleasedThisFrame)
             {
-                if (hit.transform.CompareTag(playerTroopTag))
-                {
-                    selectedTroop = hit.transform;
-                    Debug.Log($"Troop selected: {selectedTroop.name}");
-                }
-                else if (selectedTroop != null && ((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
-                {
-                    StateManager stateManager = selectedTroop.GetComponent<StateManager>();
-                    if (stateManager != null)
-                    {
-                        stateManager.CommandMove(hit.point);
-                        Debug.Log($"Ground selected for move command at: {hit.point}");
-                    }
+                if (selectionRect.width < 5f && selectionRect.height < 5f)
+                    SingleClickSelect();
+                else
+                    DragSelect();
 
-                    selectedTroop = null;
-                }
+                isDragging = false;
             }
+        }
+    }
+
+    private void SingleClickSelect()
+{
+    Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+    // Draw the ray for debugging
+    Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2f);
+
+    if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+    {
+        Debug.Log($"Ray hit: {hit.collider.name}"); // See everything hit
+
+        GameObject hitObject = hit.collider.gameObject;
+
+        if (hitObject.CompareTag(playerTroopTag))
+        {
+            selectedTroops.Clear();
+            selectedTroops.Add(hitObject.transform);
+            Debug.Log($"Single troop selected: {hitObject.name}");
+        }
+        else
+        {
+            Debug.Log("Hit object is not a player troop.");
+        }
+    }
+    else
+    {
+        Debug.Log("Raycast did not hit anything.");
+    }
+}
+
+
+    private void DragSelect()
+    {
+        GameObject[] troops = GameObject.FindGameObjectsWithTag(playerTroopTag);
+        foreach (GameObject troop in troops)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(troop.transform.position);
+            if (selectionRect.Contains(new Vector2(screenPos.x, screenPos.y)))
+            {
+                selectedTroops.Add(troop.transform);
+                Debug.Log($"Troop selected: {troop.name}");
+            }
+        }
+    }
+
+    private void HandleMoveCommand()
+{
+    if (Mouse.current.rightButton.wasPressedThisFrame && selectedTroops.Count > 0 && !EventSystem.current.IsPointerOverGameObject())
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        {
+            foreach (Transform troop in selectedTroops)
+            {
+                StateManager stateManager = troop.GetComponent<StateManager>();
+                if (stateManager != null)
+                    stateManager.CommandMove(hit.point);
+            }
+
+            // Deselect troops after issuing move command
+            selectedTroops.Clear();
+            Debug.Log("Troops deselected after move command.");
+        }
+    }
+}
+
+
+    void OnGUI()
+    {
+        if (isDragging)
+        {
+            float screenHeight = Screen.height;
+            Rect guiRect = new Rect(
+                selectionRect.x,
+                screenHeight - (selectionRect.y + selectionRect.height),
+                selectionRect.width,
+                selectionRect.height
+            );
+
+            GUI.color = new Color(0, 1, 0, 0.2f);
+            GUI.DrawTexture(guiRect, Texture2D.whiteTexture);
+            GUI.color = Color.white;
         }
     }
 }
