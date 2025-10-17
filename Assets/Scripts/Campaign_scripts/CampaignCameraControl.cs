@@ -6,6 +6,7 @@ using System.Collections;
 
 public class CampaignCameraControl : MonoBehaviour
 {
+    public bool enable;
     public Terrain mainMap;
     public float height = 10f;
     private Vector3 cameraFocus;
@@ -20,10 +21,15 @@ public class CampaignCameraControl : MonoBehaviour
         transform.position = terrainCenter + Vector3.up * height;
         transform.LookAt(terrainCenter + Vector3.forward * angle * height);
         cameraFocus = terrainCenter;
+        enable = true;
     }
 
     public void Update()
     {
+        if (!enable)
+        {
+            return;
+        }
         if (wasPressed)
         {
             Vector2 mousePosition = Mouse.current.position.ReadValue();
