@@ -12,7 +12,6 @@ public class CampaignLevelOpener : MonoBehaviour
     {
         Scene scene = SceneManager.GetSceneByName(nextScene);
         CampaignData data = SaveManager.LoadGame();
-        Debug.Log(data.levelReached);
         if(data.levelReached >= currentLevel)
         {
             currentState = CampaignLevelType.UNLOCKED;
