@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
   chaseState: {fileID: 1703737018763425281}
-  visionRange: 10
+  visionRange: 25
   enemyTag: TeamRed
 --- !u!114 &1703737018763425281
 MonoBehaviour:

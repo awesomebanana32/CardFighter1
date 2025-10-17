@@ -62,13 +62,15 @@ public class SelectionManager : MonoBehaviour
     {
         if (!isSelectionActive || Mouse.current == null || Camera.main == null) return;
 
+        // Clean out any destroyed troops
+        CleanupDestroyedTroops();
+
         HandleSelection();
         HandleMoveCommand();
     }
 
     private void HandleSelection()
     {
-        // Start drag selection
         if (Mouse.current.leftButton.wasPressedThisFrame && !EventSystem.current.IsPointerOverGameObject())
         {
             mouseStartPos = Mouse.current.position.ReadValue();
@@ -99,41 +101,34 @@ public class SelectionManager : MonoBehaviour
     }
 
     private void SingleClickSelect()
-{
-    Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-    // Draw the ray for debugging
-    Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2f);
-
-    if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
     {
-        Debug.Log($"Ray hit: {hit.collider.name}"); // See everything hit
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2f);
 
-        GameObject hitObject = hit.collider.gameObject;
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+        {
+            GameObject hitObject = hit.collider.gameObject;
 
-        if (hitObject.CompareTag(playerTroopTag))
-        {
-            selectedTroops.Clear();
-            selectedTroops.Add(hitObject.transform);
-            Debug.Log($"Single troop selected: {hitObject.name}");
-        }
-        else
-        {
-            Debug.Log("Hit object is not a player troop.");
+            if (hitObject.CompareTag(playerTroopTag))
+            {
+                selectedTroops.Clear();
+                selectedTroops.Add(hitObject.transform);
+                Debug.Log($"Single troop selected: {hitObject.name}");
+            }
+            else
+            {
+                Debug.Log("Hit object is not a player troop.");
+            }
         }
     }
-    else
-    {
-        Debug.Log("Raycast did not hit anything.");
-    }
-}
-
 
     private void DragSelect()
     {
         GameObject[] troops = GameObject.FindGameObjectsWithTag(playerTroopTag);
         foreach (GameObject troop in troops)
         {
+            if (troop == null) continue;
+
             Vector3 screenPos = Camera.main.WorldToScreenPoint(troop.transform.position);
             if (selectionRect.Contains(new Vector2(screenPos.x, screenPos.y)))
             {
@@ -144,26 +139,42 @@ public class SelectionManager : MonoBehaviour
     }
 
     private void HandleMoveCommand()
-{
-    if (Mouse.current.rightButton.wasPressedThisFrame && selectedTroops.Count > 0 && !EventSystem.current.IsPointerOverGameObject())
     {
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        if (Mouse.current.rightButton.wasPressedThisFrame && selectedTroops.Count > 0 && !EventSystem.current.IsPointerOverGameObject())
         {
-            foreach (Transform troop in selectedTroops)
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
             {
-                StateManager stateManager = troop.GetComponent<StateManager>();
-                if (stateManager != null)
-                    stateManager.CommandMove(hit.point);
-            }
+                // Send move command to all valid troops
+                foreach (Transform troop in selectedTroops)
+                {
+                    if (troop == null) continue;
 
-            // Deselect troops after issuing move command
-            selectedTroops.Clear();
-            Debug.Log("Troops deselected after move command.");
+                    StateManager stateManager = troop.GetComponent<StateManager>();
+                    if (stateManager != null)
+                    {
+                        stateManager.CommandMove(hit.point);
+                    }
+                }
+
+                // Deselect after command
+                selectedTroops.Clear();
+                Debug.Log("Troops deselected after move command.");
+            }
         }
     }
-}
 
+    private void CleanupDestroyedTroops()
+    {
+        // Remove destroyed or missing troops safely
+        for (int i = selectedTroops.Count - 1; i >= 0; i--)
+        {
+            if (selectedTroops[i] == null)
+            {
+                selectedTroops.RemoveAt(i);
+            }
+        }
+    }
 
     void OnGUI()
     {

@@ -6,7 +6,7 @@ public class ChaseState : State
     public AttackState attackState;
     public float attackRange = 2f;
     public float visionRange = 10f;
-    public string enemyTag = ""; // Set this per prefab or via CommandChase
+    public string enemyTag = "";
 
     private NavMeshAgent agent;
     private Transform nearestEnemy;
@@ -18,27 +18,21 @@ public class ChaseState : State
 
     public override void OnEnterState()
     {
-        // Ensure agent is initialized
         if (agent == null)
-        {
             agent = GetComponent<NavMeshAgent>();
-        }
 
-        // Reset path to start fresh
-        if (agent != null)
-        {
+        if (agent != null && agent.isOnNavMesh)
             agent.ResetPath();
-        }
 
-        // Clear previous target
         nearestEnemy = null;
-
-        // Log for debugging
         Debug.Log($"{gameObject.name} entered ChaseState targeting {enemyTag}");
     }
 
     public override State RunCurrentState()
     {
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+            return this;
+
         FindNearestEnemy();
 
         if (nearestEnemy == null)
@@ -49,25 +43,35 @@ public class ChaseState : State
 
         Collider enemyCollider = nearestEnemy.GetComponent<Collider>();
         if (enemyCollider == null)
-        {
             return this;
-        }
 
-        // Use collider closest point instead of pivot
         Vector3 closestPoint = enemyCollider.ClosestPoint(transform.position);
         float distance = Vector3.Distance(transform.position, closestPoint);
 
-        // If within attack range, stop and switch to attack
+        // If target destroyed mid-run
+        if (!nearestEnemy.gameObject.activeInHierarchy)
+        {
+            nearestEnemy = null;
+            agent.ResetPath();
+            return this;
+        }
+
         if (distance <= attackRange)
         {
-            agent.ResetPath(); // Stop moving
+            agent.ResetPath();
             attackState.SetTarget(nearestEnemy);
             return attackState;
         }
-        else
+
+        // Avoid crash if SetDestination fails
+        try
         {
-            // Move toward the closest point on the enemy collider
-            agent.SetDestination(closestPoint);
+            if (agent.isOnNavMesh)
+                agent.SetDestination(closestPoint);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning($"{gameObject.name} failed to SetDestination: {e.Message}");
         }
 
         return this;
@@ -81,10 +85,10 @@ public class ChaseState : State
 
         foreach (GameObject enemy in enemies)
         {
+            if (enemy == null) continue;
             Collider enemyCollider = enemy.GetComponent<Collider>();
             if (enemyCollider == null) continue;
 
-            // Use closest point to respect enemy size
             Vector3 closestPoint = enemyCollider.ClosestPoint(transform.position);
             float distance = Vector3.Distance(transform.position, closestPoint);
 

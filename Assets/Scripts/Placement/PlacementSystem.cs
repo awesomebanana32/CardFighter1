@@ -64,15 +64,17 @@ public class PlacementSystem : MonoBehaviour
 
     private void OnInputClicked()
     {
-        if (buildingState == null || inputManager.IsPointerOverUI())
+        if (buildingState == null || inputManager == null || inputManager.IsPointerOverUI())
             return;
 
         if (inputManager.GetSelectedMapPosition(out Vector3 mousePosition))
         {
             Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-            buildingState.OnAction(gridPosition);
+            if (buildingState != null)
+                buildingState.OnAction(gridPosition);
         }
     }
+
 
     public void StopPlacementButton()
     {

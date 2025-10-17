@@ -4,45 +4,43 @@ public class StateManager : MonoBehaviour
 {
     [SerializeField] private State startingState;
     [SerializeField] private MoveState moveState;
-    [SerializeField] private ChaseState chaseState; // Reference to ChaseState
-    [SerializeField] private string enemyTag = "TeamGreen"; // Enemy tag for this troop
+    [SerializeField] private ChaseState chaseState;
+    [SerializeField] private string enemyTag = "TeamGreen";
     private State currentState;
+    private bool isDead = false;
 
     void Start()
     {
-        // Initialize starting state
         currentState = startingState;
 
         if (currentState != null)
-        {
             currentState.OnEnterState();
-        }
     }
 
     void Update()
     {
-        if (currentState != null)
-        {
-            State nextState = currentState.RunCurrentState();
+        // Skip logic if dead or destroyed
+        if (isDead || currentState == null)
+            return;
 
-            if (nextState != null && nextState != currentState)
-            {
-                currentState.OnExitState();
-                currentState = nextState;
-                currentState.OnEnterState();
-            }
+        // Safely run state logic
+        State nextState = currentState.RunCurrentState();
+
+        if (nextState != null && nextState != currentState)
+        {
+            currentState.OnExitState();
+            currentState = nextState;
+            currentState.OnEnterState();
         }
     }
 
     public void CommandMove(Vector3 position)
     {
-        // Exit current state if needed
-        if (currentState != null)
-        {
-            currentState.OnExitState();
-        }
+        if (isDead) return;
 
-        // Switch to move state
+        if (currentState != null)
+            currentState.OnExitState();
+
         if (moveState != null)
         {
             moveState.SetTargetPosition(position);
@@ -51,38 +49,34 @@ public class StateManager : MonoBehaviour
         }
     }
 
-    // Method to switch this troop to chase state
     public void CommandChase(string targetEnemyTag)
     {
+        if (isDead) return;
+
         if (chaseState == null)
         {
             Debug.LogWarning($"{gameObject.name} has no ChaseState assigned!");
             return;
         }
 
-        // Set enemy tag for chase state
         chaseState.enemyTag = targetEnemyTag;
 
-        // Exit current state
         if (currentState != null)
-        {
             currentState.OnExitState();
-        }
 
-        // Switch to chase state
         currentState = chaseState;
         currentState.OnEnterState();
     }
 
-    // Static method to command all troops to chase
     public static void CommandAllToChase(string enemyTag)
     {
-        StateManager[] allTroops = FindObjectsOfType<StateManager>();
+   
+        StateManager[] allTroops = Object.FindObjectsByType<StateManager>(FindObjectsSortMode.None);
         int troopsCommanded = 0;
 
         foreach (StateManager troop in allTroops)
         {
-            if (troop.chaseState != null)
+            if (troop != null && troop.chaseState != null)
             {
                 troop.CommandChase(enemyTag);
                 troopsCommanded++;
@@ -90,5 +84,35 @@ public class StateManager : MonoBehaviour
         }
 
         Debug.Log($"Chase command sent to {troopsCommanded} troops targeting {enemyTag}");
+    }
+
+    public void CleanupBeforeDeath()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        if (currentState != null)
+        {
+            currentState.OnExitState();
+            currentState = null;
+        }
+
+        // Disable NavMeshAgent or any movement system
+        var agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.ResetPath();
+            agent.enabled = false;
+        }
+
+        // Optional: disable all colliders or visuals
+        foreach (Collider col in GetComponentsInChildren<Collider>())
+            col.enabled = false;
+    }
+
+    public void Die()
+    {
+        CleanupBeforeDeath();
+        Destroy(gameObject);
     }
 }

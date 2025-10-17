@@ -3637,11 +3637,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   maxSpeed: 120
   acceleration: 20
-  damping: 10
+  damping: 100
   zoomStepSize: 10
   zoomDampening: 7.5
   minFOV: 12
-  maxFOV: 60
+  maxFOV: 65
   edgeTolerance: 0.1
 --- !u!4 &1244493730 stripped
 Transform:
