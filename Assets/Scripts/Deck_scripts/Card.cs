@@ -1,10 +1,12 @@
 using System;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour, IDropHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public int id;
     [SerializeField]
@@ -44,6 +46,7 @@ public class Card : MonoBehaviour, IDropHandler, IBeginDragHandler, IDragHandler
     // Update is called once per frame
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
+        orginalPostion = transform.position;
         if (isCardSlot)
         {
             return;
@@ -52,22 +55,25 @@ public class Card : MonoBehaviour, IDropHandler, IBeginDragHandler, IDragHandler
         {
             //
         }
+        transform.SetAsLastSibling();
 
     }
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Dragging");
-        //if not withinDeck
-        //create duplicate that follows the cursor wherever it goes
+        transform.position = eventData.position;
         //add some highlighting to the edge of the card
+
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("DragEnded");
+        transform.position = orginalPostion;
+        GameObject overlapped = this.GetComponentInParent<UIOverlapChecker>().checkOverlap(this.gameObject);
+        if (overlapped)
+        {
+            Debug.Log(overlapped.name);
+        }
+        //call parent overlap checker
         //check which card slot it intercepts and place the card in slot intercepts
-    }
-    void IDropHandler.OnDrop(PointerEventData eventData)
-    {
-        Debug.Log("Dropped");
     }
 }
