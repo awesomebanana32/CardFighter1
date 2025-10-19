@@ -15,7 +15,7 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private Button selectionModeButton;
 
     private bool isSelectionActive = false;
-    private List<Transform> selectedTroops = new List<Transform>();
+    private List<CircleSelection> selectedUnits = new List<CircleSelection>();
     private Vector2 mouseStartPos;
     private bool isDragging = false;
     private Rect selectionRect;
@@ -51,8 +51,8 @@ public class SelectionManager : MonoBehaviour
 
         if (!isSelectionActive)
         {
+            DeselectAll(); 
             isDragging = false;
-            selectedTroops.Clear();
         }
 
         Debug.Log($"Selection mode {(isSelectionActive ? "ACTIVATED" : "DEACTIVATED")}");
@@ -62,9 +62,7 @@ public class SelectionManager : MonoBehaviour
     {
         if (!isSelectionActive || Mouse.current == null || Camera.main == null) return;
 
-        // Clean out any destroyed troops
         CleanupDestroyedTroops();
-
         HandleSelection();
         HandleMoveCommand();
     }
@@ -75,7 +73,7 @@ public class SelectionManager : MonoBehaviour
         {
             mouseStartPos = Mouse.current.position.ReadValue();
             isDragging = true;
-            selectedTroops.Clear();
+            DeselectAll(); 
         }
 
         if (isDragging)
@@ -111,13 +109,16 @@ public class SelectionManager : MonoBehaviour
 
             if (hitObject.CompareTag(playerTroopTag))
             {
-                selectedTroops.Clear();
-                selectedTroops.Add(hitObject.transform);
+                DeselectAll();
+
+                CircleSelection unit = hitObject.GetComponent<CircleSelection>();
+                if (unit != null)
+                {
+                    selectedUnits.Add(unit);
+                    unit.Select();
+                }
+
                 Debug.Log($"Single troop selected: {hitObject.name}");
-            }
-            else
-            {
-                Debug.Log("Hit object is not a player troop.");
             }
         }
     }
@@ -132,47 +133,98 @@ public class SelectionManager : MonoBehaviour
             Vector3 screenPos = Camera.main.WorldToScreenPoint(troop.transform.position);
             if (selectionRect.Contains(new Vector2(screenPos.x, screenPos.y)))
             {
-                selectedTroops.Add(troop.transform);
+                CircleSelection unit = troop.GetComponent<CircleSelection>();
+                if (unit != null)
+                {
+                    selectedUnits.Add(unit);
+                    unit.Select(); 
+                }
+
                 Debug.Log($"Troop selected: {troop.name}");
             }
         }
     }
 
-    private void HandleMoveCommand()
+   private void HandleMoveCommand()
+{
+    if (Mouse.current.rightButton.wasPressedThisFrame && selectedUnits.Count > 0 && !EventSystem.current.IsPointerOverGameObject())
     {
-        if (Mouse.current.rightButton.wasPressedThisFrame && selectedTroops.Count > 0 && !EventSystem.current.IsPointerOverGameObject())
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+            Vector3 baseDestination = hit.point;
+            int unitCount = selectedUnits.Count;
+
+            // Formation settings
+            int columns = Mathf.CeilToInt(Mathf.Sqrt(unitCount)); // auto-calculate formation width
+            float spacing = 3.0f; // distance between troops
+            Vector3 forward = Vector3.zero;
+            Vector3 right = Vector3.zero;
+
+            // Align the formation to the camera direction (so "rows" face the player)
+            if (Camera.main != null)
             {
-                // Send move command to all valid troops
-                foreach (Transform troop in selectedTroops)
-                {
-                    if (troop == null) continue;
+                forward = Camera.main.transform.forward;
+                forward.y = 0;
+                forward.Normalize();
 
-                    StateManager stateManager = troop.GetComponent<StateManager>();
-                    if (stateManager != null)
-                    {
-                        stateManager.CommandMove(hit.point);
-                    }
-                }
-
-                // Deselect after command
-                selectedTroops.Clear();
-                Debug.Log("Troops deselected after move command.");
+                right = Camera.main.transform.right;
+                right.y = 0;
+                right.Normalize();
             }
+            else
+            {
+                forward = Vector3.forward;
+                right = Vector3.right;
+            }
+
+            // Calculate the total number of rows
+            int rows = Mathf.CeilToInt((float)unitCount / columns);
+
+            // Find the top-left corner so the formation is centered on the click
+            Vector3 formationCenterOffset =
+                (-right * (columns - 1) * spacing / 2f) +
+                (forward * (rows - 1) * spacing / 2f);
+
+            for (int i = 0; i < unitCount; i++)
+            {
+                if (selectedUnits[i] == null) continue;
+
+                int row = i / columns;
+                int column = i % columns;
+
+                Vector3 offset = (right * (column * spacing)) - (forward * (row * spacing));
+                Vector3 targetPosition = baseDestination + formationCenterOffset + offset;
+
+                StateManager stateManager = selectedUnits[i].GetComponent<StateManager>();
+                if (stateManager != null)
+                    stateManager.CommandMove(targetPosition);
+
+                selectedUnits[i].Deselect();
+            }
+
+            selectedUnits.Clear();
+            Debug.Log($"Troops moved in a {rows}x{columns} formation and deselected.");
         }
+    }
+}
+
+    private void DeselectAll()
+    {
+        foreach (CircleSelection unit in selectedUnits)
+        {
+            if (unit != null)
+                unit.Deselect();
+        }
+        selectedUnits.Clear();
     }
 
     private void CleanupDestroyedTroops()
     {
-        // Remove destroyed or missing troops safely
-        for (int i = selectedTroops.Count - 1; i >= 0; i--)
+        for (int i = selectedUnits.Count - 1; i >= 0; i--)
         {
-            if (selectedTroops[i] == null)
-            {
-                selectedTroops.RemoveAt(i);
-            }
+            if (selectedUnits[i] == null)
+                selectedUnits.RemoveAt(i);
         }
     }
 

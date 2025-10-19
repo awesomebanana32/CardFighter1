@@ -559,8 +559,8 @@ MonoBehaviour:
   troopPrefab: {fileID: 6964637346258731643, guid: 5b32c9abe7f726247ad697b8b4ad1627, type: 3}
   spawnPoint: {fileID: 5085473363579873310}
   buttonName: Start
-  minSpawnInterval: 10
-  maxSpawnInterval: 20
+  minSpawnInterval: 20
+  maxSpawnInterval: 30
 --- !u!114 &8545412766615188467
 MonoBehaviour:
   m_ObjectHideFlags: 0

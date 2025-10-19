@@ -652,6 +652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3813753915969858596, guid: 9bcaa5e505e068f42b8b9f9e0136248b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3817,7 +3821,7 @@ MonoBehaviour:
     m_Bits: 256
   troopLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   playerTroopTag: TeamGreen
   selectionModeButton: {fileID: 1667682052}
 --- !u!114 &1379316002
@@ -4383,7 +4387,7 @@ Transform:
   m_GameObject: {fileID: 1565089064}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: 0.7, z: 686}
+  m_LocalPosition: {x: 500, y: 0.3, z: 686}
   m_LocalScale: {x: 1010, y: 1, z: 710.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4881,6 +4885,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedSpawner 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6124720052490014648, guid: 29a9cbb03f17fff45b84896062ab135e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7433778221407361093, guid: 29a9cbb03f17fff45b84896062ab135e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 453.2
@@ -4997,6 +5005,10 @@ PrefabInstance:
     - target: {fileID: 3813753915969858596, guid: 9bcaa5e505e068f42b8b9f9e0136248b, type: 3}
       propertyPath: m_Name
       value: Tower (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3813753915969858596, guid: 9bcaa5e505e068f42b8b9f9e0136248b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5861,7 +5873,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 113.45129, w: 38.952938}
+  m_margin: {x: 0, y: 0, z: 90.06, w: 38.952938}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6049,6 +6061,10 @@ PrefabInstance:
     - target: {fileID: 6124720052490014648, guid: 29a9cbb03f17fff45b84896062ab135e, type: 3}
       propertyPath: m_Name
       value: RedSpawner 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124720052490014648, guid: 29a9cbb03f17fff45b84896062ab135e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7433778221407361093, guid: 29a9cbb03f17fff45b84896062ab135e, type: 3}
       propertyPath: m_LocalPosition.x
