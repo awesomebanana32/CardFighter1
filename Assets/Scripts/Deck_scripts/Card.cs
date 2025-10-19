@@ -5,21 +5,23 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public int id;
     [SerializeField]
-    private String _name;
+    public Color color;
     [SerializeField]
-    private bool withinDeck;
+    public bool withinDeck;
     [SerializeField]
-    private bool isCardSlot;
+    public bool isCardSlot;
     private Vector3 orginalPostion;
     void Start()
     {
-        this.name = _name;
-        if (withinDeck)
+
+        //this.GetComponent<Image>().color = color;
+        if(withinDeck)
         {
             if (isCardSlot)
             {
@@ -71,9 +73,18 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         GameObject overlapped = this.GetComponentInParent<UIOverlapChecker>().checkOverlap(this.gameObject);
         if (overlapped)
         {
-            Debug.Log(overlapped.name);
+            Debug.Log( this.name + "Copy the red card into the white card" + overlapped.name);
+            //this.CopyTo(overlapped.GetComponent<Card>());
+            overlapped.GetComponent<Card>().CopyTo(this);
         }
         //call parent overlap checker
         //check which card slot it intercepts and place the card in slot intercepts
+    }
+    void CopyTo(Card card)
+    {
+        this.color = card.color;
+        this.isCardSlot = card.isCardSlot;
+        Image image = this.GetComponent<Image>();
+        image.color = this.color;
     }
 }
