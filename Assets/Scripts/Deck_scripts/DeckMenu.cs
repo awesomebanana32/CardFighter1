@@ -7,14 +7,17 @@ public class DeckMenu : MonoBehaviour
 {
     private long deck;
     public GameObject campaignMenu;
+    void OnValidate()
+    {
+    }
     void Start()
     {
         CampaignData data = SaveManager.LoadGame();
         deck = data.deck;
         gameObject.SetActive(false);
+
     }
 
-    // Update is called once per frame
     void Update()
     {
 
