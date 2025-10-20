@@ -17,10 +17,13 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [SerializeField]
     public bool isCardSlot;
     private Vector3 orginalPostion;
+    void OnValidate()
+    {
+        Image image = this.GetComponent<Image>();
+        image.color = this.color;
+    }
     void Start()
     {
-
-        //this.GetComponent<Image>().color = color;
         if(withinDeck)
         {
             if (isCardSlot)
