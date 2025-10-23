@@ -71,7 +71,7 @@ public class CameraController : MonoBehaviour
         // DragCamera(); // Commented out
         UpdateVelocity();
         UpdateCameraPosition();
-        CheckMouseAtScreenEdge();
+        // CheckMouseAtScreenEdge(); // Commented out
         UpdateBasePosition();
     }
 
@@ -143,6 +143,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    /*
     private void CheckMouseAtScreenEdge()
     {
         Vector2 mousePosition = Mouse.current.position.ReadValue();
@@ -165,6 +166,7 @@ public class CameraController : MonoBehaviour
 
         targetPosition += moveDirection;
     }
+    */
 
     // DragCamera method (COMMENTED OUT)
     /*

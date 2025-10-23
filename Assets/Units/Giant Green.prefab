@@ -505,7 +505,6 @@ MonoBehaviour:
   startingState: {fileID: 6017374493426044232}
   moveState: {fileID: -4804194563910900748}
   chaseState: {fileID: 6017374493426044232}
-  enemyTag: TeamRed
 --- !u!114 &-759567221389841009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,7 +641,7 @@ GameObject:
   - component: {fileID: 5675853151032898698}
   - component: {fileID: 567358745758474521}
   - component: {fileID: 2231770822806297676}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}

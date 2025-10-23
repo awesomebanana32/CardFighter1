@@ -5,7 +5,6 @@ public class StateManager : MonoBehaviour
     [SerializeField] private State startingState;
     [SerializeField] private MoveState moveState;
     [SerializeField] private ChaseState chaseState;
-    [SerializeField] private string enemyTag = "TeamGreen";
     private State currentState;
     private bool isDead = false;
 

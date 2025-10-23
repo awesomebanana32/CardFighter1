@@ -18,8 +18,8 @@ TagManager:
   - Obstacles
   - Unplaceable
   - Ground
-  - 
-  - 
+  - AlwaysWhite
+  - Camera
   - 
   - 
   - 
