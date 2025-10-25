@@ -44,8 +44,6 @@ public class FireballImpact : MonoBehaviour
 
     private void HandleImpact(Vector3 explosionPos, Quaternion explosionRot, Collider hitCollider)
     {
-        bool hitTarget = false;
-
         // Damage enemy troops
         if (hitCollider.CompareTag(targetTag))
         {
@@ -53,7 +51,6 @@ public class FireballImpact : MonoBehaviour
             if (health != null)
             {
                 health.TakeDamage(damage);
-                hitTarget = true;
             }
         }
 

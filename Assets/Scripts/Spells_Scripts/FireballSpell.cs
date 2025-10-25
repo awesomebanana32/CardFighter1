@@ -1,84 +1,78 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class FireballSpell : MonoBehaviour
 {
     [Header("Spell Settings")]
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private float fireballSpeed = 10f;
-    [Header("Optional: Only hits these layers, leave empty to hit all")]
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float spawnOffset = 0.5f; // prevent collision with caster
+    [SerializeField] private LayerMask raycastLayers = ~0; // default: hit everything
 
     private Camera mainCamera;
-    private bool isCasting = false; // Tracks if player is in casting mode
+    private bool isCasting = false;
 
     private void Awake()
     {
         mainCamera = Camera.main;
+        if (mainCamera == null)
+            Debug.LogError("Main camera not found!");
     }
 
-    // Called by left-click on UI button
+    // Called by UI button to enter casting mode
     public void StartCasting()
     {
         isCasting = true;
-        Debug.Log("Fireball casting mode enabled! Right-click to choose a target.");
+        Debug.Log("Fireball casting mode enabled! Right-click to cast.");
     }
 
     private void Update()
     {
-        if (!isCasting)
+        if (!isCasting || Mouse.current == null)
             return;
 
-        // Detect right-click
-        bool rightClicked = Mouse.current != null
-            ? Mouse.current.rightButton.wasPressedThisFrame
-            : Input.GetMouseButtonDown(1);
-
-        if (rightClicked && !EventSystem.current.IsPointerOverGameObject())
+        if (Mouse.current.rightButton.wasPressedThisFrame)
         {
-            Vector3? targetPoint = GetMouseGroundPoint();
-            if (targetPoint.HasValue)
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            Debug.Log($"Right-click detected at screen position: {mousePos}");
+
+            Ray ray = mainCamera.ScreenPointToRay(mousePos);
+
+            // Draw the ray in Scene view for 1 second
+            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
+
+            // --- Optional: check if pointer is over UI ---
+            // if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            // {
+            //     Debug.Log("Click blocked by UI element.");
+            //     return;
+            // }
+
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000f, raycastLayers, QueryTriggerInteraction.Ignore))
             {
-                SpawnFireball(targetPoint.Value);
-                isCasting = false; // exit casting mode
-                Debug.Log("Fireball casted!");
+                string hitLayer = LayerMask.LayerToName(hit.collider.gameObject.layer);
+                Debug.Log($"Raycast hit: {hit.collider.name} (Layer: {hitLayer}) at {hit.point}");
+
+                Vector3 direction = (hit.point - transform.position).normalized;
+                Vector3 spawnPos = transform.position + direction * spawnOffset;
+
+                SpawnFireball(spawnPos, direction);
             }
             else
             {
-                Debug.Log("Right-click missed the ground.");
+                Debug.Log("Raycast hit nothing, shooting forward.");
+                Vector3 direction = ray.direction;
+                Vector3 spawnPos = transform.position + direction * spawnOffset;
+
+                SpawnFireball(spawnPos, direction);
             }
+
+            isCasting = false;
         }
     }
 
-    private Vector3? GetMouseGroundPoint()
-    {
-        Vector2 mousePosition = Mouse.current != null
-            ? Mouse.current.position.ReadValue()
-            : (Vector2)Input.mousePosition;
-
-        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
-
-        RaycastHit hit;
-
-        // If groundLayer is not set, raycast everything
-        bool hitSomething = groundLayer.value == 0
-            ? Physics.Raycast(ray, out hit, 1000f)
-            : Physics.Raycast(ray, out hit, 1000f, groundLayer);
-
-        // Draw ray in Scene view for debugging
-        Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.red, 2f);
-
-        if (hitSomething)
-        {
-            Debug.Log("Raycast hit: " + hit.collider.name);
-            return hit.point;
-        }
-
-        return null;
-    }
-
-    private void SpawnFireball(Vector3 target)
+    private void SpawnFireball(Vector3 position, Vector3 direction)
     {
         if (fireballPrefab == null)
         {
@@ -86,17 +80,13 @@ public class FireballSpell : MonoBehaviour
             return;
         }
 
-        // Spawn at caster position
-        GameObject fireball = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
-        Debug.Log("Fireball spawned at: " + transform.position);
-
-        Vector3 direction = (target - transform.position).normalized;
+        GameObject fireball = Instantiate(fireballPrefab, position, Quaternion.LookRotation(direction));
 
         if (fireball.TryGetComponent<Rigidbody>(out var rb))
         {
-            rb.useGravity = false;   // optional
+            rb.useGravity = false;
             rb.linearVelocity = direction * fireballSpeed;
-            Debug.Log("Fireball velocity applied: " + rb.linearVelocity);
+            Debug.Log($"Fireball spawned at {position}, moving toward {direction}");
         }
         else
         {

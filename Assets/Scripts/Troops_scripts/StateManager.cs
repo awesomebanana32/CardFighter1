@@ -54,7 +54,7 @@ public class StateManager : MonoBehaviour
 
         if (chaseState == null)
         {
-            Debug.LogWarning($"{gameObject.name} has no ChaseState assigned!");
+            //Debug.LogWarning($"{gameObject.name} has no ChaseState assigned!");
             return;
         }
 
@@ -82,7 +82,7 @@ public class StateManager : MonoBehaviour
             }
         }
 
-        Debug.Log($"Chase command sent to {troopsCommanded} troops targeting {enemyTag}");
+        //Debug.Log($"Chase command sent to {troopsCommanded} troops targeting {enemyTag}");
     }
 
     public void CleanupBeforeDeath()

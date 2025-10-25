@@ -9857,9 +9857,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfa3976d22657b4f9526df5b6500791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireArea
-  damage: 10
+  damage: 5
   targetTag: TeamRed
   duration: 5
+  tickRate: 0.3
 --- !u!23 &2368666467641233501
 MeshRenderer:
   m_ObjectHideFlags: 0

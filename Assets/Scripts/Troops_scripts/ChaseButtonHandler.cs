@@ -14,7 +14,7 @@ public class ChaseButtonHandler : MonoBehaviour
             chaseButton = GetComponent<Button>();
             if (chaseButton == null)
             {
-                Debug.LogError("ChaseButtonHandler: No Button component assigned or found!");
+                //Debug.LogError("ChaseButtonHandler: No Button component assigned or found!");
             }
         }
     }

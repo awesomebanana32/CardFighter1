@@ -25,7 +25,7 @@ public class ChaseState : State
             agent.ResetPath();
 
         nearestEnemy = null;
-        Debug.Log($"{gameObject.name} entered ChaseState targeting {enemyTag}");
+        //Debug.Log($"{gameObject.name} entered ChaseState targeting {enemyTag}");
     }
 
     public override State RunCurrentState()
