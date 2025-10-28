@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 258.8, y: 220.6}
-  m_SizeDelta: {x: 100, y: 140}
+  m_SizeDelta: {x: 60, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3370934705876676103
 CanvasRenderer:
@@ -92,3 +92,4 @@ MonoBehaviour:
   color: {r: 0.9056604, g: 0.7773316, b: 0.06407974, a: 1}
   withinDeck: 1
   isCardSlot: 0
+  newParent: {fileID: 0}

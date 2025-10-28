@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,27 +10,35 @@ public class DeckManger : MonoBehaviour
     public int[] cards;
     public GameObject card;
     private long deck;
+    [SerializeField]
+    private Transform parent;
+    [SerializeField]
+    private bool isDeck;
+    private float layoutSpacing = 20f;
     public void Start()
     {
         CampaignData data = SaveManager.LoadGame();
         deck = data.deck;
-
         Vector3 position = transform.position;
-        //position.x -= 350;
-        //position.y += 400;
         for(int i = 0; i < 16; i++)
         {
-            //position.y -= 200;
-            GameObject row = Instantiate(new GameObject(), position, Quaternion.identity, transform);
+            GameObject row = Instantiate(new GameObject("tkdsflsj;"), position, Quaternion.identity, transform);
             RectTransform rectTransform = row.AddComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(300f, 100f);
-            HorizontalLayoutGroup layout = row.AddComponent<HorizontalLayoutGroup>();
-            layout.spacing = 20;
+
+            rectTransform.sizeDelta = transform.parent.GetComponent<RectTransform>().sizeDelta;
+            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, card.GetComponent<RectTransform>().sizeDelta.y);
+            Transform newPos = row.transform;
+            newPos.position += new Vector3(240,0,0);
             for (int j = 0; j < 4; j++)
             {
-                GameObject newCard = Instantiate(card, position, Quaternion.identity, row.transform);
+                newPos.position -= new Vector3(card.GetComponent<RectTransform>().rect.width + layoutSpacing,0,0);
+                Debug.Log(card.GetComponent<RectTransform>().rect.width + layoutSpacing);
+                GameObject newCard = Instantiate(card, position, Quaternion.identity, newPos);
+                newCard.GetComponent<Card>().newParent = parent;
+                newCard.GetComponent<Card>().withinDeck = false;
+                //TODO: check if the card id unlocked
+                newCard.GetComponent<Card>().isCardSlot = false;
             }
-            //position.x -= 640;
         }
     }
 

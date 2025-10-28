@@ -13,17 +13,22 @@ public class UIOverlapChecker : MonoBehaviour
         }
         if (a.GetComponent<Card>() == null || b.GetComponent<Card>() == null)
         {
-            return 0.0f;
+            return 0f;
         }
-        Rect rectA = a.GetComponent<RectTransform>().rect;
-        Rect rectB = b.GetComponent<RectTransform>().rect;
-        float leftSide = Math.Max(rectA.x, rectB.x);
-        float topSide = Math.Max(rectA.y, rectB.y);
-        float rightSide = Math.Min(rectA.x+rectA.width, rectB.x+rectB.width);
-        float bottomSide = Math.Min(rectA.y + rectA.height, rectB.y + rectB.height);
+        Vector3[] cornersA = new Vector3[4];
+        Vector3[] cornersB = new Vector3[4];
+        // This method populates the 'corners' array with world space coordinates.
+        RectTransform rectA = a.GetComponent<RectTransform>();
+        RectTransform rectB = b.GetComponent<RectTransform>();
+        rectA.GetWorldCorners(cornersA);
+        rectB.GetWorldCorners(cornersB);
+        float leftSide = Math.Max(cornersA[0].x, cornersB[0].x);
+        float topSide = Math.Max(cornersA[0].y, cornersB[0].y);
+        float rightSide = Math.Min(cornersA[2].x,cornersB[2].x);
+        float bottomSide = Math.Min(cornersA[2].y, cornersB[2].y);
         if (rightSide - leftSide < 0f)
         {
-            return 0.0f;
+            return 0f;
         }
         if (bottomSide - topSide < 0f)
         {
@@ -39,6 +44,7 @@ public class UIOverlapChecker : MonoBehaviour
         foreach (Transform card in cards)
         {
             if (card.gameObject == heldCard) continue;
+            if (card.GetComponent<Card>() == null) continue;
             float intersection = intersect(card.gameObject, heldCard);
             if (intersection > maxInterSection)
             {
