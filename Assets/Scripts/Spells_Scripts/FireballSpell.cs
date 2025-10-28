@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class FireballSpell : MonoBehaviour
@@ -7,11 +8,18 @@ public class FireballSpell : MonoBehaviour
     [Header("Spell Settings")]
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private float fireballSpeed = 10f;
-    [SerializeField] private float spawnOffset = 0.5f; // prevent collision with caster
-    [SerializeField] private LayerMask raycastLayers = ~0; // default: hit everything
+    [SerializeField] private float spawnOffset = 0.5f;
+    [SerializeField] private LayerMask raycastLayers = ~0;
+    [SerializeField] private float cooldownTime = 10f; // cooldown in seconds
+
+    [Header("UI Settings")]
+    [SerializeField] private Button castButton; // assign in inspector
+    [SerializeField] private Image cooldownOverlay; // assign a child UI image
 
     private Camera mainCamera;
     private bool isCasting = false;
+    private bool canCast = true;
+    private float cooldownTimer = 0f;
 
     private void Awake()
     {
@@ -20,16 +28,27 @@ public class FireballSpell : MonoBehaviour
             Debug.LogError("Main camera not found!");
     }
 
-    // Called by UI button to enter casting mode
-    public void StartCasting()
-    {
-        isCasting = true;
-        Debug.Log("Fireball casting mode enabled! Right-click to cast.");
-    }
-
     private void Update()
     {
-        if (!isCasting || Mouse.current == null)
+        // --- Handle cooldown UI ---
+        if (!canCast)
+        {
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownOverlay != null)
+                cooldownOverlay.fillAmount = cooldownTimer / cooldownTime;
+
+            if (cooldownTimer <= 0f)
+            {
+                canCast = true;
+                if (castButton != null)
+                    castButton.interactable = true;
+                if (cooldownOverlay != null)
+                    cooldownOverlay.fillAmount = 0f;
+            }
+        }
+
+        // --- Fireball casting logic ---
+        if (!isCasting || Mouse.current == null || !canCast)
             return;
 
         if (Mouse.current.rightButton.wasPressedThisFrame)
@@ -38,38 +57,36 @@ public class FireballSpell : MonoBehaviour
             Debug.Log($"Right-click detected at screen position: {mousePos}");
 
             Ray ray = mainCamera.ScreenPointToRay(mousePos);
-
-            // Draw the ray in Scene view for 1 second
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
-
-            // --- Optional: check if pointer is over UI ---
-            // if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-            // {
-            //     Debug.Log("Click blocked by UI element.");
-            //     return;
-            // }
 
             if (Physics.Raycast(ray, out RaycastHit hit, 1000f, raycastLayers, QueryTriggerInteraction.Ignore))
             {
-                string hitLayer = LayerMask.LayerToName(hit.collider.gameObject.layer);
-                Debug.Log($"Raycast hit: {hit.collider.name} (Layer: {hitLayer}) at {hit.point}");
-
                 Vector3 direction = (hit.point - transform.position).normalized;
                 Vector3 spawnPos = transform.position + direction * spawnOffset;
-
                 SpawnFireball(spawnPos, direction);
             }
             else
             {
-                Debug.Log("Raycast hit nothing, shooting forward.");
                 Vector3 direction = ray.direction;
                 Vector3 spawnPos = transform.position + direction * spawnOffset;
-
                 SpawnFireball(spawnPos, direction);
             }
 
+            StartCooldown();
             isCasting = false;
         }
+    }
+
+    public void StartCasting()
+    {
+        if (!canCast)
+        {
+            Debug.Log("Spell is on cooldown!");
+            return;
+        }
+
+        isCasting = true;
+        Debug.Log("Fireball casting mode enabled! Right-click to cast.");
     }
 
     private void SpawnFireball(Vector3 position, Vector3 direction)
@@ -92,5 +109,21 @@ public class FireballSpell : MonoBehaviour
         {
             Debug.LogWarning("Fireball prefab has no Rigidbody!");
         }
+    }
+
+    private void StartCooldown()
+    {
+        canCast = false;
+        cooldownTimer = cooldownTime;
+
+        if (castButton != null)
+            castButton.interactable = false;
+
+        if (cooldownOverlay != null)
+        {
+            cooldownOverlay.fillAmount = 1f;
+        }
+
+        Debug.Log("Fireball spell on cooldown.");
     }
 }
