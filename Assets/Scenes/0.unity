@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.0012
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -7388,7 +7388,7 @@ MonoBehaviour:
   grid: {fileID: 1963992793}
   database: {fileID: 11400000, guid: 21f1423b568c13c409f8fb4ab180176b, type: 2}
   objectPlacer: {fileID: 587537400}
-  maxPopulation: 100
+  maxPopulation: 150
   unplaceableLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -9898,7 +9898,7 @@ MonoBehaviour:
   m_CustomShadowLayers: 0
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 3
+  m_SoftShadowQuality: 2
   m_RenderingLayersMask:
     serializedVersion: 0
     m_Bits: 1
@@ -9930,10 +9930,10 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.474
-    m_Bias: 1.99
-    m_NormalBias: 4.02
-    m_NearPlane: 2.73
+    m_Strength: 0.832
+    m_Bias: 3.47
+    m_NormalBias: 2.19
+    m_NearPlane: 1.41
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -11775,7 +11775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1565089065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12130,7 +12130,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 32
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -12192,7 +12192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 46.5, y: 87.2}
+  m_AnchoredPosition: {x: 46.5, y: 92.5}
   m_SizeDelta: {x: 136.6, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1585779560 stripped
@@ -15726,7 +15726,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 32
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -15788,7 +15788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -117.2, y: 87.2}
+  m_AnchoredPosition: {x: -117.2, y: 92.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1992586498
@@ -17240,8 +17240,8 @@ SceneRoots:
   - {fileID: 2030544485}
   - {fileID: 1762968496}
   - {fileID: 690337518}
-  - {fileID: 944647209}
   - {fileID: 2020985741}
+  - {fileID: 944647209}
   - {fileID: 1934955600}
   - {fileID: 1565089068}
   - {fileID: 1379316000}
