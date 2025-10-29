@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -17,13 +16,22 @@ public class PlacementSystem : MonoBehaviour
     private Color validColor;
     private int currentPopulation = 0;
 
+    // Singleton instance
+    public static PlacementSystem Instance { get; private set; }
+
     public int MaxPopulation => maxPopulation;
     public int CurrentPopulation => currentPopulation;
 
-    public void AddToPopulation(int amount)
+    private void Awake()
     {
-        currentPopulation += amount;
-        if (currentPopulation < 0) currentPopulation = 0;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     private void Start()
@@ -36,8 +44,17 @@ public class PlacementSystem : MonoBehaviour
             ColorUtility.TryParseHtmlString("#A7FFA5", out validColor);
             previewRenderer.material.color = validColor;
         }
-        // Initialize unplaceable objects' meshes as invisible
+
         ToggleUnplaceableMeshes(false);
+    }
+
+    /// <summary>
+    /// Safely adds population, clamped to [0, maxPopulation]
+    /// </summary>
+    public void AddToPopulation(int amount)
+    {
+        currentPopulation += amount;
+        currentPopulation = Mathf.Clamp(currentPopulation, 0, maxPopulation);
     }
 
     public void StartPlacement(int ID)
@@ -47,7 +64,6 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnClicked += OnInputClicked;
         inputManager.OnExit += StopPlacement;
 
-        // Show all unplaceable objects' meshes
         ToggleUnplaceableMeshes(true);
     }
 
@@ -58,7 +74,6 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnClicked += OnInputClicked;
         inputManager.OnExit += StopPlacement;
 
-        // Show all unplaceable objects' meshes
         ToggleUnplaceableMeshes(true);
     }
 
@@ -70,53 +85,42 @@ public class PlacementSystem : MonoBehaviour
         if (inputManager.GetSelectedMapPosition(out Vector3 mousePosition))
         {
             Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-            if (buildingState != null)
-                buildingState.OnAction(gridPosition);
+            buildingState?.OnAction(gridPosition);
         }
     }
 
-
-    public void StopPlacementButton()
-    {
-        StopPlacement();
-    }
+    public void StopPlacementButton() => StopPlacement();
 
     private void StopPlacement()
     {
-        if (buildingState == null)
-            return;
+        if (buildingState == null) return;
 
         buildingState.EndState();
         inputManager.OnClicked -= OnInputClicked;
         inputManager.OnExit -= StopPlacement;
         buildingState = null;
 
-        // Hide all unplaceable objects' meshes
         ToggleUnplaceableMeshes(false);
     }
 
     private void Update()
     {
-        if (buildingState == null || inputManager == null)
-            return;
+        if (buildingState == null || inputManager == null) return;
 
         if (inputManager.GetSelectedMapPosition(out Vector3 mousePosition))
         {
             Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-            buildingState.UpdateState(gridPosition);
+            buildingState?.UpdateState(gridPosition);
         }
     }
 
     private void ToggleUnplaceableMeshes(bool visible)
     {
-        // Find all colliders in the unplaceableLayerMask
         Collider[] unplaceableColliders = Physics.OverlapSphere(Vector3.zero, float.MaxValue, unplaceableLayerMask);
         foreach (var collider in unplaceableColliders)
         {
-            // Optionally check for a specific tag
             if (collider.CompareTag("Unplaceable"))
             {
-                // Get all Renderer components (e.g., MeshRenderer) on the GameObject
                 Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
                 foreach (var renderer in renderers)
                 {

@@ -8,23 +8,25 @@ public class TroopHealth : MonoBehaviour
 
     private float currentHealth;
     private PlacementSystem placementSystem;
+    private bool isDead = false;
 
-    void Start()
+    private void Start()
     {
         currentHealth = maxHealth;
         healthbar?.UpdateHealthBar(currentHealth, maxHealth);
 
         if (placementSystem == null)
-            placementSystem = Object.FindFirstObjectByType<PlacementSystem>();
+            placementSystem = PlacementSystem.Instance; // Singleton reference
     }
 
     public void TakeDamage(float damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         healthbar?.UpdateHealthBar(currentHealth, maxHealth);
 
-        // Flash the troop/building
         if (FlashManager.Instance != null)
             FlashManager.Instance.FlashObject(gameObject);
 
@@ -34,6 +36,8 @@ public class TroopHealth : MonoBehaviour
 
     public void Heal(float healAmount)
     {
+        if (isDead) return;
+
         currentHealth += healAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         healthbar?.UpdateHealthBar(currentHealth, maxHealth);
@@ -41,6 +45,9 @@ public class TroopHealth : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         if (gameObject.CompareTag("TeamGreen") && placementSystem != null)
             placementSystem.AddToPopulation(-populationCost);
 
