@@ -5279,7 +5279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc975d0ea09e6294a9dcdbb627e58957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
-  attackRange: 150
+  attackRange: 100
   attackCooldown: 1
   damage: 25
   projectilePrefab: {fileID: 6609575395743922522, guid: 9176d9e53a2b868439745900ae7ff63c, type: 3}

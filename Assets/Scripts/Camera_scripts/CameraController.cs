@@ -8,6 +8,10 @@ public class CameraController : MonoBehaviour
     private Camera mainCamera;
     private Transform cameraTransform;
 
+    [Header("Initial Camera Settings")]
+    [SerializeField] private Vector3 startingRotation = new Vector3(60f, 0f, 0f);
+    [SerializeField] private Vector3 startingPositionOffset = new Vector3(0f, 0f, 0f);
+
     // Horizontal motion
     [SerializeField] private float maxSpeed = 5f;
     private float speed;
@@ -45,7 +49,10 @@ public class CameraController : MonoBehaviour
         cameraActions = new CameraControlActions();
         mainCamera = GetComponentInChildren<Camera>();
         cameraTransform = mainCamera.transform;
-        cameraTransform.localRotation = Quaternion.identity;
+
+        // Apply custom start transform
+        cameraTransform.localRotation = Quaternion.Euler(startingRotation);
+        cameraTransform.localPosition += startingPositionOffset;
     }
 
     private void OnEnable()
