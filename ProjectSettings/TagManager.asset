@@ -8,6 +8,7 @@ TagManager:
   - TeamGreen
   - Unplaceable
   - TroopModel
+  - MinimapCamera
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - Ground
   - AlwaysWhite
   - Camera
-  - 
-  - 
+  - Enviorment
+  - MinimapMarker
   - 
   - 
   - 

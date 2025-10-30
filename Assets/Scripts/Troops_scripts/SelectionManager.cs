@@ -118,7 +118,6 @@ public class SelectionManager : MonoBehaviour
                     unit.Select();
                 }
 
-                Debug.Log($"Single troop selected: {hitObject.name}");
             }
         }
     }
@@ -139,8 +138,6 @@ public class SelectionManager : MonoBehaviour
                     selectedUnits.Add(unit);
                     unit.Select(); 
                 }
-
-                Debug.Log($"Troop selected: {troop.name}");
             }
         }
     }
@@ -204,7 +201,6 @@ public class SelectionManager : MonoBehaviour
             }
 
             selectedUnits.Clear();
-            Debug.Log($"Troops moved in a {rows}x{columns} formation and deselected.");
         }
     }
 }
