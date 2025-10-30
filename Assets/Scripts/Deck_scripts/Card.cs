@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -32,7 +33,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             if (isCardSlot)
             {
                 Image image = this.GetComponent<Image>();
-                image.color = Color.white;
             }
             else
             {
@@ -59,7 +59,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         orginalPostion = transform.position;
         originalParent = transform.parent;
-        Debug.Log("Dragging");
         if (isCardSlot)
         {
             //Card is locked or empty card slot
@@ -93,11 +92,14 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             }
             else if (overlapped.GetComponent<Card>().withinDeck && withinDeck)
             {
-                Debug.Log("Exchange");
+                Sprite image = overlapped.GetComponent<Image>().sprite;
+                overlapped.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+                this.GetComponent<Image>().sprite = image;
                 this.ExchangeTo(overlapped.GetComponent<Card>());
             }
             else if (overlapped.GetComponent<Card>().withinDeck)
             {
+                overlapped.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
                 this.GetComponent<Card>().CopyTo(overlapped.GetComponent<Card>());
             }else if (withinDeck && !overlapped.GetComponent<Card>().withinDeck)
             {
@@ -141,6 +143,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     
     void EmptyCard()
     {
+        this.GetComponent<Image>().sprite = null;
         this.withinDeck = true;
         this.isCardSlot = true;
     }

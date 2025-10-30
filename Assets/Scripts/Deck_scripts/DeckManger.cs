@@ -15,6 +15,7 @@ public class DeckManger : MonoBehaviour
     [SerializeField]
     private bool isDeck;
     private float layoutSpacing = 20f;
+    public Sprite defaultCover;
     public void Start()
     {
         CampaignData data = SaveManager.LoadGame();
@@ -32,10 +33,11 @@ public class DeckManger : MonoBehaviour
             for (int j = 0; j < 4; j++)
             {
                 newPos.position -= new Vector3(card.GetComponent<RectTransform>().rect.width + layoutSpacing,0,0);
-                Debug.Log(card.GetComponent<RectTransform>().rect.width + layoutSpacing);
                 GameObject newCard = Instantiate(card, position, Quaternion.identity, newPos);
                 newCard.GetComponent<Card>().newParent = parent;
                 newCard.GetComponent<Card>().withinDeck = false;
+                newCard.GetComponent<Card>().id = 4 * i + j;
+                newCard.GetComponent<Image>().sprite = defaultCover;
                 //TODO: check if the card id unlocked
                 newCard.GetComponent<Card>().isCardSlot = false;
             }
