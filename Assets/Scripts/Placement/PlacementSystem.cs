@@ -3,13 +3,16 @@ using System.Collections.Generic;
 
 public class PlacementSystem : MonoBehaviour
 {
+    // Add this line at the top of the class
+    public static PlacementSystem Instance { get; private set; }
+
     [SerializeField] private GameObject cellIndicator;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private Grid grid;
     [SerializeField] private ObjectDatabaseSO database;
     [SerializeField] private ObjectPlacer objectPlacer;
     [SerializeField] private int maxPopulation = 100;
-    [SerializeField] private LayerMask unplaceableLayerMask; // Added for unplaceable objects
+    [SerializeField] private LayerMask unplaceableLayerMask;
 
     private IBuildingState buildingState;
     private GridData gridData;
@@ -19,6 +22,17 @@ public class PlacementSystem : MonoBehaviour
 
     public int MaxPopulation => maxPopulation;
     public int CurrentPopulation => currentPopulation;
+
+    // Add this Awake method
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     public void AddToPopulation(int amount)
     {
