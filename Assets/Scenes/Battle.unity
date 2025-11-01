@@ -8009,7 +8009,7 @@ MonoBehaviour:
   maxPopulation: 150
   unplaceableLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
 --- !u!1 &944647208
 GameObject:
   m_ObjectHideFlags: 0
