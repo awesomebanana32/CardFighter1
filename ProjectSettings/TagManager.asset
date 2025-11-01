@@ -7,6 +7,8 @@ TagManager:
   - TeamRed
   - TeamGreen
   - Unplaceable
+  - MinimapCamera
+  - TroopModel
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - Water
   - UI
   - Obstacles
-  - 
+  - minimap
   - 
   - 
   - 
