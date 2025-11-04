@@ -21,6 +21,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private Vector3 orginalPostion;
     private Transform originalParent;
     public Transform newParent;
+    [SerializeField]
+    private Sprite defualtCover;
+    [SerializeField]
+    private Sprite defaultLockScreen; 
     void OnValidate()
     {
         Image image = this.GetComponent<Image>();
@@ -33,6 +37,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             if (isCardSlot)
             {
                 Image image = this.GetComponent<Image>();
+                image.sprite = defualtCover;
             }
             else
             {
@@ -46,6 +51,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             {
                 Image image = this.GetComponent<Image>();
                 image.color = Color.black;
+                image.sprite = defaultLockScreen;
             }
             else
             {
