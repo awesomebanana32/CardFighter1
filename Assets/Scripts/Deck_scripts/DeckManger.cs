@@ -7,14 +7,13 @@ using UnityEngine.UI;
 [Serializable]
 public class DeckManger : MonoBehaviour
 {
-    public int[] cards;
+    private int[] cards;
     public GameObject card;
     private long deck;
     [SerializeField]
     private Transform parent;
     [SerializeField]
-    private bool isDeck;
-    private float layoutSpacing = 20f;
+    public float layoutSpacing;
     public Sprite defaultCover;
     public void Start()
     {
@@ -29,7 +28,7 @@ public class DeckManger : MonoBehaviour
             rectTransform.sizeDelta = transform.parent.GetComponent<RectTransform>().sizeDelta;
             rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, card.GetComponent<RectTransform>().sizeDelta.y);
             Transform newPos = row.transform;
-            newPos.position += new Vector3(240,0,0);
+            newPos.position += new Vector3(0,0,0);
             for (int j = 0; j < 4; j++)
             {
                 newPos.position -= new Vector3(card.GetComponent<RectTransform>().rect.width + layoutSpacing,0,0);
