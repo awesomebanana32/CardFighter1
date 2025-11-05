@@ -17,6 +17,7 @@ public class DeckManger : MonoBehaviour
     public Sprite defaultCover;
     public void Start()
     {
+        cards = new int[8];
         CampaignData data = SaveManager.LoadGame();
         deck = data.deck;
         Vector3 position = transform.position;
@@ -31,14 +32,23 @@ public class DeckManger : MonoBehaviour
             newPos.position += new Vector3(0,0,0);
             for (int j = 0; j < 4; j++)
             {
+                int currentId = 4 * i + j;
                 newPos.position -= new Vector3(card.GetComponent<RectTransform>().rect.width + layoutSpacing,0,0);
                 GameObject newCard = Instantiate(card, position, Quaternion.identity, newPos);
                 newCard.GetComponent<Card>().newParent = parent;
                 newCard.GetComponent<Card>().withinDeck = false;
                 newCard.GetComponent<Card>().id = 4 * i + j;
-                newCard.GetComponent<Image>().sprite = defaultCover;
-                //TODO: check if the card id unlocked
-                newCard.GetComponent<Card>().isCardSlot = false;
+                if (!IsInDeck(currentId))
+                {
+                    newCard.GetComponent<Card>().isCardSlot = true;
+                }
+                else
+                {
+                    //TODO: retrieve the card cover.
+                    //maybe also apply affects
+                    newCard.GetComponent<Image>().sprite = defaultCover;
+                }
+
             }
         }
     }
@@ -47,15 +57,21 @@ public class DeckManger : MonoBehaviour
     {
         // Load the database with Cool Cards
     }
-    public void SetCard(int index, int cardId)
+    /*
+    SetCard
+        When a unlocked card is dragged onto a card in the deck, we set the card in decks array after checking it is unlocked.
+    */
+    public bool SetCard(int index, int cardId)
     {
-        if (((deck >> (cardId - 1)) & 1) == 1)
+        if (IsInDeck(cardId))
         {
             cards[index] = cardId;
+            return true;
         }
-        else
-        {
-            Debug.Log("You do not have that card");
-        }
+        return false;
+    }
+    public bool IsInDeck(int cardId)
+    {
+        return (((deck >> (cardId - 1)) & 1) == 1);
     }
 }

@@ -18,7 +18,6 @@ public static class SaveManager
         {
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(SAVE_PATH, json);
-            Debug.Log("Saved to:" + SAVE_PATH);
 
         }
         catch (System.Exception e)
@@ -38,14 +37,11 @@ public static class SaveManager
             }
             catch (System.Exception e)
             {
-                Debug.Log("Failed Reading Save File" + e.Message);
-                Debug.Log("Creating New Save File");
                 return new CampaignData("BLANK");
             }
         }
         else
         {
-            Debug.Log("Creating New Save File");
             return new CampaignData("BLANK");
         }
 

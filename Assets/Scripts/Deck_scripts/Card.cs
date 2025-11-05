@@ -1,3 +1,13 @@
+/*
+Card.cs
+8coolguy
+    This Class hold information on the Card. There are two identifying variables to decide where in the UI this card is. This Card is either part of the deck or not. It is also a card slot or not.
+    inDeck and cardSlot => empty deck slot
+    not inDeck and cardSlot => locked card
+    indeck and not cardSlot => filled deck slot
+    not inDeck and not cardSlot => unlocked Card
+*/
+
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -42,7 +52,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             else
             {
                 Image image = this.GetComponent<Image>();
-                image.color = color;
             }
         }
         else
@@ -50,13 +59,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             if (isCardSlot)
             {
                 Image image = this.GetComponent<Image>();
-                image.color = Color.black;
                 image.sprite = defaultLockScreen;
             }
             else
             {
                 Image image = this.GetComponent<Image>();
-                image.color = color;
             }
         }
     }
@@ -67,7 +74,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         originalParent = transform.parent;
         if (isCardSlot)
         {
-            //Card is locked or empty card slot
             return;
         }
         transform.SetParent(newParent, true);
@@ -114,8 +120,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         }
         transform.position = orginalPostion;
         transform.SetParent(originalParent, true);
-        //call parent overlap checker
-        //check which card slot it intercepts and place the card in slot intercepts
     }
     void CopyTo(Card card)
     {

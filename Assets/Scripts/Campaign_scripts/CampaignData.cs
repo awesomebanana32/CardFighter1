@@ -15,9 +15,18 @@ public class CampaignData
         progress = 0;
         wealth = 0;
         deck = 0;
-        levelReached = 3;
-        name = playerName;
+        levelReached = 0;
+        playerName = name;
     }
+    public CampaignData(string name, int p, int w, int l, long d)
+    {
+        progress = p;
+        wealth = w;
+        deck = d;
+        levelReached = l;
+        playerName = name;
+    }
+
     public string toString(){
         return JsonUtility.ToJson(this);
     }
