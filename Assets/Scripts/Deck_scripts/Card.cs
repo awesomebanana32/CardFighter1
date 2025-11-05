@@ -34,7 +34,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [SerializeField]
     private Sprite defualtCover;
     [SerializeField]
-    private Sprite defaultLockScreen; 
+    private Sprite defaultLockScreen;
+    public GameObject deck;
     void OnValidate()
     {
         Image image = this.GetComponent<Image>();
@@ -51,6 +52,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             }
             else
             {
+                //TODO: show card cover
                 Image image = this.GetComponent<Image>();
             }
         }
@@ -63,6 +65,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             }
             else
             {
+                //TODO: show card cover
                 Image image = this.GetComponent<Image>();
             }
         }
@@ -94,15 +97,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (overlapped)
         {
             Debug.Log(overlapped.name + "had been intersected");
-            if (overlapped.GetComponent<Card>().isCardSlot && isCardSlot)
-            {
-                //do nothing
-            }
-            else if (!overlapped.GetComponent<Card>().withinDeck && !withinDeck)
-            {
-                //do nothing
-            }
-            else if (overlapped.GetComponent<Card>().withinDeck && withinDeck)
+            if (overlapped.GetComponent<Card>().withinDeck && withinDeck)
             {
                 Sprite image = overlapped.GetComponent<Image>().sprite;
                 overlapped.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
@@ -111,8 +106,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             }
             else if (overlapped.GetComponent<Card>().withinDeck)
             {
-                overlapped.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-                this.GetComponent<Card>().CopyTo(overlapped.GetComponent<Card>());
+                if (overlapped.GetComponent<Card>().deck.GetComponent<DeckManger>().SetCard(overlapped.GetComponent<Card>().id, id))
+                {
+                    overlapped.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+                    this.GetComponent<Card>().CopyTo(overlapped.GetComponent<Card>());
+                }
             }else if (withinDeck && !overlapped.GetComponent<Card>().withinDeck)
             {
                 EmptyCard();
