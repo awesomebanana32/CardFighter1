@@ -2,62 +2,66 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CountdownTimer : MonoBehaviour
+public class CountUpTimer : MonoBehaviour
 {
     [Header("UI Elements")]
     public Button startButton;           // Assign your start button
     public TextMeshProUGUI timerText;    // Assign your TextMeshProUGUI for the timer display
 
     [Header("Timer Settings")]
-    public int startMinutes = 1;         // Minutes to start from
-    public int startSeconds = 0;         // Seconds to start from
+    public int targetMinutes = 1;        // Optional: Stop at this minute mark
+    public int targetSeconds = 0;        // Optional: Stop at this second mark
+    public bool stopAtTargetTime = false; // If true, timer stops when reaching target time
 
-    private float remainingTime;         // Time left in seconds
-    private bool isCountingDown = false;
+    private float elapsedTime = 0f;      // Time passed in seconds
+    private bool isCounting = false;
 
     void Start()
     {
         if (startButton != null)
-            startButton.onClick.AddListener(StartCountdown);
+            startButton.onClick.AddListener(StartCount);
 
         // Initialize timer display
-        remainingTime = startMinutes * 60 + startSeconds;
+        elapsedTime = 0f;
         UpdateTimerDisplay();
     }
 
     void Update()
     {
-        if (isCountingDown)
+        if (isCounting)
         {
-            if (remainingTime > 0)
+            elapsedTime += Time.deltaTime;
+
+            if (stopAtTargetTime)
             {
-                remainingTime -= Time.deltaTime;
-                if (remainingTime < 0) remainingTime = 0; // Prevent negative time
-                UpdateTimerDisplay();
+                float targetTime = targetMinutes * 60 + targetSeconds;
+                if (elapsedTime >= targetTime)
+                {
+                    elapsedTime = targetTime;
+                    isCounting = false;
+                }
             }
-            else
-            {
-                isCountingDown = false;
-            }
+
+            UpdateTimerDisplay();
         }
     }
 
-    void StartCountdown()
+    void StartCount()
     {
-        remainingTime = startMinutes * 60 + startSeconds;
-        isCountingDown = true;
+        elapsedTime = 0f;
+        isCounting = true;
     }
 
     void UpdateTimerDisplay()
     {
-        int minutes = Mathf.FloorToInt(remainingTime / 60f);
-        int seconds = Mathf.FloorToInt(remainingTime % 60f);
+        int minutes = Mathf.FloorToInt(elapsedTime / 60f);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60f);
         if (timerText != null)
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public void StopCountdown()
+    public void StopCount()
     {
-        isCountingDown = false;
+        isCounting = false;
     }
 }
