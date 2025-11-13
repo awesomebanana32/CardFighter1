@@ -15,9 +15,14 @@ public class DeckManger : MonoBehaviour
     [SerializeField]
     public float layoutSpacing;
     public Sprite defaultCover;
+    public CardDatabase cardDatabase;
     public void Start()
     {
         cards = new int[8];
+        for(int i = 0; i < 8; i++)
+        {
+            cards[i] = -1;
+        }
         CampaignData data = SaveManager.LoadGame();
         deck = data.deck;
         Vector3 position = transform.position;
@@ -45,28 +50,44 @@ public class DeckManger : MonoBehaviour
                 else
                 {
                     //TODO: retrieve the card cover.
-                    //maybe also apply affects
-                    newCard.GetComponent<Image>().sprite = defaultCover;
+                    Sprite cover = cardDatabase.GetSprite(currentId);
+                    //TODO: apply affects
+                    if (cover != null)
+                    {
+                        newCard.GetComponent<Image>().sprite = cover;
+                    }
+                    else
+                    {
+                        newCard.GetComponent<Image>().sprite = defaultCover;
+                    }
                 }
 
             }
         }
     }
 
-    public void LoadCardDatabase(int level)
-    {
-        // Load the database with Cool Cards
-    }
     /*
     SetCard
         When a unlocked card is dragged onto a card in the deck, we set the card in decks array after checking it is unlocked.
     */
     public bool SetCard(int index, int cardId)
     {
-        if (IsInDeck(cardId))
+        if (IsInDeck(cardId) && !IsInPlayingDeck(cardId))
         {
             cards[index] = cardId;
             return true;
+        }
+        return false;
+    }
+    public bool IsInPlayingDeck(int cardId)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (cards[i] == cardId)
+            {
+                return true;
+            }
+
         }
         return false;
     }
