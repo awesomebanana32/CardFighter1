@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ObjectDatabase", menuName = "Database/ObjectDatabaseSO")]
 public class ObjectDatabaseSO : ScriptableObject
 {
+    [Header("All Units/Buildings Data")]
     public List<ObjectData> objectsData;
 
     // Get the prefab for a given ID
@@ -20,6 +21,13 @@ public class ObjectDatabaseSO : ScriptableObject
         ObjectData data = objectsData.Find(obj => obj.ID == id);
         return data != null ? data.PopulationCost : 1;
     }
+
+    // Get the gold cost for a given ID
+    public int GetGoldCostByID(int id)
+    {
+        ObjectData data = objectsData.Find(obj => obj.ID == id);
+        return data != null ? data.GoldCost : 0;
+    }
 }
 
 [Serializable]
@@ -30,4 +38,7 @@ public class ObjectData
     [field: SerializeField] public Vector2Int Size { get; private set; } = Vector2Int.one;
     [field: SerializeField] public GameObject Prefab { get; private set; }
     [field: SerializeField] public int PopulationCost { get; private set; } = 1;
+
+    // Gold cost field added
+    [field: SerializeField] public int GoldCost { get; private set; } = 100;
 }

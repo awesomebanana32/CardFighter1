@@ -8,7 +8,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private int maxPopulation = 100;
 
     [Header("UI")]
-    [SerializeField] private GameObject selectCityPopup; // Assign a UI Text or panel here
+    [SerializeField] private GameObject selectCityPopup; 
     [SerializeField] private float popupDuration = 2f;
 
     private int currentPopulation = 0;
@@ -26,7 +26,7 @@ public class PlacementSystem : MonoBehaviour
             Instance = this;
     }
 
-    // Call this when a troop button is clicked
+    // Called when a troop button is clicked
     public void SpawnTroop(int troopID)
     {
         City selectedCity = CitySelectionManager.SelectedCity;
@@ -39,6 +39,7 @@ public class PlacementSystem : MonoBehaviour
 
         GameObject troopPrefab = database.GetPrefabByID(troopID);
         int popCost = database.GetPopulationCostByID(troopID);
+        int goldCost = database.GetGoldCostByID(troopID);   // NEW
 
         if (troopPrefab == null)
         {
@@ -46,13 +47,25 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
-        if (currentPopulation + popCost > maxPopulation)
+        // Check gold BEFORE population
+        if (!GoldManager.Instance.SpendGold(goldCost))       // NEW
         {
-            Debug.LogWarning("Not enough population to spawn this troop!");
+            Debug.Log("Not enough gold to spawn this troop!");
             return;
         }
 
-        // Spawn at the city's spawn point
+        // Check population
+        if (currentPopulation + popCost > maxPopulation)
+        {
+            Debug.LogWarning("Not enough population to spawn this troop!");
+            
+            // OPTIONAL: Refund if you want
+            // GoldManager.Instance.AddGold(goldCost);
+
+            return;
+        }
+
+        // Spawn the troop
         Transform spawnPoint = selectedCity.GetSpawnPoint();
         Instantiate(troopPrefab, spawnPoint.position, Quaternion.identity);
 
@@ -71,7 +84,7 @@ public class PlacementSystem : MonoBehaviour
         if (selectCityPopup == null) return;
 
         selectCityPopup.SetActive(true);
-        StopAllCoroutines(); // ensure multiple clicks don’t overlap timers
+        StopAllCoroutines();
         StartCoroutine(HidePopupAfterDelay(popupDuration));
     }
 
