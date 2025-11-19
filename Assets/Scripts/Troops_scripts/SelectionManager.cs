@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class SelectionManager : MonoBehaviour
@@ -11,10 +10,6 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private LayerMask troopLayer;
     [SerializeField] private string playerTroopTag = "TeamGreen";
 
-    [Header("UI")]
-    [SerializeField] private Button selectionModeButton;
-
-    private bool isSelectionActive = false;
     private List<CircleSelection> selectedUnits = new List<CircleSelection>();
     private Vector2 mouseStartPos;
     private bool isDragging = false;
@@ -22,45 +17,12 @@ public class SelectionManager : MonoBehaviour
 
     void Start()
     {
-        if (selectionModeButton != null)
-        {
-            selectionModeButton.onClick.AddListener(ToggleSelectionMode);
-        }
-        else
-        {
-            Debug.LogWarning("SelectionModeButton not assigned in inspector!");
-        }
-    }
-
-    void OnDestroy()
-    {
-        if (selectionModeButton != null)
-            selectionModeButton.onClick.RemoveListener(ToggleSelectionMode);
-    }
-
-    private void ToggleSelectionMode()
-    {
-        isSelectionActive = !isSelectionActive;
-
-        if (selectionModeButton != null)
-        {
-            ColorBlock colors = selectionModeButton.colors;
-            colors.normalColor = isSelectionActive ? Color.green : Color.white;
-            selectionModeButton.colors = colors;
-        }
-
-        if (!isSelectionActive)
-        {
-            DeselectAll(); 
-            isDragging = false;
-        }
-
-        Debug.Log($"Selection mode {(isSelectionActive ? "ACTIVATED" : "DEACTIVATED")}");
+        // Selection is always active
     }
 
     void Update()
     {
-        if (!isSelectionActive || Mouse.current == null || Camera.main == null) return;
+        if (Mouse.current == null || Camera.main == null) return;
 
         CleanupDestroyedTroops();
         HandleSelection();
@@ -73,7 +35,7 @@ public class SelectionManager : MonoBehaviour
         {
             mouseStartPos = Mouse.current.position.ReadValue();
             isDragging = true;
-            DeselectAll(); 
+            DeselectAll();
         }
 
         if (isDragging)
@@ -117,7 +79,6 @@ public class SelectionManager : MonoBehaviour
                     selectedUnits.Add(unit);
                     unit.Select();
                 }
-
             }
         }
     }
@@ -136,74 +97,58 @@ public class SelectionManager : MonoBehaviour
                 if (unit != null)
                 {
                     selectedUnits.Add(unit);
-                    unit.Select(); 
+                    unit.Select();
                 }
             }
         }
     }
 
-   private void HandleMoveCommand()
-{
-    if (Mouse.current.rightButton.wasPressedThisFrame && selectedUnits.Count > 0 && !EventSystem.current.IsPointerOverGameObject())
+    private void HandleMoveCommand()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        if (Mouse.current.rightButton.wasPressedThisFrame && selectedUnits.Count > 0 && !EventSystem.current.IsPointerOverGameObject())
         {
-            Vector3 baseDestination = hit.point;
-            int unitCount = selectedUnits.Count;
-
-            // Formation settings
-            int columns = Mathf.CeilToInt(Mathf.Sqrt(unitCount)); // auto-calculate formation width
-            float spacing = 3.0f; // distance between troops
-            Vector3 forward = Vector3.zero;
-            Vector3 right = Vector3.zero;
-
-            // Align the formation to the camera direction (so "rows" face the player)
-            if (Camera.main != null)
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
             {
-                forward = Camera.main.transform.forward;
+                Vector3 baseDestination = hit.point;
+                int unitCount = selectedUnits.Count;
+
+                // Formation settings
+                int columns = Mathf.CeilToInt(Mathf.Sqrt(unitCount));
+                float spacing = 3.0f;
+                Vector3 forward = Camera.main.transform.forward;
                 forward.y = 0;
                 forward.Normalize();
-
-                right = Camera.main.transform.right;
+                Vector3 right = Camera.main.transform.right;
                 right.y = 0;
                 right.Normalize();
+                int rows = Mathf.CeilToInt((float)unitCount / columns);
+
+                Vector3 formationCenterOffset =
+                    (-right * (columns - 1) * spacing / 2f) +
+                    (forward * (rows - 1) * spacing / 2f);
+
+                for (int i = 0; i < unitCount; i++)
+                {
+                    if (selectedUnits[i] == null) continue;
+
+                    int row = i / columns;
+                    int column = i % columns;
+
+                    Vector3 offset = (right * (column * spacing)) - (forward * (row * spacing));
+                    Vector3 targetPosition = baseDestination + formationCenterOffset + offset;
+
+                    StateManager stateManager = selectedUnits[i].GetComponent<StateManager>();
+                    if (stateManager != null)
+                        stateManager.CommandMove(targetPosition);
+
+                    selectedUnits[i].Deselect();
+                }
+
+                selectedUnits.Clear();
             }
-            else
-            {
-                forward = Vector3.forward;
-                right = Vector3.right;
-            }
-
-            // Calculate the total number of rows
-            int rows = Mathf.CeilToInt((float)unitCount / columns);
-
-            // Find the top-left corner so the formation is centered on the click
-            Vector3 formationCenterOffset =
-                (-right * (columns - 1) * spacing / 2f) +
-                (forward * (rows - 1) * spacing / 2f);
-
-            for (int i = 0; i < unitCount; i++)
-            {
-                if (selectedUnits[i] == null) continue;
-
-                int row = i / columns;
-                int column = i % columns;
-
-                Vector3 offset = (right * (column * spacing)) - (forward * (row * spacing));
-                Vector3 targetPosition = baseDestination + formationCenterOffset + offset;
-
-                StateManager stateManager = selectedUnits[i].GetComponent<StateManager>();
-                if (stateManager != null)
-                    stateManager.CommandMove(targetPosition);
-
-                selectedUnits[i].Deselect();
-            }
-
-            selectedUnits.Clear();
         }
     }
-}
 
     private void DeselectAll()
     {

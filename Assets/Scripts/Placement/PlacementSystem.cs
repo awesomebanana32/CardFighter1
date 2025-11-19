@@ -1,22 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class PlacementSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject cellIndicator;
-    [SerializeField] private InputManager inputManager;
-    [SerializeField] private Grid grid;
     [SerializeField] private ObjectDatabaseSO database;
-    [SerializeField] private ObjectPlacer objectPlacer;
     [SerializeField] private int maxPopulation = 100;
-    [SerializeField] private LayerMask unplaceableLayerMask;
 
-    private IBuildingState buildingState;
-    private GridData gridData;
-    private Renderer previewRenderer;
-    private Color validColor;
+    [Header("UI")]
+    [SerializeField] private GameObject selectCityPopup; // Assign a UI Text or panel here
+    [SerializeField] private float popupDuration = 2f;
+
     private int currentPopulation = 0;
 
-    // Singleton instance
     public static PlacementSystem Instance { get; private set; }
 
     public int MaxPopulation => maxPopulation;
@@ -25,108 +21,64 @@ public class PlacementSystem : MonoBehaviour
     private void Awake()
     {
         if (Instance != null && Instance != this)
-        {
             Destroy(gameObject);
-        }
         else
-        {
             Instance = this;
-        }
     }
 
-    private void Start()
+    // Call this when a troop button is clicked
+    public void SpawnTroop(int troopID)
     {
-        StopPlacement();
-        gridData = new GridData();
-        previewRenderer = cellIndicator?.GetComponentInChildren<Renderer>();
-        if (previewRenderer != null)
+        City selectedCity = CitySelectionManager.SelectedCity;
+
+        if (selectedCity == null)
         {
-            ColorUtility.TryParseHtmlString("#A7FFA5", out validColor);
-            previewRenderer.material.color = validColor;
+            ShowSelectCityPopup();
+            return;
         }
 
-        ToggleUnplaceableMeshes(false);
+        GameObject troopPrefab = database.GetPrefabByID(troopID);
+        int popCost = database.GetPopulationCostByID(troopID);
+
+        if (troopPrefab == null)
+        {
+            Debug.LogWarning("Troop prefab not found for ID: " + troopID);
+            return;
+        }
+
+        if (currentPopulation + popCost > maxPopulation)
+        {
+            Debug.LogWarning("Not enough population to spawn this troop!");
+            return;
+        }
+
+        // Spawn at the city's spawn point
+        Transform spawnPoint = selectedCity.GetSpawnPoint();
+        Instantiate(troopPrefab, spawnPoint.position, Quaternion.identity);
+
+        AddToPopulation(popCost);
     }
 
-    /// <summary>
-    /// Safely adds population, clamped to [0, maxPopulation]
-    /// </summary>
     public void AddToPopulation(int amount)
     {
         currentPopulation += amount;
         currentPopulation = Mathf.Clamp(currentPopulation, 0, maxPopulation);
     }
 
-    public void StartPlacement(int ID)
+    // Show a brief popup warning if no city is selected
+    private void ShowSelectCityPopup()
     {
-        StopPlacement();
-        buildingState = new PlacementState(ID, grid, database, objectPlacer, gridData, cellIndicator, inputManager, this, unplaceableLayerMask);
-        inputManager.OnClicked += OnInputClicked;
-        inputManager.OnExit += StopPlacement;
+        if (selectCityPopup == null) return;
 
-        ToggleUnplaceableMeshes(true);
+        selectCityPopup.SetActive(true);
+        StopAllCoroutines(); // ensure multiple clicks don’t overlap timers
+        StartCoroutine(HidePopupAfterDelay(popupDuration));
     }
 
-    public void StartRemoving()
+    private IEnumerator HidePopupAfterDelay(float delay)
     {
-        StopPlacement();
-        buildingState = new RemovingState(grid, objectPlacer, gridData, cellIndicator, inputManager, database, this);
-        inputManager.OnClicked += OnInputClicked;
-        inputManager.OnExit += StopPlacement;
-
-        ToggleUnplaceableMeshes(true);
-    }
-
-    private void OnInputClicked()
-    {
-        if (buildingState == null || inputManager == null || inputManager.IsPointerOverUI())
-            return;
-
-        if (inputManager.GetSelectedMapPosition(out Vector3 mousePosition))
-        {
-            Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-            buildingState?.OnAction(gridPosition);
-        }
-    }
-
-    public void StopPlacementButton() => StopPlacement();
-
-    private void StopPlacement()
-    {
-        if (buildingState == null) return;
-
-        buildingState.EndState();
-        inputManager.OnClicked -= OnInputClicked;
-        inputManager.OnExit -= StopPlacement;
-        buildingState = null;
-
-        ToggleUnplaceableMeshes(false);
-    }
-
-    private void Update()
-    {
-        if (buildingState == null || inputManager == null) return;
-
-        if (inputManager.GetSelectedMapPosition(out Vector3 mousePosition))
-        {
-            Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-            buildingState?.UpdateState(gridPosition);
-        }
-    }
-
-    private void ToggleUnplaceableMeshes(bool visible)
-    {
-        Collider[] unplaceableColliders = Physics.OverlapSphere(Vector3.zero, float.MaxValue, unplaceableLayerMask);
-        foreach (var collider in unplaceableColliders)
-        {
-            if (collider.CompareTag("Unplaceable"))
-            {
-                Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
-                foreach (var renderer in renderers)
-                {
-                    renderer.enabled = visible;
-                }
-            }
-        }
+        yield return new WaitForSeconds(delay);
+        if (selectCityPopup != null)
+            selectCityPopup.SetActive(false);
     }
 }
