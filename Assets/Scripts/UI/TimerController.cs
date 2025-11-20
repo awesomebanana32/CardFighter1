@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class CountUpTimer : MonoBehaviour
 {
     [Header("UI Elements")]
-    public Button startButton;           // Assign your start button
     public TextMeshProUGUI timerText;    // Assign your TextMeshProUGUI for the timer display
 
     [Header("Timer Settings")]
@@ -18,11 +16,11 @@ public class CountUpTimer : MonoBehaviour
 
     void Start()
     {
-        if (startButton != null)
-            startButton.onClick.AddListener(StartCount);
+        // Start counting automatically
+        elapsedTime = 0f;
+        isCounting = true;
 
         // Initialize timer display
-        elapsedTime = 0f;
         UpdateTimerDisplay();
     }
 
@@ -44,12 +42,6 @@ public class CountUpTimer : MonoBehaviour
 
             UpdateTimerDisplay();
         }
-    }
-
-    void StartCount()
-    {
-        elapsedTime = 0f;
-        isCounting = true;
     }
 
     void UpdateTimerDisplay()

@@ -28,6 +28,11 @@ public class ObjectDatabaseSO : ScriptableObject
         ObjectData data = objectsData.Find(obj => obj.ID == id);
         return data != null ? data.GoldCost : 0;
     }
+    public float GetCooldownByID(int id)
+    {
+        ObjectData data = objectsData.Find(obj => obj.ID == id);
+        return data != null ? data.Cooldown : 1f;
+    }
 }
 
 [Serializable]
@@ -41,4 +46,5 @@ public class ObjectData
 
     // Gold cost field added
     [field: SerializeField] public int GoldCost { get; private set; } = 100;
+    [field: SerializeField] public float Cooldown { get; private set; } = 1f;
 }
