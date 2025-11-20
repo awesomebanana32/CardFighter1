@@ -11,12 +11,22 @@ public class LightningSpawner : MonoBehaviour
     [SerializeField] private float cooldownTime = 10f;
 
     [Header("UI Settings")]
-    [SerializeField] private Button castButton;       // assign your lightning button here
-    [SerializeField] private Image cooldownOverlay;   // assign overlay image (child of button)
+    [SerializeField] private Button castButton;
+    [SerializeField] private Image cooldownOverlay;
+
+    [Header("Gold Settings")]
+    [SerializeField] private int lightningCost = 50;
 
     private bool lightningModeActive = false;
     private bool canCast = true;
     private float cooldownTimer = 0f;
+
+    private GoldManager gold;
+
+    private void Start()
+    {
+        gold = GoldManager.Instance;
+    }
 
     public void EnableLightningMode()
     {
@@ -26,31 +36,22 @@ public class LightningSpawner : MonoBehaviour
             return;
         }
 
+        // Try to spend gold now, only allow mode if successful
+        if (!gold.SpendGold(lightningCost))
+        {
+            Debug.Log("Not enough gold to cast lightning!");
+            return;
+        }
+
         lightningModeActive = true;
-        Debug.Log("Lightning mode enabled. Right-click to cast.");
     }
 
     private void Update()
     {
-        // --- Cooldown update ---
-        if (!canCast)
-        {
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownOverlay != null)
-                cooldownOverlay.fillAmount = cooldownTimer / cooldownTime;
+        HandleCooldown();
 
-            if (cooldownTimer <= 0f)
-            {
-                canCast = true;
-                if (castButton != null)
-                    castButton.interactable = true;
-                if (cooldownOverlay != null)
-                    cooldownOverlay.fillAmount = 0f;
-            }
-        }
-
-        // --- Lightning casting ---
-        if (!lightningModeActive || !canCast) return;
+        if (!lightningModeActive || !canCast)
+            return;
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -68,14 +69,7 @@ public class LightningSpawner : MonoBehaviour
     private void SpawnLightning(Vector3 position)
     {
         if (lightningPrefab != null)
-        {
             Instantiate(lightningPrefab, position, Quaternion.identity);
-            Debug.Log($"Lightning spawned at {position}");
-        }
-        else
-        {
-            Debug.LogWarning("Lightning prefab not assigned!");
-        }
     }
 
     private void StartCooldown()
@@ -88,7 +82,25 @@ public class LightningSpawner : MonoBehaviour
 
         if (cooldownOverlay != null)
             cooldownOverlay.fillAmount = 1f;
+    }
 
-        Debug.Log("Lightning cooldown started.");
+    private void HandleCooldown()
+    {
+        if (!canCast)
+        {
+            cooldownTimer -= Time.deltaTime;
+
+            if (cooldownOverlay != null)
+                cooldownOverlay.fillAmount = cooldownTimer / cooldownTime;
+
+            if (cooldownTimer <= 0f)
+            {
+                canCast = true;
+                if (castButton != null)
+                    castButton.interactable = true;
+                if (cooldownOverlay != null)
+                    cooldownOverlay.fillAmount = 0f;
+            }
+        }
     }
 }

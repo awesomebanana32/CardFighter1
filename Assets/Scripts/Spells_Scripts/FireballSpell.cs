@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class FireballSpell : MonoBehaviour
 {
@@ -12,6 +11,9 @@ public class FireballSpell : MonoBehaviour
     [SerializeField] private LayerMask raycastLayers = ~0;
     [SerializeField] private float cooldownTime = 10f; // cooldown in seconds
 
+    [Header("Gold Settings")]
+    [SerializeField] private int fireballCost = 50;
+
     [Header("UI Settings")]
     [SerializeField] private Button castButton; // assign in inspector
     [SerializeField] private Image cooldownOverlay; // assign a child UI image
@@ -21,43 +23,28 @@ public class FireballSpell : MonoBehaviour
     private bool canCast = true;
     private float cooldownTimer = 0f;
 
+    private GoldManager gold;
+
     private void Awake()
     {
         mainCamera = Camera.main;
         if (mainCamera == null)
             Debug.LogError("Main camera not found!");
+
+        gold = GoldManager.Instance;
     }
 
     private void Update()
     {
-        // --- Handle cooldown UI ---
-        if (!canCast)
-        {
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownOverlay != null)
-                cooldownOverlay.fillAmount = cooldownTimer / cooldownTime;
+        HandleCooldown();
 
-            if (cooldownTimer <= 0f)
-            {
-                canCast = true;
-                if (castButton != null)
-                    castButton.interactable = true;
-                if (cooldownOverlay != null)
-                    cooldownOverlay.fillAmount = 0f;
-            }
-        }
-
-        // --- Fireball casting logic ---
         if (!isCasting || Mouse.current == null || !canCast)
             return;
 
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             Vector2 mousePos = Mouse.current.position.ReadValue();
-            Debug.Log($"Right-click detected at screen position: {mousePos}");
-
             Ray ray = mainCamera.ScreenPointToRay(mousePos);
-            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
 
             if (Physics.Raycast(ray, out RaycastHit hit, 1000f, raycastLayers, QueryTriggerInteraction.Ignore))
             {
@@ -85,6 +72,13 @@ public class FireballSpell : MonoBehaviour
             return;
         }
 
+        // Try to spend gold, only enable casting if successful
+        if (!gold.SpendGold(fireballCost))
+        {
+            Debug.Log("Not enough gold to cast Fireball!");
+            return;
+        }
+
         isCasting = true;
         Debug.Log("Fireball casting mode enabled! Right-click to cast.");
     }
@@ -103,7 +97,6 @@ public class FireballSpell : MonoBehaviour
         {
             rb.useGravity = false;
             rb.linearVelocity = direction * fireballSpeed;
-            Debug.Log($"Fireball spawned at {position}, moving toward {direction}");
         }
         else
         {
@@ -120,10 +113,25 @@ public class FireballSpell : MonoBehaviour
             castButton.interactable = false;
 
         if (cooldownOverlay != null)
-        {
             cooldownOverlay.fillAmount = 1f;
-        }
+    }
 
-        Debug.Log("Fireball spell on cooldown.");
+    private void HandleCooldown()
+    {
+        if (!canCast)
+        {
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownOverlay != null)
+                cooldownOverlay.fillAmount = cooldownTimer / cooldownTime;
+
+            if (cooldownTimer <= 0f)
+            {
+                canCast = true;
+                if (castButton != null)
+                    castButton.interactable = true;
+                if (cooldownOverlay != null)
+                    cooldownOverlay.fillAmount = 0f;
+            }
+        }
     }
 }
