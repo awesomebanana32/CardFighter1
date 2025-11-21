@@ -118,6 +118,15 @@ public partial class @CameraControlActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ResetCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d0485df-d24b-4bd4-98be-539d65ea84eb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -197,6 +206,17 @@ public partial class @CameraControlActions: IInputActionCollection2, IDisposable
                     ""action"": ""ZoomCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c34dc4c5-d366-4ac4-8cdd-bcd35b67da0e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +228,7 @@ public partial class @CameraControlActions: IInputActionCollection2, IDisposable
         m_Camera_Movement = m_Camera.FindAction("Movement", throwIfNotFound: true);
         m_Camera_RotateCamera = m_Camera.FindAction("RotateCamera", throwIfNotFound: true);
         m_Camera_ZoomCamera = m_Camera.FindAction("ZoomCamera", throwIfNotFound: true);
+        m_Camera_ResetCamera = m_Camera.FindAction("ResetCamera", throwIfNotFound: true);
     }
 
     ~@CameraControlActions()
@@ -291,6 +312,7 @@ public partial class @CameraControlActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Camera_Movement;
     private readonly InputAction m_Camera_RotateCamera;
     private readonly InputAction m_Camera_ZoomCamera;
+    private readonly InputAction m_Camera_ResetCamera;
     /// <summary>
     /// Provides access to input actions defined in input action map "Camera".
     /// </summary>
@@ -314,6 +336,10 @@ public partial class @CameraControlActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Camera/ZoomCamera".
         /// </summary>
         public InputAction @ZoomCamera => m_Wrapper.m_Camera_ZoomCamera;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/ResetCamera".
+        /// </summary>
+        public InputAction @ResetCamera => m_Wrapper.m_Camera_ResetCamera;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -349,6 +375,9 @@ public partial class @CameraControlActions: IInputActionCollection2, IDisposable
             @ZoomCamera.started += instance.OnZoomCamera;
             @ZoomCamera.performed += instance.OnZoomCamera;
             @ZoomCamera.canceled += instance.OnZoomCamera;
+            @ResetCamera.started += instance.OnResetCamera;
+            @ResetCamera.performed += instance.OnResetCamera;
+            @ResetCamera.canceled += instance.OnResetCamera;
         }
 
         /// <summary>
@@ -369,6 +398,9 @@ public partial class @CameraControlActions: IInputActionCollection2, IDisposable
             @ZoomCamera.started -= instance.OnZoomCamera;
             @ZoomCamera.performed -= instance.OnZoomCamera;
             @ZoomCamera.canceled -= instance.OnZoomCamera;
+            @ResetCamera.started -= instance.OnResetCamera;
+            @ResetCamera.performed -= instance.OnResetCamera;
+            @ResetCamera.canceled -= instance.OnResetCamera;
         }
 
         /// <summary>
@@ -430,5 +462,12 @@ public partial class @CameraControlActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnZoomCamera(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ResetCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnResetCamera(InputAction.CallbackContext context);
     }
 }

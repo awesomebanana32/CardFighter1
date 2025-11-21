@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour
 {
     private CameraControlActions cameraActions;
     private InputAction movement;
+    private InputAction resetCamera;
     private Camera mainCamera;
     private Transform cameraTransform;
 
@@ -44,6 +45,10 @@ public class CameraController : MonoBehaviour
     private Vector3 dragVelocity;
     */
 
+    // Capital City return
+    [Header("Capital City Return")]
+    [SerializeField] private Transform capitalCity;
+
     private void Awake()
     {
         cameraActions = new CameraControlActions();
@@ -59,15 +64,24 @@ public class CameraController : MonoBehaviour
     {
         targetFOV = mainCamera.fieldOfView;
         lastPosition = transform.position;
+
         movement = cameraActions.Camera.Movement;
+        resetCamera = cameraActions.Camera.ResetCamera;
+
         cameraActions.Camera.ZoomCamera.performed += ZoomCamera;
+        resetCamera.performed += ResetToCapital;
+
         cameraActions.Camera.Enable();
+        resetCamera.Enable();
     }
 
     private void OnDisable()
     {
         cameraActions.Camera.ZoomCamera.performed -= ZoomCamera;
+        resetCamera.performed -= ResetToCapital;
+
         cameraActions.Disable();
+        resetCamera.Disable();
     }
 
     private void Update()
@@ -144,10 +158,28 @@ public class CameraController : MonoBehaviour
 
     private void UpdateCameraPosition()
     {
+        UpdateCameraZoom();
+    }
+
+    private void UpdateCameraZoom()
+    {
         if (Time.deltaTime > 0f)
         {
-            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, Time.deltaTime * zoomDampening);
+            mainCamera.fieldOfView = Mathf.Lerp(
+                mainCamera.fieldOfView,
+                targetFOV,
+                Time.deltaTime * zoomDampening
+            );
         }
+    }
+
+    // Spacebar: instant snap to capital city
+    private void ResetToCapital(InputAction.CallbackContext ctx)
+    {
+        if (capitalCity == null) return;
+
+        // INSTANT SNAP
+        transform.position = capitalCity.position;
     }
 
     /*
@@ -167,7 +199,6 @@ public class CameraController : MonoBehaviour
         else if (viewportPos.y > 1f - edgeTolerance)
             moveDirection += GetCameraForward();
 
-        // Normalize diagonal movement
         if (moveDirection.sqrMagnitude > 0.01f)
             moveDirection.Normalize();
 
