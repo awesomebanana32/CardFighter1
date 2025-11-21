@@ -1,57 +1,41 @@
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
-public class WinLossManager : MonoBehaviour
+public class CapitalCityManager : MonoBehaviour
 {
-    public GameObject winScreen; // Assign Win UI panel in Inspector
-    public GameObject loseScreen; // Assign Lose UI panel in Inspector
+    [Header("UI Screens")]
+    public GameObject winScreen;   // Assign Win UI panel
+    public GameObject loseScreen;  // Assign Lose UI panel
+
+    [Header("Capital Cities")]
+    public GameObject greenCapital; // Your team's capital
+    public GameObject redCapital;   // Enemy's capital
+
     private bool gameEnded = false;
 
     void Start()
     {
-        // Ensure UI screens are initially hidden
+        // Hide UI screens at start
         if (winScreen != null) winScreen.SetActive(false);
         if (loseScreen != null) loseScreen.SetActive(false);
     }
 
-    // Public method to be called by the button's OnClick event
-    public void StartTeamStatusCheck()
+    // Call this method when any capital is destroyed
+    public void CapitalDestroyed(GameObject destroyedCapital)
     {
-        StartCoroutine(StartCheckWithDelay());
-    }
+        if (gameEnded) return;
 
-    IEnumerator StartCheckWithDelay()
-    {
-        // Wait for 1 second before starting the team status check
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(CheckTeamStatus());
-    }
+        gameEnded = true;
+        Time.timeScale = 0f; // Pause the game
 
-    IEnumerator CheckTeamStatus()
-    {
-        while (!gameEnded)
+        if (destroyedCapital == greenCapital)
         {
-            // Find all GameObjects with specified tags
-            GameObject[] teamGreen = GameObject.FindGameObjectsWithTag("TeamGreen");
-            GameObject[] teamRed = GameObject.FindGameObjectsWithTag("TeamRed");
-
-            // Check if either team has zero members
-            if (teamGreen.Length == 0)
-            {
-                gameEnded = true;
-                Time.timeScale = 0f; // Pause the game
-                if (loseScreen != null) loseScreen.SetActive(true);
-            }
-            else if (teamRed.Length == 0)
-            {
-                gameEnded = true;
-                Time.timeScale = 0f; // Pause the game
-                if (winScreen != null) winScreen.SetActive(true);
-            }
-
-            // Wait for 1 second before next check
-            yield return new WaitForSeconds(1f);
+            // Player's capital destroyed  lose
+            if (loseScreen != null) loseScreen.SetActive(true);
+        }
+        else if (destroyedCapital == redCapital)
+        {
+            // Enemy capital destroyed  win
+            if (winScreen != null) winScreen.SetActive(true);
         }
     }
 }
