@@ -9,6 +9,7 @@ TagManager:
   - Unplaceable
   - MinimapCamera
   - TroopModel
+  - TeamGray
   layers:
   - Default
   - TransparentFX

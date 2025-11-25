@@ -3,35 +3,40 @@ using UnityEngine;
 public class IdleState : State
 {
     public ChaseState chaseState;
-    public float visionRange = 10f; // Add this
-    public string enemyTag = ""; // Set per prefab, like in ChaseState
+    public float visionRange = 10f;
+    public Team team;
 
-    private bool canSeeTheEnemy; // Existing
+    private bool canSeeEnemy;
+    private float checkInterval = 0.2f;
+    private float nextCheckTime = 0f;
 
     public override State RunCurrentState()
     {
-        canSeeTheEnemy = CheckForEnemies(); // New check
-        if (canSeeTheEnemy)
+        if (Time.time >= nextCheckTime)
         {
-            return chaseState;
+            nextCheckTime = Time.time + checkInterval;
+            canSeeEnemy = CheckForEnemies();
         }
-        else
-        {
-            return this;
-        }
+
+        return canSeeEnemy ? chaseState : this;
     }
 
     private bool CheckForEnemies()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-        foreach (GameObject enemy in enemies)
+        string[] enemyTags = TeamHelper.GetEnemies(team);
+
+        foreach (string enemyTag in enemyTags)
         {
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance <= visionRange)
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+            foreach (GameObject enemy in enemies)
             {
-                return true;
+                if (enemy == null) continue;
+                float distanceSqr = (enemy.transform.position - transform.position).sqrMagnitude;
+                if (distanceSqr <= visionRange * visionRange)
+                    return true;
             }
         }
+
         return false;
     }
 }

@@ -5,11 +5,12 @@ public class ChaseState : State
 {
     public AttackState attackState;
     public float attackRange = 2f;
-    public float visionRange = 10f;
-    public string enemyTag = "";
+    public Team team;
 
     private NavMeshAgent agent;
     private Transform nearestEnemy;
+    private float checkInterval = 0.2f;
+    private float nextCheckTime = 0f;
 
     private void Awake()
     {
@@ -18,14 +19,8 @@ public class ChaseState : State
 
     public override void OnEnterState()
     {
-        if (agent == null)
-            agent = GetComponent<NavMeshAgent>();
-
-        if (agent != null && agent.isOnNavMesh)
-            agent.ResetPath();
-
         nearestEnemy = null;
-        //Debug.Log($"{gameObject.name} entered ChaseState targeting {enemyTag}");
+        agent?.ResetPath();
     }
 
     public override State RunCurrentState()
@@ -33,7 +28,11 @@ public class ChaseState : State
         if (agent == null || !agent.enabled || !agent.isOnNavMesh)
             return this;
 
-        FindNearestEnemy();
+        if (Time.time >= nextCheckTime)
+        {
+            nextCheckTime = Time.time + checkInterval;
+            FindNearestEnemy();
+        }
 
         if (nearestEnemy == null)
         {
@@ -46,9 +45,8 @@ public class ChaseState : State
             return this;
 
         Vector3 closestPoint = enemyCollider.ClosestPoint(transform.position);
-        float distance = Vector3.Distance(transform.position, closestPoint);
+        float distanceSqr = (closestPoint - transform.position).sqrMagnitude;
 
-        // If target destroyed mid-run
         if (!nearestEnemy.gameObject.activeInHierarchy)
         {
             nearestEnemy = null;
@@ -56,46 +54,42 @@ public class ChaseState : State
             return this;
         }
 
-        if (distance <= attackRange)
+        if (distanceSqr <= attackRange * attackRange)
         {
             agent.ResetPath();
             attackState.SetTarget(nearestEnemy);
             return attackState;
         }
 
-        // Avoid crash if SetDestination fails
-        try
-        {
-            if (agent.isOnNavMesh)
-                agent.SetDestination(closestPoint);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogWarning($"{gameObject.name} failed to SetDestination: {e.Message}");
-        }
+        if (agent.isOnNavMesh)
+            agent.SetDestination(closestPoint);
 
         return this;
     }
 
     private void FindNearestEnemy()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-        float shortestDistance = Mathf.Infinity;
+        string[] enemyTags = TeamHelper.GetEnemies(team);
+        float shortestDistanceSqr = Mathf.Infinity;
         Transform closestEnemy = null;
 
-        foreach (GameObject enemy in enemies)
+        foreach (string enemyTag in enemyTags)
         {
-            if (enemy == null) continue;
-            Collider enemyCollider = enemy.GetComponent<Collider>();
-            if (enemyCollider == null) continue;
-
-            Vector3 closestPoint = enemyCollider.ClosestPoint(transform.position);
-            float distance = Vector3.Distance(transform.position, closestPoint);
-
-            if (distance < shortestDistance)
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+            foreach (GameObject enemy in enemies)
             {
-                shortestDistance = distance;
-                closestEnemy = enemy.transform;
+                if (enemy == null) continue;
+                Collider col = enemy.GetComponent<Collider>();
+                if (col == null) continue;
+
+                Vector3 closestPoint = col.ClosestPoint(transform.position);
+                float distanceSqr = (closestPoint - transform.position).sqrMagnitude;
+
+                if (distanceSqr < shortestDistanceSqr)
+                {
+                    shortestDistanceSqr = distanceSqr;
+                    closestEnemy = enemy.transform;
+                }
             }
         }
 

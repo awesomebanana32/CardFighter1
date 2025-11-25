@@ -22,14 +22,12 @@ public class MoveState : State
     public override State RunCurrentState()
     {
         if (!hasTarget)
-        {
-            return idleState; // No target, go idle
-        }
+            return idleState;
 
-        agent.SetDestination(targetPosition);
+        if (!agent.hasPath || agent.destination != targetPosition)
+            agent.SetDestination(targetPosition);
 
-        // Check if arrived (use agent's built-in check)
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.1f)
         {
             hasTarget = false;
             agent.ResetPath();

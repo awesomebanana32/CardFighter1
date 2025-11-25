@@ -3,10 +3,10 @@ using UnityEngine;
 public class AttackState : State
 {
     public float attackCooldown = 1f;
-    public float attackRange = 2f;  // consistent with ChaseState
+    public float attackRange = 2f;
     public int damage = 10;
-    private float lastAttackTime = 0f;
 
+    private float lastAttackTime = 0f;
     private Transform target;
     public ChaseState chaseState;
 
@@ -15,27 +15,23 @@ public class AttackState : State
         if (target == null)
             return chaseState;
 
-        // Face the target
         Vector3 dir = (target.position - transform.position).normalized;
         transform.forward = dir;
 
-        float distance = Vector3.Distance(
-        transform.position,
-        target.GetComponent<Collider>().ClosestPoint(transform.position)
-        );
+        Collider col = target.GetComponent<Collider>();
+        if (col == null)
+            return chaseState;
 
-        // Attack if in range and cooldown passed
-        if (distance <= attackRange && Time.time - lastAttackTime >= attackCooldown)
+        float distanceSqr = (col.ClosestPoint(transform.position) - transform.position).sqrMagnitude;
+
+        if (distanceSqr <= attackRange * attackRange && Time.time - lastAttackTime >= attackCooldown)
         {
             TroopHealth health = target.GetComponent<TroopHealth>();
-            if (health != null)
-                health.TakeDamage(damage);
-
+            health?.TakeDamage(damage);
             lastAttackTime = Time.time;
         }
 
-        // Return to chase if target moves away
-        if (distance > attackRange)
+        if (distanceSqr > attackRange * attackRange)
             return chaseState;
 
         return this;

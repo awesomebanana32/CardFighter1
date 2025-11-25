@@ -299,8 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChaseState
   attackState: {fileID: 8060580490656244430}
   attackRange: 25
-  visionRange: 10
-  enemyTag: TeamGreen
+  team: 1
 --- !u!114 &8101953010314638215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +315,7 @@ MonoBehaviour:
   startingState: {fileID: 7329904950169982582}
   moveState: {fileID: 0}
   chaseState: {fileID: 0}
+  team: 0
 --- !u!114 &1390650570709631146
 MonoBehaviour:
   m_ObjectHideFlags: 0
