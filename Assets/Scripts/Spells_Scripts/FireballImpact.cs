@@ -3,7 +3,7 @@ using UnityEngine;
 public class FireballImpact : MonoBehaviour
 {
     [Header("Damage Settings")]
-    public int damage = 20;
+    public float baseDamage = 20f;
     public string targetTag = "TeamRed";
 
     [Header("Explosion Settings")]
@@ -17,11 +17,14 @@ public class FireballImpact : MonoBehaviour
     [Header("Physics Settings")]
     public LayerMask groundLayer;
 
+    [Header("Spell Caster")]
+    public GameObject caster; // the unit that cast this fireball
+
     private bool hasCollided = false;
 
     private void Update()
     {
-        // Safety net: detect terrain hit if collision missed
+        // Safety: detect ground hit if collision missed
         if (!hasCollided)
         {
             if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.6f, groundLayer))
@@ -50,7 +53,18 @@ public class FireballImpact : MonoBehaviour
             TroopHealth health = hitCollider.GetComponent<TroopHealth>();
             if (health != null)
             {
-                health.TakeDamage(damage);
+                float scaledDamage = baseDamage;
+
+                // Scale with caster level if available
+                if (caster != null)
+                {
+                    LevelSystem lvl = caster.GetComponent<LevelSystem>();
+                    if (lvl != null)
+                        scaledDamage *= 1 + lvl.level * 0.1f; // +10% per level
+                }
+
+                // Deal damage and pass caster for XP
+                health.TakeDamage(scaledDamage, caster);
             }
         }
 

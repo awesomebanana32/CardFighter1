@@ -8,7 +8,15 @@ public class AttackState : State
 
     private float lastAttackTime = 0f;
     private Transform target;
+
     public ChaseState chaseState;
+
+    private LevelSystem levelSystem;
+
+    private void Awake()
+    {
+        levelSystem = GetComponent<LevelSystem>();
+    }
 
     public override State RunCurrentState()
     {
@@ -27,7 +35,13 @@ public class AttackState : State
         if (distanceSqr <= attackRange * attackRange && Time.time - lastAttackTime >= attackCooldown)
         {
             TroopHealth health = target.GetComponent<TroopHealth>();
-            health?.TakeDamage(damage);
+
+            if (health != null)
+            {
+                float dmg = (levelSystem != null) ? levelSystem.currentDamage : damage;
+                health.TakeDamage(dmg, this.gameObject); // PASS ATTACKER
+            }
+
             lastAttackTime = Time.time;
         }
 

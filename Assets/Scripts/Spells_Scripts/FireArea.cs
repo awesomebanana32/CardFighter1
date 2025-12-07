@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class FireArea : MonoBehaviour
 {
-    public int damage = 5;
+    [Header("Damage Settings")]
+    public float baseDamage = 5f;
     public string targetTag = "TeamRed";
-    public float duration = 5f; // how long the fire stays before disappearing
-    public float tickRate = 0.3f; // how often damage is applied
+    public float duration = 5f;      // How long the fire lasts
+    public float tickRate = 0.3f;    // Damage interval
 
-    // Keep track of coroutines for each enemy
+    [Header("Spell Caster")]
+    public GameObject caster;         // The unit that cast the fire
+
+    // Track coroutines per enemy
     private Dictionary<TroopHealth, Coroutine> activeCoroutines = new Dictionary<TroopHealth, Coroutine>();
 
     private void Start()
     {
-        // Destroy the fire after a few seconds
-        Destroy(gameObject, duration);
+        Destroy(gameObject, duration); // Auto cleanup
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +28,6 @@ public class FireArea : MonoBehaviour
             TroopHealth health = other.GetComponent<TroopHealth>();
             if (health != null && !activeCoroutines.ContainsKey(health))
             {
-                // Start damage-over-time coroutine
                 Coroutine c = StartCoroutine(ApplyDamageOverTime(health));
                 activeCoroutines.Add(health, c);
             }
@@ -39,7 +41,6 @@ public class FireArea : MonoBehaviour
             TroopHealth health = other.GetComponent<TroopHealth>();
             if (health != null && activeCoroutines.ContainsKey(health))
             {
-                // Stop the coroutine when they leave the fire
                 StopCoroutine(activeCoroutines[health]);
                 activeCoroutines.Remove(health);
             }
@@ -50,7 +51,19 @@ public class FireArea : MonoBehaviour
     {
         while (health != null)
         {
-            health.TakeDamage(damage);
+            float scaledDamage = baseDamage;
+
+            // Scale with caster level if available
+            if (caster != null)
+            {
+                LevelSystem lvl = caster.GetComponent<LevelSystem>();
+                if (lvl != null)
+                    scaledDamage *= 1 + lvl.level * 0.1f; // +10% per level
+            }
+
+            // Deal damage and pass caster for XP
+            health.TakeDamage(scaledDamage, caster);
+
             yield return new WaitForSeconds(tickRate);
         }
     }

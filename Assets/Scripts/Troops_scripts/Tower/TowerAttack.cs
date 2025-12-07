@@ -2,12 +2,17 @@ using UnityEngine;
 
 public class TowerAttack : MonoBehaviour
 {
+    [Header("Tower Settings")]
     [SerializeField] private float attackRange = 5f;
     [SerializeField] private float attackCooldown = 1f;
-    [SerializeField] private int damage = 10;
+
+    [Header("Projectile Settings")]
+    [SerializeField] private int baseDamage = 10;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform firePoint; // Assign a child transform in the editor for the firing position
-    [SerializeField] private string targetTag = "PlayerTroop"; // Set this to the tag of the player's troops (e.g., "TeamRed" or whatever your player's team tag is)
+    [SerializeField] private Transform firePoint; // Firing position
+
+    [Header("Target Settings")]
+    [SerializeField] private string targetTag = "PlayerTroop"; // Enemy tag
 
     private float lastAttackTime = 0f;
     private Transform currentTarget;
@@ -45,22 +50,23 @@ public class TowerAttack : MonoBehaviour
     private void Shoot()
     {
         if (projectilePrefab == null || firePoint == null || currentTarget == null)
-        {
             return;
-        }
 
-        // Calculate direction and rotation towards the target
+        // Direction and rotation
         Vector3 direction = (currentTarget.position - firePoint.position).normalized;
         Quaternion rotation = Quaternion.LookRotation(direction);
 
-        // Instantiate the projectile
+        // Instantiate projectile
         GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, rotation);
 
-        // Set damage on the projectile
+        // Set damage and caster
         Projectile projectileScript = projectileInstance.GetComponent<Projectile>();
         if (projectileScript != null)
         {
-            projectileScript.damage = damage;
+            projectileScript.baseDamage = baseDamage;
+
+            // Assign this tower/unit as the caster for XP and scaling
+            projectileScript.caster = this.gameObject;
         }
     }
 }
