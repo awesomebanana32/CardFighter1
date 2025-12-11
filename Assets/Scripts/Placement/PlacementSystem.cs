@@ -145,7 +145,6 @@ public class PlacementSystem : MonoBehaviour
             cooldownImage = cooldownImage,
             lastSpawnTime = Time.time // start cooldown immediately
         };
-
         spawnQueue.Add(entry);
 
         // initialize overlay to full (countdown starts)
@@ -160,7 +159,7 @@ public class PlacementSystem : MonoBehaviour
     {
         if (entry.spawnCity == null)
         {
-            // City was destroyed/unassigned — refund population? (we already reserved pop)
+            // City was destroyed/unassigned ï¿½ refund population? (we already reserved pop)
             // Safer to not spawn and refund population + gold isn't tracked here because gold already spent.
             // We'll release reserved population back:
             AddToPopulation(-database.GetPopulationCostByID(entry.troopID));
@@ -188,7 +187,7 @@ public class PlacementSystem : MonoBehaviour
         Transform spawnPoint = entry.spawnCity.GetSpawnPoint();
         Instantiate(prefab, spawnPoint.position, Quaternion.identity);
 
-        // Population already reserved earlier — no need to AddToPopulation here.
+        // Population already reserved earlier ï¿½ no need to AddToPopulation here.
         // We kept reserved population count as actual currentPopulation, so nothing to change now.
         // (Note: when reserving we added pop; when failed we remove it).
     }

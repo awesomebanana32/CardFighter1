@@ -20,6 +20,7 @@ MonoBehaviour:
     <PopulationCost>k__BackingField: 1
     <GoldCost>k__BackingField: 25
     <Cooldown>k__BackingField: 3
+    <Stealth>k__BackingField: 5
   - <Name>k__BackingField: Archer
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
@@ -27,6 +28,7 @@ MonoBehaviour:
     <PopulationCost>k__BackingField: 1
     <GoldCost>k__BackingField: 50
     <Cooldown>k__BackingField: 3
+    <Stealth>k__BackingField: 5
   - <Name>k__BackingField: Giant
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
@@ -34,6 +36,7 @@ MonoBehaviour:
     <PopulationCost>k__BackingField: 2
     <GoldCost>k__BackingField: 100
     <Cooldown>k__BackingField: 5
+    <Stealth>k__BackingField: 5
   - <Name>k__BackingField: Tower
     <ID>k__BackingField: 4
     <Size>k__BackingField: {x: 2, y: 2}
@@ -41,6 +44,7 @@ MonoBehaviour:
     <PopulationCost>k__BackingField: 7
     <GoldCost>k__BackingField: 125
     <Cooldown>k__BackingField: 1
+    <Stealth>k__BackingField: 5
   - <Name>k__BackingField: Scout
     <ID>k__BackingField: 5
     <Size>k__BackingField: {x: 1, y: 1}
@@ -48,3 +52,4 @@ MonoBehaviour:
     <PopulationCost>k__BackingField: 3
     <GoldCost>k__BackingField: 150
     <Cooldown>k__BackingField: 3
+    <Stealth>k__BackingField: 5

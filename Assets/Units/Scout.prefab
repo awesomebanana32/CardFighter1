@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 3374137366330909509}
   - component: {fileID: 5634357323402551671}
   - component: {fileID: 1954737824751061787}
+  - component: {fileID: 899651011301202823}
   m_Layer: 0
   m_Name: Scout
   m_TagString: Untagged
@@ -454,6 +455,19 @@ MonoBehaviour:
   healthbar: {fileID: 1793632039648988056}
   maxHealth: 100
   populationCost: 1
+  levelUI: {fileID: 0}
+--- !u!114 &899651011301202823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323641092637380009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
 --- !u!1 &5535801789251171251
 GameObject:
   m_ObjectHideFlags: 0
