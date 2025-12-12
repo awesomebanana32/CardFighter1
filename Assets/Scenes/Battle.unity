@@ -7671,7 +7671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWar
   Instance: {fileID: 1305741031}
-  resolution: 307
+  resolution: 200
   worldSize: 1000
   fogHeight: 1
   defaultColor: {r: 0.3773585, g: 0.34709862, b: 0.34709862, a: 1}

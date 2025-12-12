@@ -14,7 +14,6 @@ public class DeckMenu : MonoBehaviour
     {
         CampaignData data = SaveManager.LoadGame();
         deck = data.deck;
-        gameObject.SetActive(false);
 
     }
 

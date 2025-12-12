@@ -188,6 +188,7 @@ public class FogOfWar : MonoBehaviour
 }
 public class VisionSource
 {
+    //TODO: Figure out why transforms get deleted after about a minute
     public float stealthRadius;
     public Transform transform;
     public VisionSource(Transform t, float s)
