@@ -47,4 +47,5 @@ public class ObjectData
     // Gold cost field added
     [field: SerializeField] public int GoldCost { get; private set; } = 100;
     [field: SerializeField] public float Cooldown { get; private set; } = 1f;
+    [field: SerializeField] public float Stealth{ get; private set; } = 5f;
 }

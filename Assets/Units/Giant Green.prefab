@@ -594,6 +594,7 @@ GameObject:
   - component: {fileID: 2636716165523417910}
   - component: {fileID: -4503869229971673384}
   - component: {fileID: -1343724275933164441}
+  - component: {fileID: -8280666078978519998}
   m_Layer: 0
   m_Name: Giant Green
   m_TagString: TeamGreen
@@ -853,6 +854,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelNumberUI
   text: {fileID: 3490543975926694334}
+--- !u!114 &-8280666078978519998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5987151210666922726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
 --- !u!1 &6156454510579752202
 GameObject:
   m_ObjectHideFlags: 0
