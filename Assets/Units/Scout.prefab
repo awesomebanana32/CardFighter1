@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 8855089806675246320}
   - component: {fileID: 8288660294464833645}
   - component: {fileID: 3916482752971862357}
+  - component: {fileID: 473739005405489259}
   m_Layer: 0
   m_Name: Scout
   m_TagString: TeamGreen
@@ -734,6 +735,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CircleSelection
   selectionCircle: {fileID: 1997681198485579267}
+--- !u!114 &473739005405489259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323641092637380009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
 --- !u!1 &5535801789251171251
 GameObject:
   m_ObjectHideFlags: 0
