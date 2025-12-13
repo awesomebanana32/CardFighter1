@@ -1362,6 +1362,18 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &204455951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204455932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
 --- !u!1 &225799698
 GameObject:
   m_ObjectHideFlags: 0
@@ -10222,6 +10234,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2135833328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135833330}
+  - component: {fileID: 2135833329}
+  m_Layer: 0
+  m_Name: Fog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2135833329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135833328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c73f35648cc943e8aa9e0740156982f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWar
+  Instance: {fileID: 2135833329}
+  resolution: 300
+  worldSize: 1000
+  fogHeight: 1
+  defaultColor: {r: 0, g: 0, b: 0, a: 1}
+  fogMaterial: {fileID: 2100000, guid: e43b38e73a5254106941aa128d6d0032, type: 2}
+--- !u!4 &2135833330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135833328}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 129.29817, y: -0.00003, z: 139.01819}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &144876889619613551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10393,6 +10455,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6355018836733719313, guid: 9b79a40a9227bd3488b2bc03dc99ddf3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 204455942}
+    - targetCorrespondingSourceObject: {fileID: 6355018836733719313, guid: 9b79a40a9227bd3488b2bc03dc99ddf3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 204455951}
   m_SourcePrefab: {fileID: 100100000, guid: 9b79a40a9227bd3488b2bc03dc99ddf3, type: 3}
 --- !u!1001 &5110313629049343687
 PrefabInstance:
@@ -10774,3 +10839,4 @@ SceneRoots:
   - {fileID: 589952476}
   - {fileID: 1413769858}
   - {fileID: 1504555104}
+  - {fileID: 2135833330}
