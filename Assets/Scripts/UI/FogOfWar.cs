@@ -6,21 +6,27 @@
 */
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using UnityEngine.Rendering.PostProcessing;
 public class FogOfWar : MonoBehaviour
 {
+    public FogOfWar Instance;
     public int resolution = 32;
     public int worldSize = 100;
     public float fogHeight = 30f;
     public Color defaultColor = Color.black;
     public Material fogMaterial;
 
-    private FogOfWarTile[,] tiles;
-
     private Texture2D fogTexture;
     private Color32[] pixels;
     private byte[,] fogData;
     private MeshRenderer fogRenderer;
     private List<VisionSource> sources = new List<VisionSource>();
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -60,8 +66,19 @@ public class FogOfWar : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Debug.Log("Number of sources " + sources.Count);
+        ClearFogData();
         UpdateFog();        
+    }
+    void ClearFogData()
+    {
+        for (int i = 0; i < resolution; i++)
+        {
+            for (int j = 0; j < resolution; j++)
+            {
+                fogData[i,j] = 0;
+            }
+        }
+
     }
 
     void UpdateFog()
@@ -132,7 +149,9 @@ public class FogOfWar : MonoBehaviour
 
     public void UnRegisterVisionSource(VisionSource v)
     {
-        sources.Remove(v);
+        Debug.Log(" Unregistering " + v.transform.gameObject.name);
+        if(sources.Contains(v))
+            sources.Remove(v);
     }
 
     void OnDrawGizmosSelected()
@@ -153,9 +172,23 @@ public class FogOfWar : MonoBehaviour
         int y = Mathf.FloorToInt(normZ * resolution);
         return new Vector2Int(x,y);
     }
+
+    void printFogData()
+    {
+        String output = "";
+        for(int i = 0; i < resolution; i++)
+        {
+            for(int j = 0; j < resolution; j++)
+            {
+               output+=fogData[i,j];
+            }
+            output+="\n";
+        }
+    }
 }
 public class VisionSource
 {
+    //TODO: Figure out why transforms get deleted after about a minute
     public float stealthRadius;
     public Transform transform;
     public VisionSource(Transform t, float s)
@@ -190,4 +223,5 @@ public class FogOfWarTile : MonoBehaviour
     {
         //Do operation to show the map, usually just disable
     }
+
 }
