@@ -1374,6 +1374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
+  stealthRadius: 60
 --- !u!1 &225799698
 GameObject:
   m_ObjectHideFlags: 0
@@ -10263,7 +10264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c73f35648cc943e8aa9e0740156982f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWar
-  Instance: {fileID: 2135833329}
   resolution: 300
   worldSize: 1000
   fogHeight: 1

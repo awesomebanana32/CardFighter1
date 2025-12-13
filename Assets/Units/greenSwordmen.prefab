@@ -470,6 +470,7 @@ GameObject:
   - component: {fileID: 8734225427346562736}
   - component: {fileID: 21011538084637110}
   - component: {fileID: 1763382179260237530}
+  - component: {fileID: 6476607765938855412}
   m_Layer: 0
   m_Name: greenSwordmen
   m_TagString: TeamGreen
@@ -730,6 +731,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CircleSelection
   selectionCircle: {fileID: 6593424630636537420}
+--- !u!114 &6476607765938855412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481102387247209894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
+  stealthRadius: 5
 --- !u!1 &6593424630636537420
 GameObject:
   m_ObjectHideFlags: 0
