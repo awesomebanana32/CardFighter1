@@ -1,9 +1,11 @@
-Shader "Custom/URP/SimpleFogOfWar_SmoothEdges"
+Shader "Custom/URP/SimpleFogOfWar_SmoothEdges_Translucent"
 {
     Properties
     {
         _MainTex ("Fog Texture", 2D) = "white" {}
         _TexelSize ("Texel Size", Vector) = (1,1,0,0)
+        _FogColor ("Fog Color", Color) = (0.02, 0.02, 0.02, 1)
+        _FogOpacity ("Fog Opacity", Range(0,1)) = 0.65
     }
 
     SubShader
@@ -38,7 +40,10 @@ Shader "Custom/URP/SimpleFogOfWar_SmoothEdges"
 
             TEXTURE2D(_MainTex);
             SAMPLER(sampler_MainTex);
-            float4 _TexelSize; // x = 1/width, y = 1/height
+
+            float4 _TexelSize;
+            float4 _FogColor;
+            float _FogOpacity;
 
             Varyings vert(Attributes v)
             {
@@ -55,24 +60,27 @@ Shader "Custom/URP/SimpleFogOfWar_SmoothEdges"
                 // Sample current alpha
                 float alpha = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv).a;
 
-                // Sample neighbors
+                // Sample neighbors for smoothing
                 float up    = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv + float2(0, _TexelSize.y)).a;
                 float down  = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv - float2(0, _TexelSize.y)).a;
                 float left  = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv - float2(_TexelSize.x, 0)).a;
                 float right = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv + float2(_TexelSize.x, 0)).a;
 
-                // Determine if on an edge (difference between neighbors)
-                float edge = step(0.01, abs(alpha - up)) +
-                             step(0.01, abs(alpha - down)) +
-                             step(0.01, abs(alpha - left)) +
-                             step(0.01, abs(alpha - right));
+                float edge =
+                    step(0.01, abs(alpha - up)) +
+                    step(0.01, abs(alpha - down)) +
+                    step(0.01, abs(alpha - left)) +
+                    step(0.01, abs(alpha - right));
 
-                float soften = saturate(edge * 0.25); // max 1.0
+                float soften = saturate(edge * 0.25);
 
-                // Soften alpha just a little where edge detected
-                alpha = lerp(alpha, 0.0, soften * 0.50);  // 0.5 - Simple Version || 3.0 - Brighter Version
+                // Smooth edges
+                alpha = lerp(alpha, 0.0, soften * 0.5);
 
-                return float4(0, 0, 0, alpha);
+                // Global translucency
+                alpha *= _FogOpacity;
+
+                return float4(_FogColor.rgb, alpha);
             }
             ENDHLSL
         }

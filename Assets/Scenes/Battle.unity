@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
-  stealthRadius: 60
+  stealthRadius: 80
 --- !u!1 &225799698
 GameObject:
   m_ObjectHideFlags: 0
@@ -10244,7 +10244,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2135833330}
-  - component: {fileID: 2135833329}
+  - component: {fileID: 2135833332}
+  - component: {fileID: 2135833331}
   m_Layer: 0
   m_Name: Fog
   m_TagString: Untagged
@@ -10252,23 +10253,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2135833329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135833328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c73f35648cc943e8aa9e0740156982f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FogOfWar
-  resolution: 300
-  worldSize: 1000
-  fogHeight: 1
-  defaultColor: {r: 0, g: 0, b: 0, a: 1}
-  fogMaterial: {fileID: 2100000, guid: e43b38e73a5254106941aa128d6d0032, type: 2}
 --- !u!4 &2135833330
 Transform:
   m_ObjectHideFlags: 0
@@ -10284,6 +10268,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2135833331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135833328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c73f35648cc943e8aa9e0740156982f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarVisible
+  resolution: 100
+  worldSize: 1000
+  fogHeight: 1
+  fogMaterial: {fileID: 2100000, guid: e43b38e73a5254106941aa128d6d0032, type: 2}
+--- !u!114 &2135833332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135833328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a6d4eb8d9ad5444808b2721ff32323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarDiscovered
+  resolution: 100
+  worldSize: 1000
+  fogHeight: 2
+  fogMaterial: {fileID: 2100000, guid: 6d19df6d44ccd994b88103c078f2c113, type: 2}
 --- !u!1001 &144876889619613551
 PrefabInstance:
   m_ObjectHideFlags: 0

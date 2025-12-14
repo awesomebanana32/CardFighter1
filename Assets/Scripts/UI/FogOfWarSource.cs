@@ -6,7 +6,8 @@ public class FogOfWarSource : MonoBehaviour
     [Header("Vision")]
     public float stealthRadius = 5f;
 
-    private bool registered = false;
+    private bool registeredVisible = false;
+    private bool registeredDiscovered = false;
 
     void OnEnable()
     {
@@ -15,24 +16,38 @@ public class FogOfWarSource : MonoBehaviour
 
     IEnumerator TryRegister()
     {
-        while (!registered)
+        while (!registeredVisible || !registeredDiscovered)
         {
-            if (FogOfWar.Instance != null)
+            // Register with FogOfWarVisible
+            if (!registeredVisible && FogOfWarVisible.Instance != null)
             {
-                FogOfWar.Instance.RegisterVisionSource(this);
-                registered = true;
-                yield break;
+                FogOfWarVisible.Instance.RegisterVisionSource(this);
+                registeredVisible = true;
             }
+
+            // Register with FogOfWarDiscovered
+            if (!registeredDiscovered && FogOfWarDiscovered.Instance != null)
+            {
+                FogOfWarDiscovered.Instance.RegisterVisionSource(this);
+                registeredDiscovered = true;
+            }
+
             yield return null;
         }
     }
 
     void OnDisable()
     {
-        if (registered && FogOfWar.Instance != null)
+        if (registeredVisible && FogOfWarVisible.Instance != null)
         {
-            FogOfWar.Instance.UnRegisterVisionSource(this);
-            registered = false;
+            FogOfWarVisible.Instance.UnRegisterVisionSource(this);
+            registeredVisible = false;
+        }
+
+        if (registeredDiscovered && FogOfWarDiscovered.Instance != null)
+        {
+            FogOfWarDiscovered.Instance.UnRegisterVisionSource(this);
+            registeredDiscovered = false;
         }
     }
 }

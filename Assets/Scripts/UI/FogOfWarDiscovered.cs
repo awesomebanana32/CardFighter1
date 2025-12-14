@@ -1,35 +1,27 @@
-/*
- * FogOfWar.cs
- * Covers the map in an r x r grid and reveals areas based on vision sources.
- */
 using UnityEngine;
 using System.Collections.Generic;
 
-public class FogOfWar : MonoBehaviour
+public class FogOfWarDiscovered : MonoBehaviour
 {
-    public static FogOfWar Instance;
+    public static FogOfWarDiscovered Instance;
 
     [Header("Fog Settings")]
     public int resolution = 32;
     public int worldSize = 100;
-    public float fogHeight = 30f;
-    public Color defaultColor = Color.black;
+    public float fogHeight = 29.5f; // slightly above ground but below visible fog
+
+    [Header("Fog Appearance")]
     public Material fogMaterial;
 
     private Texture2D fogTexture;
     private Color32[] pixels;
-    private byte[,] fogData;
+    private byte[,] discoveredData;
     private MeshRenderer fogRenderer;
-
     private List<FogOfWarSource> sources = new List<FogOfWarSource>();
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
 
@@ -37,18 +29,19 @@ public class FogOfWar : MonoBehaviour
     {
         fogTexture = new Texture2D(resolution, resolution, TextureFormat.RGBA32, false);
         fogTexture.filterMode = FilterMode.Bilinear;
+        fogTexture.wrapMode = TextureWrapMode.Clamp;
 
-        fogData = new byte[resolution, resolution];
         pixels = new Color32[resolution * resolution];
+        discoveredData = new byte[resolution, resolution];
 
         for (int i = 0; i < pixels.Length; i++)
-            pixels[i] = defaultColor;
+            pixels[i] = new Color32(0, 0, 0, 255); // start fully black
 
         fogTexture.SetPixels32(pixels);
         fogTexture.Apply();
 
         GameObject fogPlane = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        fogPlane.name = "FogPlane";
+        fogPlane.name = "FogPlaneDiscovered";
         fogPlane.transform.position = new Vector3(worldSize / 2f, fogHeight, worldSize / 2f);
         fogPlane.transform.localScale = new Vector3(worldSize, worldSize, 1f);
         fogPlane.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
@@ -62,26 +55,13 @@ public class FogOfWar : MonoBehaviour
 
     void LateUpdate()
     {
-        ClearFogData();
-
         foreach (var source in sources)
         {
             if (source == null) continue;
-
-            RevealCircle(
-                WorldToTex(source.transform.position),
-                source.stealthRadius
-            );
+            RevealCircle(WorldToTex(source.transform.position), source.stealthRadius);
         }
 
         UpdateFogTexture();
-    }
-
-    void ClearFogData()
-    {
-        for (int x = 0; x < resolution; x++)
-            for (int y = 0; y < resolution; y++)
-                fogData[x, y] = 0;
     }
 
     void UpdateFogTexture()
@@ -91,7 +71,7 @@ public class FogOfWar : MonoBehaviour
             for (int y = 0; y < resolution; y++)
             {
                 int index = y * resolution + x;
-                pixels[index] = fogData[x, y] == 0 ? defaultColor : Color.clear;
+                pixels[index] = discoveredData[x, y] == 1 ? new Color32(0, 0, 0, 0) : new Color32(0, 0, 0, 255);
             }
         }
 
@@ -103,8 +83,7 @@ public class FogOfWar : MonoBehaviour
     void UpdateTexelSize()
     {
         Vector2 texelSize = new Vector2(1f / resolution, 1f / resolution);
-        fogMaterial.SetVector("_TexelSize",
-            new Vector4(texelSize.x, texelSize.y, 0, 0));
+        fogMaterial.SetVector("_TexelSize", new Vector4(texelSize.x, texelSize.y, 0, 0));
     }
 
     void RevealCircle(Vector2Int center, float radiusWorld)
@@ -118,11 +97,10 @@ public class FogOfWar : MonoBehaviour
                 int fx = center.x + x;
                 int fy = center.y + y;
 
-                if (fx < 0 || fx >= resolution || fy < 0 || fy >= resolution)
-                    continue;
+                if (fx < 0 || fx >= resolution || fy < 0 || fy >= resolution) continue;
 
                 if (x * x + y * y <= radiusTex * radiusTex)
-                    fogData[fx, fy] = 1;
+                    discoveredData[fx, fy] = 1;
             }
         }
     }
@@ -140,21 +118,11 @@ public class FogOfWar : MonoBehaviour
 
     public void RegisterVisionSource(FogOfWarSource source)
     {
-        if (!sources.Contains(source))
-            sources.Add(source);
+        if (!sources.Contains(source)) sources.Add(source);
     }
 
     public void UnRegisterVisionSource(FogOfWarSource source)
     {
         sources.Remove(source);
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(
-            new Vector3(worldSize / 2f, fogHeight, worldSize / 2f),
-            new Vector3(worldSize, 0.1f, worldSize)
-        );
     }
 }

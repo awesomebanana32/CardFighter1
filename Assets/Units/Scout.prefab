@@ -747,6 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
+  stealthRadius: 50
 --- !u!1 &5535801789251171251
 GameObject:
   m_ObjectHideFlags: 0
