@@ -1,9 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:LongField label="Deck" value="42" name="Deck" />
-    <ui:IntegerField label="Progress&#10;" value="42" name="Progress" />
-    <ui:IntegerField label="Wealth" value="42" name="Wealth" />
-    <ui:IntegerField label="LevelReached" value="42" name="LevelReached" />
-    <ui:TextField label="Name" placeholder-text="filler text" name="Name" />
-    <ui:Button text="Load Save" name="SubmitButton" />
-    <ui:Button text="Clear Save" name="ClearSave" />
-</ui:UXML>
