@@ -10280,7 +10280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c73f35648cc943e8aa9e0740156982f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarVisible
-  resolution: 100
+  resolution: 200
   worldSize: 1000
   fogHeight: 1
   fogMaterial: {fileID: 2100000, guid: e43b38e73a5254106941aa128d6d0032, type: 2}
@@ -10296,7 +10296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a6d4eb8d9ad5444808b2721ff32323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarDiscovered
-  resolution: 100
+  resolution: 200
   worldSize: 1000
   fogHeight: 2
   fogMaterial: {fileID: 2100000, guid: 6d19df6d44ccd994b88103c078f2c113, type: 2}
