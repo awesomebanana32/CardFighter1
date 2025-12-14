@@ -13,10 +13,13 @@ public class FogOfWarVisible : MonoBehaviour
     [Header("Fog Appearance")]
     public Material fogMaterial;
 
+    [Header("Fog Layers")]
+    [SerializeField] private string mainLayerName = "Default";
+    [SerializeField] private string minimapLayerName = "minimap";
+
     private Texture2D fogTexture;
     private Color32[] pixels;
     private byte[,] visibleData;
-    private MeshRenderer fogRenderer;
     private List<FogOfWarSource> sources = new List<FogOfWarSource>();
 
     void Awake()
@@ -39,20 +42,13 @@ public class FogOfWarVisible : MonoBehaviour
         visibleData = new byte[resolution, resolution];
 
         for (int i = 0; i < pixels.Length; i++)
-            pixels[i] = new Color32(0, 0, 0, 255); // start fully fogged
+            pixels[i] = new Color32(0, 0, 0, 255);
 
         fogTexture.SetPixels32(pixels);
         fogTexture.Apply();
 
-        GameObject fogPlane = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        fogPlane.name = "FogPlaneVisible";
-        fogPlane.transform.position = new Vector3(worldSize / 2f, fogHeight, worldSize / 2f);
-        fogPlane.transform.localScale = new Vector3(worldSize, worldSize, 1f);
-        fogPlane.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-
-        fogRenderer = fogPlane.GetComponent<MeshRenderer>();
-        fogRenderer.material = fogMaterial;
-        fogRenderer.material.mainTexture = fogTexture;
+        CreateFogPlane(mainLayerName, "FogPlane_Main");
+        CreateFogPlane(minimapLayerName, "FogPlane_minimap");
 
         UpdateTexelSize();
     }
@@ -70,6 +66,24 @@ public class FogOfWarVisible : MonoBehaviour
         UpdateFogTexture();
     }
 
+    void CreateFogPlane(string layerName, string objectName)
+    {
+        GameObject fogPlane = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        fogPlane.name = objectName;
+
+        fogPlane.transform.position = new Vector3(worldSize / 2f, fogHeight, worldSize / 2f);
+        fogPlane.transform.localScale = new Vector3(worldSize, worldSize, 1f);
+        fogPlane.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+
+        fogPlane.layer = LayerMask.NameToLayer(layerName);
+
+        MeshRenderer renderer = fogPlane.GetComponent<MeshRenderer>();
+        renderer.material = new Material(fogMaterial);
+        renderer.material.mainTexture = fogTexture;
+
+        Destroy(fogPlane.GetComponent<Collider>());
+    }
+
     void ClearVisibility()
     {
         for (int x = 0; x < resolution; x++)
@@ -84,7 +98,9 @@ public class FogOfWarVisible : MonoBehaviour
             for (int y = 0; y < resolution; y++)
             {
                 int index = y * resolution + x;
-                pixels[index] = visibleData[x, y] == 1 ? new Color32(0, 0, 0, 0) : new Color32(0, 0, 0, 255);
+                pixels[index] = visibleData[x, y] == 1
+                    ? new Color32(0, 0, 0, 0)
+                    : new Color32(0, 0, 0, 255);
             }
         }
 
@@ -110,7 +126,8 @@ public class FogOfWarVisible : MonoBehaviour
                 int fx = center.x + x;
                 int fy = center.y + y;
 
-                if (fx < 0 || fx >= resolution || fy < 0 || fy >= resolution) continue;
+                if (fx < 0 || fx >= resolution || fy < 0 || fy >= resolution)
+                    continue;
 
                 if (x * x + y * y <= radiusTex * radiusTex)
                     visibleData[fx, fy] = 1;
@@ -131,7 +148,8 @@ public class FogOfWarVisible : MonoBehaviour
 
     public void RegisterVisionSource(FogOfWarSource source)
     {
-        if (!sources.Contains(source)) sources.Add(source);
+        if (!sources.Contains(source))
+            sources.Add(source);
     }
 
     public void UnRegisterVisionSource(FogOfWarSource source)

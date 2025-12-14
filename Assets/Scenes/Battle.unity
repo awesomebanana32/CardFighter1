@@ -10284,6 +10284,8 @@ MonoBehaviour:
   worldSize: 1000
   fogHeight: 1
   fogMaterial: {fileID: 2100000, guid: e43b38e73a5254106941aa128d6d0032, type: 2}
+  mainLayerName: Default
+  minimapLayerName: minimap
 --- !u!114 &2135833332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10300,6 +10302,8 @@ MonoBehaviour:
   worldSize: 1000
   fogHeight: 2
   fogMaterial: {fileID: 2100000, guid: 6d19df6d44ccd994b88103c078f2c113, type: 2}
+  mainLayerName: Default
+  minimapLayerName: minimap
 --- !u!1001 &144876889619613551
 PrefabInstance:
   m_ObjectHideFlags: 0

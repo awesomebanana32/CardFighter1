@@ -8,20 +8,27 @@ public class FogOfWarDiscovered : MonoBehaviour
     [Header("Fog Settings")]
     public int resolution = 32;
     public int worldSize = 100;
-    public float fogHeight = 29.5f; // slightly above ground but below visible fog
+    public float fogHeight = 29.5f; // below visible fog
 
     [Header("Fog Appearance")]
     public Material fogMaterial;
 
+    [Header("Fog Layers")]
+    [SerializeField] private string mainLayerName = "Default";
+    [SerializeField] private string minimapLayerName = "minimap";
+
     private Texture2D fogTexture;
     private Color32[] pixels;
     private byte[,] discoveredData;
-    private MeshRenderer fogRenderer;
     private List<FogOfWarSource> sources = new List<FogOfWarSource>();
 
     void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
     }
 
@@ -35,20 +42,13 @@ public class FogOfWarDiscovered : MonoBehaviour
         discoveredData = new byte[resolution, resolution];
 
         for (int i = 0; i < pixels.Length; i++)
-            pixels[i] = new Color32(0, 0, 0, 255); // start fully black
+            pixels[i] = new Color32(0, 0, 0, 255);
 
         fogTexture.SetPixels32(pixels);
         fogTexture.Apply();
 
-        GameObject fogPlane = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        fogPlane.name = "FogPlaneDiscovered";
-        fogPlane.transform.position = new Vector3(worldSize / 2f, fogHeight, worldSize / 2f);
-        fogPlane.transform.localScale = new Vector3(worldSize, worldSize, 1f);
-        fogPlane.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-
-        fogRenderer = fogPlane.GetComponent<MeshRenderer>();
-        fogRenderer.material = fogMaterial;
-        fogRenderer.material.mainTexture = fogTexture;
+        CreateFogPlane(mainLayerName, "FogPlaneDiscovered_Main");
+        CreateFogPlane(minimapLayerName, "FogPlaneDiscovered_minimap");
 
         UpdateTexelSize();
     }
@@ -64,6 +64,24 @@ public class FogOfWarDiscovered : MonoBehaviour
         UpdateFogTexture();
     }
 
+    void CreateFogPlane(string layerName, string objectName)
+    {
+        GameObject fogPlane = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        fogPlane.name = objectName;
+
+        fogPlane.transform.position = new Vector3(worldSize / 2f, fogHeight, worldSize / 2f);
+        fogPlane.transform.localScale = new Vector3(worldSize, worldSize, 1f);
+        fogPlane.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+
+        fogPlane.layer = LayerMask.NameToLayer(layerName);
+
+        MeshRenderer renderer = fogPlane.GetComponent<MeshRenderer>();
+        renderer.material = new Material(fogMaterial);
+        renderer.material.mainTexture = fogTexture;
+
+        Destroy(fogPlane.GetComponent<Collider>());
+    }
+
     void UpdateFogTexture()
     {
         for (int x = 0; x < resolution; x++)
@@ -71,7 +89,9 @@ public class FogOfWarDiscovered : MonoBehaviour
             for (int y = 0; y < resolution; y++)
             {
                 int index = y * resolution + x;
-                pixels[index] = discoveredData[x, y] == 1 ? new Color32(0, 0, 0, 0) : new Color32(0, 0, 0, 255);
+                pixels[index] = discoveredData[x, y] == 1
+                    ? new Color32(0, 0, 0, 0)
+                    : new Color32(0, 0, 0, 255);
             }
         }
 
@@ -97,7 +117,8 @@ public class FogOfWarDiscovered : MonoBehaviour
                 int fx = center.x + x;
                 int fy = center.y + y;
 
-                if (fx < 0 || fx >= resolution || fy < 0 || fy >= resolution) continue;
+                if (fx < 0 || fx >= resolution || fy < 0 || fy >= resolution)
+                    continue;
 
                 if (x * x + y * y <= radiusTex * radiusTex)
                     discoveredData[fx, fy] = 1;
@@ -118,7 +139,8 @@ public class FogOfWarDiscovered : MonoBehaviour
 
     public void RegisterVisionSource(FogOfWarSource source)
     {
-        if (!sources.Contains(source)) sources.Add(source);
+        if (!sources.Contains(source))
+            sources.Add(source);
     }
 
     public void UnRegisterVisionSource(FogOfWarSource source)
