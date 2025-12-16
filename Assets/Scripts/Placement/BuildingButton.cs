@@ -6,18 +6,42 @@ public class BuildingButton : MonoBehaviour
     public ObjectDatabaseSO database;
 
     [Header("Gameplay")]
-    public int objectIDToSpawn = 0;       // ID of the building/unit to spawn
-    public Camera mainCamera;             // Drag your main camera here
+    public int objectIDToSpawn = 0;
+    public Camera mainCamera;
+
+    [Header("Preview")]
+    public GameObject previewPrefab;
+
+    private GameObject previewObject;
+    private bool isPlacing = false;
+    private float previewHeightOffset;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!isPlacing)
         {
-            SpawnAtMouse();
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartPlacement();
+            }
+        }
+        else
+        {
+            UpdatePreview();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlaceBuilding();
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                CancelPlacement();
+            }
         }
     }
 
-    void SpawnAtMouse()
+   void StartPlacement()
     {
         if (mainCamera == null)
         {
@@ -25,42 +49,92 @@ public class BuildingButton : MonoBehaviour
             return;
         }
 
+        int goldCost = database.GetGoldCostByID(objectIDToSpawn);
+
+        if (GoldManager.Instance.CurrentGold < goldCost)
+        {
+            Debug.Log("Not enough gold to start placement.");
+            return;
+        }
+
+        if (previewPrefab == null)
+        {
+            Debug.LogError("Preview Prefab not assigned!");
+            return;
+        }
+
+        previewObject = Instantiate(previewPrefab);
+        DisableColliders(previewObject);
+
+        CalculatePreviewHeightOffset();
+
+        isPlacing = true;
+    }
+
+    void UpdatePreview()
+    {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        // Raycast against everything; works with Terrain
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
         {
-            // Only spawn if we hit a terrain
             if (hit.collider.GetComponent<Terrain>() == null)
-            {
-                Debug.Log("You clicked something that is not terrain.");
                 return;
-            }
 
-            Vector3 spawnPos = hit.point;
+            Vector3 alignedPos = hit.point;
+            alignedPos.y += previewHeightOffset;
 
-            GameObject prefab = database.GetPrefabByID(objectIDToSpawn);
-            int goldCost = database.GetGoldCostByID(objectIDToSpawn);
-
-            if (prefab == null)
-            {
-                Debug.LogWarning("Prefab not found for object ID: " + objectIDToSpawn);
-                return;
-            }
-
-            if (GoldManager.Instance.SpendGold(goldCost))
-            {
-                Instantiate(prefab, spawnPos, Quaternion.identity);
-                Debug.Log($"Spawned {prefab.name} at {spawnPos}. Remaining gold: {GoldManager.Instance.CurrentGold}");
-            }
-            else
-            {
-                Debug.Log("Not enough gold!");
-            }
+            previewObject.transform.position = alignedPos;
         }
-        else
+    }
+
+    void PlaceBuilding()
+    {
+        int goldCost = database.GetGoldCostByID(objectIDToSpawn);
+
+        if (!GoldManager.Instance.SpendGold(goldCost))
         {
-            Debug.Log("Raycast did not hit anything!");
+            Debug.Log("Not enough gold!");
+            return;
         }
+
+        Vector3 spawnPos = previewObject.transform.position;
+        GameObject prefab = database.GetPrefabByID(objectIDToSpawn);
+
+        Instantiate(prefab, spawnPos, Quaternion.identity);
+
+        Destroy(previewObject);
+        isPlacing = false;
+    }
+
+    void CancelPlacement()
+    {
+        Destroy(previewObject);
+        isPlacing = false;
+    }
+
+    void CalculatePreviewHeightOffset()
+    {
+        Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
+
+        if (renderers.Length == 0)
+        {
+            previewHeightOffset = 0f;
+            return;
+        }
+
+        Bounds bounds = renderers[0].bounds;
+        for (int i = 1; i < renderers.Length; i++)
+        {
+            bounds.Encapsulate(renderers[i].bounds);
+        }
+
+        previewHeightOffset = bounds.extents.y;
+    }
+
+    void DisableColliders(GameObject obj)
+    {
+        Collider[] colliders = obj.GetComponentsInChildren<Collider>();
+        foreach (Collider c in colliders)
+            c.enabled = false;
     }
 }

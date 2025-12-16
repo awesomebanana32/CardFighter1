@@ -4473,6 +4473,7 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: 21f1423b568c13c409f8fb4ab180176b, type: 2}
   objectIDToSpawn: 4
   mainCamera: {fileID: 330585545}
+  previewPrefab: {fileID: 3813753915969858596, guid: e915cd21eef401b4180db0faa13b053a, type: 3}
 --- !u!1 &828447472
 GameObject:
   m_ObjectHideFlags: 0
@@ -5103,12 +5104,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingPlacementSystem
   groundLayer:
-    serializedVersion: 2
     m_Bits: 256
   buildingLayer:
-    serializedVersion: 2
     m_Bits: 512
   buildingCheckRadius: 1.5
+  buildingPrefab: {fileID: 0}
+  selectedSpawnRadius: {fileID: 0}
+  isPlacing: 0
 --- !u!1 &1010299908
 GameObject:
   m_ObjectHideFlags: 0
