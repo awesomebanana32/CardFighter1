@@ -4473,6 +4473,13 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: 21f1423b568c13c409f8fb4ab180176b, type: 2}
   objectIDToSpawn: 4
   mainCamera: {fileID: 330585545}
+  cityRadius: 70
+  cityLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  buildingLayer:
+    serializedVersion: 2
+    m_Bits: 512
   previewPrefab: {fileID: 3813753915969858596, guid: e915cd21eef401b4180db0faa13b053a, type: 3}
 --- !u!1 &828447472
 GameObject:
@@ -10403,6 +10410,10 @@ PrefabInstance:
     - target: {fileID: 6355018836733719313, guid: 9b79a40a9227bd3488b2bc03dc99ddf3, type: 3}
       propertyPath: m_Name
       value: Green Capital
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355018836733719313, guid: 9b79a40a9227bd3488b2bc03dc99ddf3, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6548924720850102238, guid: 9b79a40a9227bd3488b2bc03dc99ddf3, type: 3}
       propertyPath: manager
