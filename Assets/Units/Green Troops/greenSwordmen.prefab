@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 21011538084637110}
   - component: {fileID: 1763382179260237530}
   - component: {fileID: 6476607765938855412}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: greenSwordmen
   m_TagString: TeamGreen
   m_Icon: {fileID: 0}

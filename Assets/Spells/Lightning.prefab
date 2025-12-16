@@ -14967,10 +14967,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c475b57d22ebf9499cc3c9c457896af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LightningDamage
-  damage: 70
+  baseDamage: 50
   lifetime: 1
   destroyOnHit: 1
   hitEffect: {fileID: 0}
+  caster: {fileID: 0}
 --- !u!54 &3016617824630629148
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15008,6 +15009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7200141846694514929}
   - component: {fileID: 685081399638085199}
+  - component: {fileID: 1126368679874466245}
   m_Layer: 0
   m_Name: Lightning
   m_TagString: Untagged
@@ -15049,6 +15051,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoDestroy
   lifetime: 2
+--- !u!114 &1126368679874466245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852258308709235570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
+  stealthRadius: 20
 --- !u!1001 &868781457759075475
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29192,7 +29192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3669be0bc0317c940bac5e541e7788fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballImpact
-  damage: 200
+  baseDamage: 20
   targetTag: TeamRed
   explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   explosionDuration: 2
@@ -29201,6 +29201,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  caster: {fileID: 0}
 --- !u!54 &7008831488113366431
 Rigidbody:
   m_ObjectHideFlags: 0

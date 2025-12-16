@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 8288660294464833645}
   - component: {fileID: 3916482752971862357}
   - component: {fileID: 473739005405489259}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Scout
   m_TagString: TeamGreen
   m_Icon: {fileID: 0}

@@ -1250,6 +1250,9 @@ MonoBehaviour:
   healAmountPerSecond: 5
   healingRadius: 42
   healingTag: TeamGreen
+  healableLayers:
+    serializedVersion: 2
+    m_Bits: 1024
   circleSegments: 50
   circleColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!120 &204455942
@@ -10403,7 +10406,8 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 225799703}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -5628444251507480448, guid: 9b79a40a9227bd3488b2bc03dc99ddf3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

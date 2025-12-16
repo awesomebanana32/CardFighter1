@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: -4503869229971673384}
   - component: {fileID: -1343724275933164441}
   - component: {fileID: -8280666078978519998}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Giant Green
   m_TagString: TeamGreen
   m_Icon: {fileID: 0}
