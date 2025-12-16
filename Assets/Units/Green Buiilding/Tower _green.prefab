@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5156109605419268405}
   - component: {fileID: 5560848453064853096}
   - component: {fileID: 2340805548264588309}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Bullet Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 1974271469146619447}
   - component: {fileID: 3083894945011901841}
   - component: {fileID: 3019783556373980073}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 515798655175167852}
   - component: {fileID: 3128501041141671952}
   - component: {fileID: 5818087762330953450}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,8 @@ GameObject:
   - component: {fileID: 7219155199795887885}
   - component: {fileID: 4332933701398474854}
   - component: {fileID: -4033487042008248868}
-  m_Layer: 6
+  - component: {fileID: -8956629978113324982}
+  m_Layer: 9
   m_Name: Tower _green
   m_TagString: TeamGreen
   m_Icon: {fileID: 0}
@@ -322,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 3813753915969858596}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 471.8638, y: 7.17999, z: 475.39536}
+  m_LocalPosition: {x: 471.8638, y: 21.85, z: 475.39536}
   m_LocalScale: {x: 10, y: 15, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -424,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
   attackRange: 50
   attackCooldown: 1
-  damage: 50
+  baseDamage: 10
   projectilePrefab: {fileID: 6609575395743922522, guid: 4e43473473147464e83f58be61c485a9, type: 3}
   firePoint: {fileID: 9084820559524539453}
   targetTag: TeamRed
@@ -442,7 +443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TroopHealth
   healthbar: {fileID: 5818087762330953450}
   maxHealth: 1000
-  damageAmount: 0
+  populationCost: 1
+  levelUI: {fileID: 0}
 --- !u!208 &-4033487042008248868
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -459,6 +461,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &-8956629978113324982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3813753915969858596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6070d9108af4879b24c2ad49feaa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarSource
+  stealthRadius: 50
 --- !u!1 &5382223526029115606
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1715754075795243450}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +522,7 @@ GameObject:
   - component: {fileID: 2150223310647498365}
   - component: {fileID: 4383879798012557687}
   - component: {fileID: 3925697531690861271}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,7 +623,7 @@ GameObject:
   - component: {fileID: 6854075636398261125}
   - component: {fileID: 4813256537664751735}
   - component: {fileID: 1723554600078131989}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,7 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -682,7 +697,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5154732302721470277, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542244127404, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: lengthInSec
@@ -778,7 +793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542244127411, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542703049432, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_LocalScale.x
@@ -838,7 +853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542703049433, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -898,7 +913,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5154732302721470277, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542244127404, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: lengthInSec
@@ -994,7 +1009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542244127411, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542703049432, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1054,7 +1069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542703049433, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -1114,7 +1129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5154732302721470277, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542244127404, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: lengthInSec
@@ -1210,7 +1225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542244127411, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542703049432, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1270,7 +1285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360420542703049433, guid: 8fcb9d2d43929c04f8c70c38581418d4, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

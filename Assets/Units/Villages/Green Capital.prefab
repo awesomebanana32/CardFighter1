@@ -707,6 +707,7 @@ GameObject:
   - component: {fileID: 9082347313634778910}
   - component: {fileID: 2478421162572691695}
   - component: {fileID: 3387162225517719688}
+  - component: {fileID: -5628444251507480448}
   m_Layer: 0
   m_Name: Green Capital
   m_TagString: TeamGreen
@@ -870,6 +871,20 @@ MonoBehaviour:
   maxHealth: 1000
   populationCost: 0
   levelUI: {fileID: 0}
+--- !u!114 &-5628444251507480448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355018836733719313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acf980790f172744b6b67c5314b7998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnRadius
+  spawnRadius: 50
+  spawnPoint: {fileID: 303124285797295963}
 --- !u!1 &6481474488569560882
 GameObject:
   m_ObjectHideFlags: 0

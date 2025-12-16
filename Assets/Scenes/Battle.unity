@@ -2289,7 +2289,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2431
+    m_Bits: 2943
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4344,6 +4344,7 @@ GameObject:
   - component: {fileID: 820800727}
   - component: {fileID: 820800726}
   - component: {fileID: 820800725}
+  - component: {fileID: 820800728}
   m_Layer: 5
   m_Name: Spawn Tower
   m_TagString: Untagged
@@ -4415,19 +4416,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 820800726}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 942585454}
-        m_TargetAssemblyTypeName: PlacementSystem, Assembly-CSharp
-        m_MethodName: StartPlacement
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &820800726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4466,6 +4455,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820800723}
   m_CullTransparentMesh: 1
+--- !u!114 &820800728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820800723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2cc2a95fb8f88d49a3d8ff06ea8ec94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingButton
+  database: {fileID: 11400000, guid: 21f1423b568c13c409f8fb4ab180176b, type: 2}
+  objectIDToSpawn: 4
+  mainCamera: {fileID: 330585545}
 --- !u!1 &828447472
 GameObject:
   m_ObjectHideFlags: 0
@@ -5044,6 +5048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 942585453}
   - component: {fileID: 942585454}
+  - component: {fileID: 942585455}
   m_Layer: 0
   m_Name: PlacementSystem
   m_TagString: Untagged
@@ -5082,6 +5087,25 @@ MonoBehaviour:
   maxPopulation: 150
   selectCityPopup: {fileID: 162208333}
   popupDuration: 2
+--- !u!114 &942585455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942585452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67c39cdabb743d4b8665089df1e2c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingPlacementSystem
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  buildingLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  buildingCheckRadius: 1.5
 --- !u!1 &1010299908
 GameObject:
   m_ObjectHideFlags: 0
@@ -8459,7 +8483,7 @@ TerrainCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 4518b2e3689d29245ac791fbbeccc63e, type: 2}
@@ -9809,19 +9833,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2031307534}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 942585454}
-        m_TargetAssemblyTypeName: PlacementSystem, Assembly-CSharp
-        m_MethodName: SpawnTroop
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2031307534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10198,7 +10210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c73f35648cc943e8aa9e0740156982f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarVisible
-  resolution: 200
+  resolution: 400
   worldSize: 1000
   fogHeight: 1
   fogMaterial: {fileID: 2100000, guid: e43b38e73a5254106941aa128d6d0032, type: 2}
@@ -10216,7 +10228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a6d4eb8d9ad5444808b2721ff32323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarDiscovered
-  resolution: 200
+  resolution: 400
   worldSize: 1000
   fogHeight: 2
   fogMaterial: {fileID: 2100000, guid: 6d19df6d44ccd994b88103c078f2c113, type: 2}
@@ -10327,6 +10339,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5628444251507480448, guid: 9b79a40a9227bd3488b2bc03dc99ddf3, type: 3}
+      propertyPath: spawnRadius
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 303124285797295963, guid: 9b79a40a9227bd3488b2bc03dc99ddf3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 101
