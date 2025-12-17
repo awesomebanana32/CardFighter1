@@ -33,6 +33,17 @@ public class ObjectDatabaseSO : ScriptableObject
         ObjectData data = objectsData.Find(obj => obj.ID == id);
         return data != null ? data.Cooldown : 1f;
     }
+    // Get the Card Cover Sprite for given ID
+    public Sprite GetCardCoverByID(int id)
+    {
+        ObjectData data = objectsData.Find(obj => obj.ID == id);
+        if (data != null)
+        {
+            return data!=null ? data.CardCover : null;
+        }
+        return null;
+    }
+
 }
 
 [Serializable]
@@ -48,4 +59,5 @@ public class ObjectData
     [field: SerializeField] public int GoldCost { get; private set; } = 100;
     [field: SerializeField] public float Cooldown { get; private set; } = 1f;
     [field: SerializeField] public float Stealth{ get; private set; } = 5f;
+    [field: SerializeField] public Sprite CardCover {get; private set;}
 }

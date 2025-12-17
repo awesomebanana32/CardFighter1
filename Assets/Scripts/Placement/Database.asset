@@ -21,6 +21,7 @@ MonoBehaviour:
     <GoldCost>k__BackingField: 25
     <Cooldown>k__BackingField: 3
     <Stealth>k__BackingField: 5
+    <CardCover>k__BackingField: {fileID: 21300000, guid: 72d2fc8202d26824ab413dc10649385f, type: 3}
   - <Name>k__BackingField: Archer
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
@@ -29,6 +30,7 @@ MonoBehaviour:
     <GoldCost>k__BackingField: 50
     <Cooldown>k__BackingField: 3
     <Stealth>k__BackingField: 5
+    <CardCover>k__BackingField: {fileID: 21300000, guid: 4193e039758df7b42a40201cedd13a4c, type: 3}
   - <Name>k__BackingField: Giant
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
@@ -37,6 +39,7 @@ MonoBehaviour:
     <GoldCost>k__BackingField: 100
     <Cooldown>k__BackingField: 5
     <Stealth>k__BackingField: 5
+    <CardCover>k__BackingField: {fileID: 21300000, guid: bcbd627036b9d3c42a8201e8440af49b, type: 3}
   - <Name>k__BackingField: Tower
     <ID>k__BackingField: 4
     <Size>k__BackingField: {x: 2, y: 2}
@@ -45,6 +48,7 @@ MonoBehaviour:
     <GoldCost>k__BackingField: 125
     <Cooldown>k__BackingField: 1
     <Stealth>k__BackingField: 5
+    <CardCover>k__BackingField: {fileID: 21300000, guid: 9f804c83e3a6b304486b29d4be65cd39, type: 3}
   - <Name>k__BackingField: Scout
     <ID>k__BackingField: 5
     <Size>k__BackingField: {x: 1, y: 1}
@@ -53,3 +57,4 @@ MonoBehaviour:
     <GoldCost>k__BackingField: 150
     <Cooldown>k__BackingField: 3
     <Stealth>k__BackingField: 5
+    <CardCover>k__BackingField: {fileID: 21300000, guid: 52ef342a76c117d4ea2b8f90ccc81690, type: 3}

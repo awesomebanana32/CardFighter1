@@ -15,7 +15,7 @@ public class DeckManger : MonoBehaviour
     [SerializeField]
     public float layoutSpacing;
     public Sprite defaultCover;
-    public CardDatabase cardDatabase;
+    public ObjectDatabaseSO cardDatabase;
     public void Start()
     {
         cards = new int[8];
@@ -50,7 +50,7 @@ public class DeckManger : MonoBehaviour
                 else
                 {
                     //TODO: retrieve the card cover.
-                    Sprite cover = cardDatabase.GetSprite(currentId);
+                    Sprite cover = cardDatabase.GetCardCoverByID(currentId);
                     //TODO: apply affects
                     if (cover != null)
                     {
