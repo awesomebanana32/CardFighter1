@@ -650,7 +650,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.9916, y: -1.9832}
+  m_AnchoredPosition: {x: -106, y: -76}
   m_SizeDelta: {x: 356.3027, y: 329.9091}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &138966712
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   parent: {fileID: 1879718198}
   layoutSpacing: 10
   defaultCover: {fileID: 21300000, guid: fea2324f6231e4a2196c0caec5b4c3f4, type: 3}
-  cardDatabase: {fileID: 0}
+  cardDatabase: {fileID: 11400000, guid: 21f1423b568c13c409f8fb4ab180176b, type: 2}
 --- !u!224 &277318155
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2349,7 +2349,7 @@ MonoBehaviour:
   parent: {fileID: 1550673226}
   layoutSpacing: 10
   defaultCover: {fileID: 21300000, guid: fea2324f6231e4a2196c0caec5b4c3f4, type: 3}
-  cardDatabase: {fileID: 0}
+  cardDatabase: {fileID: 11400000, guid: 21f1423b568c13c409f8fb4ab180176b, type: 2}
 --- !u!224 &683319121
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2643,7 +2643,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1304266737}
   - component: {fileID: 1304266739}
-  - component: {fileID: 1304266738}
   m_Layer: 5
   m_Name: Deck
   m_TagString: Untagged
@@ -2668,39 +2667,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 598, y: -25}
+  m_AnchoredPosition: {x: 660, y: -361}
   m_SizeDelta: {x: -1428.0936, y: -739.5753}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1304266738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304266736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.91201925, g: 1, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 534394083, guid: c7474d05063acbe419637509a408a310, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1304266739
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3128,7 +3097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9137255, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.8517363, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3136,7 +3105,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 534394083, guid: c7474d05063acbe419637509a408a310, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3144,7 +3113,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 4
 --- !u!222 &1382401072
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4144,7 +4113,7 @@ RectTransform:
   m_GameObject: {fileID: 1590347630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 138966711}
@@ -4152,7 +4121,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -562, y: -25}
+  m_AnchoredPosition: {x: 11, y: 69}
   m_SizeDelta: {x: -1485.3237, y: -607.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590347632
@@ -4168,14 +4137,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9137255, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 534394083, guid: c7474d05063acbe419637509a408a310, type: 3}
+  m_Sprite: {fileID: 1289787449, guid: b7b5b57b19e2a49f2a78e5f077476dac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4206,6 +4175,8 @@ GameObject:
   - component: {fileID: 1596309975}
   - component: {fileID: 1596309974}
   - component: {fileID: 1596309978}
+  - component: {fileID: 1596309980}
+  - component: {fileID: 1596309979}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4311,6 +4282,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0171f48da03aa4eaa9449e951b8eee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIOverlapChecker
+--- !u!114 &1596309979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596309973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1596309980
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596309973}
+  m_CullTransparentMesh: 1
 --- !u!1 &1629470476
 GameObject:
   m_ObjectHideFlags: 0
@@ -4939,7 +4948,7 @@ MonoBehaviour:
   parent: {fileID: 225530929}
   layoutSpacing: 10
   defaultCover: {fileID: 21300000, guid: fea2324f6231e4a2196c0caec5b4c3f4, type: 3}
-  cardDatabase: {fileID: 0}
+  cardDatabase: {fileID: 11400000, guid: 21f1423b568c13c409f8fb4ab180176b, type: 2}
 --- !u!224 &2005703960
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4956,7 +4965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: 164.9553}
+  m_AnchoredPosition: {x: -200, y: 164.95456}
   m_SizeDelta: {x: 500.14, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &2104972635 stripped

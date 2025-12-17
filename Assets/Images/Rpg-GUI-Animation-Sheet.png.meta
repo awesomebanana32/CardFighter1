@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c7474d05063acbe419637509a408a310
+guid: b7b5b57b19e2a49f2a78e5f077476dac
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Border All 2_0
+      name: Rpg-GUI-Animation-Sheet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 448
-        width: 64
-        height: 64
+        x: 1
+        y: 847
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,20 +112,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 671699b7cf63d6a42850bea9f21d9d5e
-      internalID: -1408886377
+      spriteID: e2c2ac8873d9e4126abecea816466061
+      internalID: -737507931
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_1
+      name: Rpg-GUI-Animation-Sheet_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 448
-        width: 64
-        height: 64
+        x: 137
+        y: 847
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a86564712a6144443ad19d1ea432a8c5
-      internalID: -76149395
+      spriteID: 23d826da12edb420b85756044ea3e380
+      internalID: -1446297838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_2
+      name: Rpg-GUI-Animation-Sheet_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 448
-        width: 64
-        height: 64
+        x: 273
+        y: 847
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9963fdccb8310b4784b414e70e6d9bf
-      internalID: 1417098313
+      spriteID: a4e687c9bdeb7476b89f4c24e31a9f4b
+      internalID: -469912816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_3
+      name: Rpg-GUI-Animation-Sheet_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 448
-        width: 64
-        height: 64
+        x: 409
+        y: 847
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,20 +178,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 238db1b78d12a9948bef99428cd5d8f4
-      internalID: -1575307614
+      spriteID: f60270c03becf487995461193051eeb5
+      internalID: 1110518120
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_4
+      name: Rpg-GUI-Animation-Sheet_4
       rect:
         serializedVersion: 2
-        x: 256
-        y: 448
-        width: 64
-        height: 64
+        x: 545
+        y: 847
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc77142d7d881b744a6ecf1438d51ea6
-      internalID: -2044107665
+      spriteID: 9c009807e20004ad19834f7fdd1759b8
+      internalID: 985787579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_5
+      name: Rpg-GUI-Animation-Sheet_5
       rect:
         serializedVersion: 2
-        x: 320
-        y: 448
-        width: 64
-        height: 64
+        x: 681
+        y: 847
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,20 +222,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aee5a001d97d3fa4c97893fb8440da69
-      internalID: -2026979221
+      spriteID: f81d43a1927db4e4f83374e35e07769a
+      internalID: -240704015
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_6
+      name: Rpg-GUI-Animation-Sheet_6
       rect:
         serializedVersion: 2
-        x: 384
-        y: 448
-        width: 64
-        height: 64
+        x: 817
+        y: 847
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +244,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58ec1bf801e5aeb44a68945d97414f68
-      internalID: 1542953244
+      spriteID: a319415cedc1948f1a71dcd72c8013ee
+      internalID: -1074580957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_7
+      name: Rpg-GUI-Animation-Sheet_7
       rect:
         serializedVersion: 2
-        x: 448
-        y: 448
-        width: 64
-        height: 64
+        x: 1
+        y: 706
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,20 +266,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3660d55ac1bc8804e822b56294d30c59
-      internalID: -1333606572
+      spriteID: e42b2092a71ce4af99c84b664a495f35
+      internalID: -1980015993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_8
+      name: Rpg-GUI-Animation-Sheet_8
       rect:
         serializedVersion: 2
-        x: 512
-        y: 448
-        width: 64
-        height: 64
+        x: 137
+        y: 706
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -288,20 +288,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f47ba84307114b43af77329e6ca3acc
-      internalID: 1359368609
+      spriteID: b42fedc536d8b4a8081d73cd5b66f86c
+      internalID: -1747665159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_9
+      name: Rpg-GUI-Animation-Sheet_9
       rect:
         serializedVersion: 2
-        x: 576
-        y: 448
-        width: 64
-        height: 64
+        x: 273
+        y: 706
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -310,20 +310,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 043e7ee2f05b1794688a5b212d7c7f31
-      internalID: -1137709293
+      spriteID: 62cca65e71ee04a5e86573a123e346fe
+      internalID: 1289787449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_10
+      name: Rpg-GUI-Animation-Sheet_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 384
-        width: 64
-        height: 64
+        x: 409
+        y: 706
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -332,20 +332,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 137f4f402b9678b40b9e0447f28a8079
-      internalID: -454628552
+      spriteID: f59617ce91c2b4ce3888c7788834e296
+      internalID: 1917526864
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_11
+      name: Rpg-GUI-Animation-Sheet_11
       rect:
         serializedVersion: 2
-        x: 64
-        y: 384
-        width: 64
-        height: 64
+        x: 545
+        y: 706
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -354,20 +354,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9bb9fe3cad250249a0c216a48769f5b
-      internalID: 2057538187
+      spriteID: 159ab57ab5e1f4ff2b66b917c0b00461
+      internalID: -112322533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_12
+      name: Rpg-GUI-Animation-Sheet_12
       rect:
         serializedVersion: 2
-        x: 128
-        y: 384
-        width: 64
-        height: 64
+        x: 681
+        y: 706
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,20 +376,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e96256b6727e3e841862cc870b5688eb
-      internalID: 459190796
+      spriteID: fdff8daa340864ca298dd292f84e9290
+      internalID: -128930967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_13
+      name: Rpg-GUI-Animation-Sheet_13
       rect:
         serializedVersion: 2
-        x: 192
-        y: 384
-        width: 64
-        height: 64
+        x: 817
+        y: 706
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -398,20 +398,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58997068a8f0e5c49af644f8da1607a0
-      internalID: 148845187
+      spriteID: 5088e4db322f246a8b87ab6f23386280
+      internalID: 342261073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_14
+      name: Rpg-GUI-Animation-Sheet_14
       rect:
         serializedVersion: 2
-        x: 256
-        y: 384
-        width: 64
-        height: 64
+        x: 1
+        y: 565
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -420,20 +420,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f3f642accbeb624f9f7384cefec1061
-      internalID: -1933781419
+      spriteID: b1bb27c2be15d4fca82653616bf04e1a
+      internalID: 1220239522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_15
+      name: Rpg-GUI-Animation-Sheet_15
       rect:
         serializedVersion: 2
-        x: 320
-        y: 384
-        width: 64
-        height: 64
+        x: 137
+        y: 565
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -442,20 +442,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d841536533491bd439706246069e03c3
-      internalID: 731563693
+      spriteID: 9910333985d644284bc008ec6b1a24ed
+      internalID: 496918672
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_16
+      name: Rpg-GUI-Animation-Sheet_16
       rect:
         serializedVersion: 2
-        x: 384
-        y: 384
-        width: 64
-        height: 64
+        x: 273
+        y: 565
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -464,20 +464,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 369af26552fc7b845bd37e41c9032722
-      internalID: 1870962271
+      spriteID: b90dbb40974c84f5b9a8ddf1eafe7803
+      internalID: -1467620871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_17
+      name: Rpg-GUI-Animation-Sheet_17
       rect:
         serializedVersion: 2
-        x: 448
-        y: 384
-        width: 64
-        height: 64
+        x: 409
+        y: 565
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -486,20 +486,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03931b0ee7fe0994789bc599b04ae8ea
-      internalID: 29942774
+      spriteID: 10e97f8d328ab4679b199d90609277d7
+      internalID: -1482849559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_18
+      name: Rpg-GUI-Animation-Sheet_18
       rect:
         serializedVersion: 2
-        x: 512
-        y: 384
-        width: 64
-        height: 64
+        x: 545
+        y: 565
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -508,20 +508,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa0d97a3adca52d40bea61b4a9a31de1
-      internalID: 695407890
+      spriteID: 06d2a9f691fb448ed9ed13667028afc6
+      internalID: 255950447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_19
+      name: Rpg-GUI-Animation-Sheet_19
       rect:
         serializedVersion: 2
-        x: 576
-        y: 384
-        width: 64
-        height: 64
+        x: 681
+        y: 565
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -530,20 +530,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 025a518a3bd0cae468eb6517062e6e5e
-      internalID: 1519798749
+      spriteID: 4ae8026330131405aad1fee0fdd186f9
+      internalID: 26446369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_20
+      name: Rpg-GUI-Animation-Sheet_20
       rect:
         serializedVersion: 2
-        x: 0
-        y: 320
-        width: 64
-        height: 64
+        x: 817
+        y: 565
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -552,20 +552,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 244949cf061a36e4aae5cfebcf399756
-      internalID: -679897724
+      spriteID: 476e2d1f855144955882ddee46cc6a8f
+      internalID: -1046440728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_21
+      name: Rpg-GUI-Animation-Sheet_21
       rect:
         serializedVersion: 2
-        x: 64
-        y: 320
-        width: 64
-        height: 64
+        x: 1
+        y: 424
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -574,20 +574,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b1b6a5363281d642b81f7c489fd7769
-      internalID: -1293194528
+      spriteID: 36bd6e8bd7f6a4c618a29656e950e52a
+      internalID: -1686355229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_22
+      name: Rpg-GUI-Animation-Sheet_22
       rect:
         serializedVersion: 2
-        x: 128
-        y: 320
-        width: 64
-        height: 64
+        x: 137
+        y: 424
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -596,20 +596,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9eed95b48b9daf94b8e619fa1817c512
-      internalID: -652092517
+      spriteID: 53fe778d4db96479d8f7ea21a3337f53
+      internalID: 990743571
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_23
+      name: Rpg-GUI-Animation-Sheet_23
       rect:
         serializedVersion: 2
-        x: 192
-        y: 320
-        width: 64
-        height: 64
+        x: 273
+        y: 424
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -618,20 +618,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97e0cf442f529ac49a797048f907a6aa
-      internalID: -1610289211
+      spriteID: 48b99454d6b68401fa28f4d420bcc09e
+      internalID: -1627487935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_24
+      name: Rpg-GUI-Animation-Sheet_24
       rect:
         serializedVersion: 2
-        x: 256
-        y: 320
-        width: 64
-        height: 64
+        x: 409
+        y: 424
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -640,20 +640,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f84f85730bd05a04d963859779eb9a4e
-      internalID: 1855139797
+      spriteID: 1438eb6a0b20349ceb5f4c45112f450c
+      internalID: -177390038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_25
+      name: Rpg-GUI-Animation-Sheet_25
       rect:
         serializedVersion: 2
-        x: 320
-        y: 320
-        width: 64
-        height: 64
+        x: 545
+        y: 424
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -662,20 +662,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e57bc3cd7cd80ff4e8105499196c31c0
-      internalID: 1875300662
+      spriteID: 3481ad35b5828460e841bf3dbe09ebe9
+      internalID: -949210837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_26
+      name: Rpg-GUI-Animation-Sheet_26
       rect:
         serializedVersion: 2
-        x: 384
-        y: 320
-        width: 64
-        height: 64
+        x: 681
+        y: 424
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -684,20 +684,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcfc4937fd39fb34ab019212e38ef33a
-      internalID: 1003905628
+      spriteID: c1f629d0c6d6c48df8375b6dac7f5138
+      internalID: 440200706
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_27
+      name: Rpg-GUI-Animation-Sheet_27
       rect:
         serializedVersion: 2
-        x: 448
-        y: 320
-        width: 64
-        height: 64
+        x: 817
+        y: 424
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -706,20 +706,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 429de9df5c22187449783f763db553da
-      internalID: -1395758746
+      spriteID: 01a9de93e9ff741fb8521b14a41840c2
+      internalID: 1793596680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_28
+      name: Rpg-GUI-Animation-Sheet_28
       rect:
         serializedVersion: 2
-        x: 512
-        y: 320
-        width: 64
-        height: 64
+        x: 1
+        y: 283
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -728,20 +728,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c6133363c38d314abffc7ee231cb553
-      internalID: 445995457
+      spriteID: 8b2e70a5e9aa44c5882e7d7675c06258
+      internalID: 1407577495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_29
+      name: Rpg-GUI-Animation-Sheet_29
       rect:
         serializedVersion: 2
-        x: 576
-        y: 320
-        width: 64
-        height: 64
+        x: 137
+        y: 283
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -750,20 +750,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92652e3dcf6ac504dbd70d49dc24c205
-      internalID: -615903355
+      spriteID: 058dc3561545d4d22b3099f92224b795
+      internalID: -1551183925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_30
+      name: Rpg-GUI-Animation-Sheet_30
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
-        width: 64
-        height: 64
+        x: 273
+        y: 283
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -772,20 +772,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1fbbfe51f5df464586599b509bddd18
-      internalID: 1283013657
+      spriteID: 350e9caf5da6f4391a7b024ab235c8df
+      internalID: 2003451245
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_31
+      name: Rpg-GUI-Animation-Sheet_31
       rect:
         serializedVersion: 2
-        x: 64
-        y: 256
-        width: 64
-        height: 64
+        x: 409
+        y: 283
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -794,20 +794,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78714bd9d8e9c4c4bae41abec524ab2d
-      internalID: -1797781971
+      spriteID: 113d567539119488c815a497fdfe1d9e
+      internalID: 2094795625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_32
+      name: Rpg-GUI-Animation-Sheet_32
       rect:
         serializedVersion: 2
-        x: 128
-        y: 256
-        width: 64
-        height: 64
+        x: 545
+        y: 283
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -816,20 +816,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0c78bfbbc99b294e8076fcd150fff26
-      internalID: 101698032
+      spriteID: 94a0740b445cd4a84a8943888c758a4d
+      internalID: 1239646572
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_33
+      name: Rpg-GUI-Animation-Sheet_33
       rect:
         serializedVersion: 2
-        x: 192
-        y: 256
-        width: 64
-        height: 64
+        x: 681
+        y: 283
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -838,20 +838,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 853fad8e0b1ee26489e910725d7180f8
-      internalID: -2007728859
+      spriteID: 90800a71e3e044c09a3c8566244bd0f6
+      internalID: 320155040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_34
+      name: Rpg-GUI-Animation-Sheet_34
       rect:
         serializedVersion: 2
-        x: 256
-        y: 256
-        width: 64
-        height: 64
+        x: 817
+        y: 283
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -860,20 +860,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 123e04debbe9d9342b362930be85a0b8
-      internalID: 1159712727
+      spriteID: 77a312435dc8b41d2981d3b5f1668110
+      internalID: -195559549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_35
+      name: Rpg-GUI-Animation-Sheet_35
       rect:
         serializedVersion: 2
-        x: 320
-        y: 256
-        width: 64
-        height: 64
+        x: 1
+        y: 142
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -882,20 +882,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0435511621f575a46b8eaa202fb100f7
-      internalID: 330310174
+      spriteID: f258652c9e8ac4f26a873019823f2d19
+      internalID: -627424694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_36
+      name: Rpg-GUI-Animation-Sheet_36
       rect:
         serializedVersion: 2
-        x: 384
-        y: 256
-        width: 64
-        height: 64
+        x: 137
+        y: 142
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -904,20 +904,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3335a6bc775f4b49a93f7d09d4b1e63
-      internalID: 1011872166
+      spriteID: 30ce43dce1eda48759491f77eb79a1ab
+      internalID: 145334983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_37
+      name: Rpg-GUI-Animation-Sheet_37
       rect:
         serializedVersion: 2
-        x: 448
-        y: 256
-        width: 64
-        height: 64
+        x: 273
+        y: 142
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -926,20 +926,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6f6eee2656a4154c914a14740f38b4a
-      internalID: -338979935
+      spriteID: f6da01fd5892941ae80d44ff38ecf2c5
+      internalID: 664277248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_38
+      name: Rpg-GUI-Animation-Sheet_38
       rect:
         serializedVersion: 2
-        x: 513
-        y: 257
-        width: 62
-        height: 62
+        x: 409
+        y: 142
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -948,20 +948,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f635025624d808642b3a82f900a3b554
-      internalID: 260941523
+      spriteID: 5b14df45c60584f14b0c24236e34dde5
+      internalID: 1794204668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_39
+      name: Rpg-GUI-Animation-Sheet_39
       rect:
         serializedVersion: 2
-        x: 576
-        y: 256
-        width: 64
-        height: 64
+        x: 545
+        y: 142
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -970,20 +970,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9712a61e3f2b1474d999e09aac1dede8
-      internalID: 1182643629
+      spriteID: b39ebb9341c6a46bf859b011098382a9
+      internalID: -20615059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_40
+      name: Rpg-GUI-Animation-Sheet_40
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
+        x: 681
+        y: 142
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -992,20 +992,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6df6873fc0caaf140a395d82ff76834f
-      internalID: -1757066115
+      spriteID: 26786374f71984464831474e1020a881
+      internalID: -1191721111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_41
+      name: Rpg-GUI-Animation-Sheet_41
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
+        x: 817
+        y: 142
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1014,20 +1014,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d396f22f05f969f4e98903543e9b6b33
-      internalID: 1587775564
+      spriteID: c805a9738c92340fca8f4aab44266503
+      internalID: -103999169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_42
+      name: Rpg-GUI-Animation-Sheet_42
       rect:
         serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
+        x: 1
+        y: 1
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1036,20 +1036,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 636035a38f8b85042acd7a2035c4d1f9
-      internalID: -644185745
+      spriteID: 92b06992d33f6490a83b4cf921dc9599
+      internalID: -2038569219
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_43
+      name: Rpg-GUI-Animation-Sheet_43
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
-        width: 64
-        height: 64
+        x: 137
+        y: 1
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1058,20 +1058,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f2c1f626fdf95e44bb237c84b2e7f19
-      internalID: 689077395
+      spriteID: 7423f6956f30346bea9f58a28a0d21d6
+      internalID: 1416158026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_44
+      name: Rpg-GUI-Animation-Sheet_44
       rect:
         serializedVersion: 2
-        x: 256
-        y: 192
-        width: 64
-        height: 64
+        x: 273
+        y: 1
+        width: 134
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1080,20 +1080,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8b1d53e238d13748ba8f8d3594f0a4c
-      internalID: 994525321
+      spriteID: 67e8e494f50c64ba19730011725a95ee
+      internalID: -1548374438
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_45
+      name: Rpg-GUI-Animation-Sheet_45
       rect:
         serializedVersion: 2
-        x: 320
-        y: 192
-        width: 64
-        height: 64
+        x: 409
+        y: 108
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1102,20 +1102,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97601cd50762ab047bc2c353bee75f82
-      internalID: 1481674565
+      spriteID: 73e1b5e433e3f4b089630ae9fbe955bb
+      internalID: -999321380
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_46
+      name: Rpg-GUI-Animation-Sheet_46
       rect:
         serializedVersion: 2
-        x: 384
-        y: 192
-        width: 64
-        height: 64
+        x: 507
+        y: 108
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1124,20 +1124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50570344e4aed2746a2e0c8e03266616
-      internalID: 552148881
+      spriteID: 336818cdefd1c42ab920bc17b16ac048
+      internalID: 446782187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_47
+      name: Rpg-GUI-Animation-Sheet_47
       rect:
         serializedVersion: 2
-        x: 448
-        y: 192
-        width: 64
-        height: 64
+        x: 605
+        y: 108
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1146,20 +1146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3a92cbe0a82b10428879d9c8414d690
-      internalID: 117279680
+      spriteID: 46e5a06772b604499bc5de3d54b783aa
+      internalID: -1171316794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_48
+      name: Rpg-GUI-Animation-Sheet_48
       rect:
         serializedVersion: 2
-        x: 512
-        y: 192
-        width: 64
-        height: 64
+        x: 703
+        y: 108
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1168,20 +1168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f5f4013af595e542acb98a3b1cdffc8
-      internalID: 1369821778
+      spriteID: 91136a203554345cf992041d8a802ddc
+      internalID: -947002181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_49
+      name: Rpg-GUI-Animation-Sheet_49
       rect:
         serializedVersion: 2
-        x: 576
-        y: 192
-        width: 64
-        height: 64
+        x: 801
+        y: 108
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1190,20 +1190,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c203d5d688e0fa34e878fd3a1d0b0624
-      internalID: 1875905907
+      spriteID: 60541634d54ee45fd96d74573f564589
+      internalID: -498603499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_50
+      name: Rpg-GUI-Animation-Sheet_50
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
+        x: 409
+        y: 74
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1212,20 +1212,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec3cf3591e692e24a94896490bd4ee43
-      internalID: 1073550797
+      spriteID: 89e09fe81b94245c69be312a38fa07ef
+      internalID: 2124609510
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_51
+      name: Rpg-GUI-Animation-Sheet_51
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
+        x: 507
+        y: 74
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1234,20 +1234,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc97aa0e42ebcd4418b045ef6aec3968
-      internalID: -1283730000
+      spriteID: 194176c1321fc468b9c7de4331cd88b4
+      internalID: -1700515479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_52
+      name: Rpg-GUI-Animation-Sheet_52
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
-        width: 64
-        height: 64
+        x: 605
+        y: 74
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1256,20 +1256,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68c2cf9090cfa474084bff06e9ee134a
-      internalID: 981882433
+      spriteID: 1a47710ca8c5e4d51bd0662b386be9c8
+      internalID: -908491471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_53
+      name: Rpg-GUI-Animation-Sheet_53
       rect:
         serializedVersion: 2
-        x: 192
-        y: 128
-        width: 64
-        height: 64
+        x: 703
+        y: 74
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1278,20 +1278,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f0bd17add1125d4d9fe0495ebd349cd
-      internalID: -1097239891
+      spriteID: df390ef51dbe3460b9672d889b825a58
+      internalID: -1375797556
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_54
+      name: Rpg-GUI-Animation-Sheet_54
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
-        width: 64
-        height: 64
+        x: 801
+        y: 74
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1300,20 +1300,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 737e2f88290baae48ba5f398c482f5d8
-      internalID: -1554503467
+      spriteID: 04fcce1784f4642cb864e12a18697f01
+      internalID: 531926263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_55
+      name: Rpg-GUI-Animation-Sheet_55
       rect:
         serializedVersion: 2
-        x: 320
-        y: 128
-        width: 64
-        height: 64
+        x: 409
+        y: 40
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1322,20 +1322,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff56a667aa4298648a00b955102a7c6c
-      internalID: -2128265272
+      spriteID: e8ad0db1fe42f458ead7d246dc0c521d
+      internalID: -1660306719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_56
+      name: Rpg-GUI-Animation-Sheet_56
       rect:
         serializedVersion: 2
-        x: 384
-        y: 128
-        width: 64
-        height: 64
+        x: 507
+        y: 40
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1344,20 +1344,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00b554e4224556b44bfd61a6c9931cb6
-      internalID: 2076112938
+      spriteID: 4fe3faad6515d40e89c6df4482e47103
+      internalID: -374033444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_57
+      name: Rpg-GUI-Animation-Sheet_57
       rect:
         serializedVersion: 2
-        x: 448
-        y: 128
-        width: 64
-        height: 64
+        x: 605
+        y: 40
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1366,20 +1366,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 185b516f55d8d134580745602f1e5dd2
-      internalID: -1283091029
+      spriteID: 1f0f74b2a53ff4ee698094ce0ad20917
+      internalID: 154345853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_58
+      name: Rpg-GUI-Animation-Sheet_58
       rect:
         serializedVersion: 2
-        x: 512
-        y: 128
-        width: 64
-        height: 64
+        x: 703
+        y: 40
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1388,20 +1388,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 239e63ab69ff65c40afd399f90f1094b
-      internalID: -1720114091
+      spriteID: 69864e893f6884e5cbd1f34500287f19
+      internalID: 175666996
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_59
+      name: Rpg-GUI-Animation-Sheet_59
       rect:
         serializedVersion: 2
-        x: 576
-        y: 128
-        width: 64
-        height: 64
+        x: 801
+        y: 40
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1410,20 +1410,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebb962066210c0f4498d8ce2156bc969
-      internalID: -506728619
+      spriteID: a73d342f8272341aebfd7bcfd0de5fff
+      internalID: -844645642
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_60
+      name: Rpg-GUI-Animation-Sheet_60
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
+        x: 409
+        y: 6
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1432,20 +1432,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efc5501a64491374b8536833e08ee0ef
-      internalID: 1971499297
+      spriteID: 31ed05d02ee2647d9ae3cad296c17f0c
+      internalID: -2078772914
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_61
+      name: Rpg-GUI-Animation-Sheet_61
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
+        x: 507
+        y: 6
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1454,20 +1454,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 484f0645926fac741938f549d459c39a
-      internalID: -704801659
+      spriteID: 9b65fc9617eb24cdca85c73cb6aa930c
+      internalID: 1468360040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_62
+      name: Rpg-GUI-Animation-Sheet_62
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
+        x: 605
+        y: 6
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1476,20 +1476,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1f153041b469284da8ba07105536749
-      internalID: -257547278
+      spriteID: 8f39091bae73a452e85f6d9e2a2925ee
+      internalID: 1083177972
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_63
+      name: Rpg-GUI-Animation-Sheet_63
       rect:
         serializedVersion: 2
-        x: 192
-        y: 64
-        width: 64
-        height: 64
+        x: 703
+        y: 6
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1498,20 +1498,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9fd135f2cda68845b5a4b51fb0d76a6
-      internalID: -224704226
+      spriteID: d81b1531796ee40788f5d0152d738ed8
+      internalID: 1542021602
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border All 2_64
+      name: Rpg-GUI-Animation-Sheet_64
       rect:
         serializedVersion: 2
-        x: 256
-        y: 64
-        width: 64
-        height: 64
+        x: 801
+        y: 6
+        width: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1520,338 +1520,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d226b529de774214a9f09a1e70685b44
-      internalID: -302805263
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_65
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d1b5fd65b338f946a4e751f712a3e1b
-      internalID: -363064812
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_66
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5eab9424d34140047bc81088cfde6282
-      internalID: -1348904349
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_67
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f8a4df3073b7984fa754a2df8a3c2ab
-      internalID: -863251156
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_68
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d2551774e3c0aed4db7f1ffeef2cda05
-      internalID: 1501350592
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_69
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e7c1e404849e4a4090108bbdb53fd07
-      internalID: -1450976896
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_70
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 61f9fc5ca228712449b8b6029cc565ed
-      internalID: -1018214727
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_71
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 467b5e1e0eb9bdd4da19f980339b3660
-      internalID: 277620870
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_72
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7953105127612674ba1bfe8bfbbf4303
-      internalID: -1360667543
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_73
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4458d14268812f646996c710fc921816
-      internalID: 534394083
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_74
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a39c3832ce68f944ba38a51ac481b560
-      internalID: 1523011205
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_75
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 69419e26dd6a7c645ae0ad893e8915a8
-      internalID: 1872591289
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_76
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5884aaf380403d94b967cc1437cba3b7
-      internalID: -1992766811
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_77
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 54fba94b5c39e28428326e109f306620
-      internalID: -1844152825
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_78
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb5c376d5487a1c4f9ea256f566d7f72
-      internalID: 1588001863
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border All 2_79
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22918637b1b02a14da368375e6125455
-      internalID: -1972862610
+      spriteID: b5e25e4001ad8496385076a66daa9ab5
+      internalID: 1650745323
       vertices: []
       indices: 
       edges: []
@@ -1860,7 +1530,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fa4a3d5636ea9e94e9f51eab30e908e5
+    spriteID: a438e59bf071148018c11a0644fe7b63
     internalID: 0
     vertices: []
     indices: 
@@ -1869,91 +1539,76 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
       - key: SpriteEditor.SliceOnImport
-        value: False
+        value: True
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":true,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Border All 2_0: -1408886377
-      Border All 2_1: -76149395
-      Border All 2_10: -454628552
-      Border All 2_11: 2057538187
-      Border All 2_12: 459190796
-      Border All 2_13: 148845187
-      Border All 2_14: -1933781419
-      Border All 2_15: 731563693
-      Border All 2_16: 1870962271
-      Border All 2_17: 29942774
-      Border All 2_18: 695407890
-      Border All 2_19: 1519798749
-      Border All 2_2: 1417098313
-      Border All 2_20: -679897724
-      Border All 2_21: -1293194528
-      Border All 2_22: -652092517
-      Border All 2_23: -1610289211
-      Border All 2_24: 1855139797
-      Border All 2_25: 1875300662
-      Border All 2_26: 1003905628
-      Border All 2_27: -1395758746
-      Border All 2_28: 445995457
-      Border All 2_29: -615903355
-      Border All 2_3: -1575307614
-      Border All 2_30: 1283013657
-      Border All 2_31: -1797781971
-      Border All 2_32: 101698032
-      Border All 2_33: -2007728859
-      Border All 2_34: 1159712727
-      Border All 2_35: 330310174
-      Border All 2_36: 1011872166
-      Border All 2_37: -338979935
-      Border All 2_38: 260941523
-      Border All 2_39: 1182643629
-      Border All 2_4: -2044107665
-      Border All 2_40: -1757066115
-      Border All 2_41: 1587775564
-      Border All 2_42: -644185745
-      Border All 2_43: 689077395
-      Border All 2_44: 994525321
-      Border All 2_45: 1481674565
-      Border All 2_46: 552148881
-      Border All 2_47: 117279680
-      Border All 2_48: 1369821778
-      Border All 2_49: 1875905907
-      Border All 2_5: -2026979221
-      Border All 2_50: 1073550797
-      Border All 2_51: -1283730000
-      Border All 2_52: 981882433
-      Border All 2_53: -1097239891
-      Border All 2_54: -1554503467
-      Border All 2_55: -2128265272
-      Border All 2_56: 2076112938
-      Border All 2_57: -1283091029
-      Border All 2_58: -1720114091
-      Border All 2_59: -506728619
-      Border All 2_6: 1542953244
-      Border All 2_60: 1971499297
-      Border All 2_61: -704801659
-      Border All 2_62: -257547278
-      Border All 2_63: -224704226
-      Border All 2_64: -302805263
-      Border All 2_65: -363064812
-      Border All 2_66: -1348904349
-      Border All 2_67: -863251156
-      Border All 2_68: 1501350592
-      Border All 2_69: -1450976896
-      Border All 2_7: -1333606572
-      Border All 2_70: -1018214727
-      Border All 2_71: 277620870
-      Border All 2_72: -1360667543
-      Border All 2_73: 534394083
-      Border All 2_74: 1523011205
-      Border All 2_75: 1872591289
-      Border All 2_76: -1992766811
-      Border All 2_77: -1844152825
-      Border All 2_78: 1588001863
-      Border All 2_79: -1972862610
-      Border All 2_8: 1359368609
-      Border All 2_9: -1137709293
+      Rpg-GUI-Animation-Sheet_0: -737507931
+      Rpg-GUI-Animation-Sheet_1: -1446297838
+      Rpg-GUI-Animation-Sheet_10: 1917526864
+      Rpg-GUI-Animation-Sheet_11: -112322533
+      Rpg-GUI-Animation-Sheet_12: -128930967
+      Rpg-GUI-Animation-Sheet_13: 342261073
+      Rpg-GUI-Animation-Sheet_14: 1220239522
+      Rpg-GUI-Animation-Sheet_15: 496918672
+      Rpg-GUI-Animation-Sheet_16: -1467620871
+      Rpg-GUI-Animation-Sheet_17: -1482849559
+      Rpg-GUI-Animation-Sheet_18: 255950447
+      Rpg-GUI-Animation-Sheet_19: 26446369
+      Rpg-GUI-Animation-Sheet_2: -469912816
+      Rpg-GUI-Animation-Sheet_20: -1046440728
+      Rpg-GUI-Animation-Sheet_21: -1686355229
+      Rpg-GUI-Animation-Sheet_22: 990743571
+      Rpg-GUI-Animation-Sheet_23: -1627487935
+      Rpg-GUI-Animation-Sheet_24: -177390038
+      Rpg-GUI-Animation-Sheet_25: -949210837
+      Rpg-GUI-Animation-Sheet_26: 440200706
+      Rpg-GUI-Animation-Sheet_27: 1793596680
+      Rpg-GUI-Animation-Sheet_28: 1407577495
+      Rpg-GUI-Animation-Sheet_29: -1551183925
+      Rpg-GUI-Animation-Sheet_3: 1110518120
+      Rpg-GUI-Animation-Sheet_30: 2003451245
+      Rpg-GUI-Animation-Sheet_31: 2094795625
+      Rpg-GUI-Animation-Sheet_32: 1239646572
+      Rpg-GUI-Animation-Sheet_33: 320155040
+      Rpg-GUI-Animation-Sheet_34: -195559549
+      Rpg-GUI-Animation-Sheet_35: -627424694
+      Rpg-GUI-Animation-Sheet_36: 145334983
+      Rpg-GUI-Animation-Sheet_37: 664277248
+      Rpg-GUI-Animation-Sheet_38: 1794204668
+      Rpg-GUI-Animation-Sheet_39: -20615059
+      Rpg-GUI-Animation-Sheet_4: 985787579
+      Rpg-GUI-Animation-Sheet_40: -1191721111
+      Rpg-GUI-Animation-Sheet_41: -103999169
+      Rpg-GUI-Animation-Sheet_42: -2038569219
+      Rpg-GUI-Animation-Sheet_43: 1416158026
+      Rpg-GUI-Animation-Sheet_44: -1548374438
+      Rpg-GUI-Animation-Sheet_45: -999321380
+      Rpg-GUI-Animation-Sheet_46: 446782187
+      Rpg-GUI-Animation-Sheet_47: -1171316794
+      Rpg-GUI-Animation-Sheet_48: -947002181
+      Rpg-GUI-Animation-Sheet_49: -498603499
+      Rpg-GUI-Animation-Sheet_5: -240704015
+      Rpg-GUI-Animation-Sheet_50: 2124609510
+      Rpg-GUI-Animation-Sheet_51: -1700515479
+      Rpg-GUI-Animation-Sheet_52: -908491471
+      Rpg-GUI-Animation-Sheet_53: -1375797556
+      Rpg-GUI-Animation-Sheet_54: 531926263
+      Rpg-GUI-Animation-Sheet_55: -1660306719
+      Rpg-GUI-Animation-Sheet_56: -374033444
+      Rpg-GUI-Animation-Sheet_57: 154345853
+      Rpg-GUI-Animation-Sheet_58: 175666996
+      Rpg-GUI-Animation-Sheet_59: -844645642
+      Rpg-GUI-Animation-Sheet_6: -1074580957
+      Rpg-GUI-Animation-Sheet_60: -2078772914
+      Rpg-GUI-Animation-Sheet_61: 1468360040
+      Rpg-GUI-Animation-Sheet_62: 1083177972
+      Rpg-GUI-Animation-Sheet_63: 1542021602
+      Rpg-GUI-Animation-Sheet_64: 1650745323
+      Rpg-GUI-Animation-Sheet_7: -1980015993
+      Rpg-GUI-Animation-Sheet_8: -1747665159
+      Rpg-GUI-Animation-Sheet_9: 1289787449
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
