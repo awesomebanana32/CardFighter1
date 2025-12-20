@@ -8,9 +8,9 @@ public class BuildingButton : MonoBehaviour
     [Header("Gameplay")]
     public int objectIDToSpawn = 0;
     public Camera mainCamera;
-    public float cityRadius = 20f;           
-    public LayerMask cityLayer;              // Layer for cities
-    public LayerMask buildingLayer;          // Layer for existing buildings
+    public float cityRadius = 20f;
+    public LayerMask cityLayer;
+    public LayerMask buildingLayer;
 
     [Header("Preview")]
     public GameObject previewPrefab;
@@ -23,30 +23,27 @@ public class BuildingButton : MonoBehaviour
     void Update()
     {
         if (!isPlacing)
+            return;
+
+        UpdatePreview();
+
+        if (Input.GetMouseButtonDown(0) && canPlaceHere)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                StartPlacement();
-            }
+            PlaceBuilding();
         }
-        else
+
+        if (Input.GetMouseButtonDown(1))
         {
-            UpdatePreview();
-
-            if (Input.GetMouseButtonDown(0) && canPlaceHere)
-            {
-                PlaceBuilding();
-            }
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                CancelPlacement();
-            }
+            CancelPlacement();
         }
     }
 
-    void StartPlacement()
+    // CALLED ONLY BY UI BUTTON
+    public void StartPlacement()
     {
+        if (isPlacing)
+            return;
+
         if (mainCamera == null)
         {
             Debug.LogError("Main Camera not assigned!");
@@ -54,7 +51,6 @@ public class BuildingButton : MonoBehaviour
         }
 
         int goldCost = database.GetGoldCostByID(objectIDToSpawn);
-
         if (GoldManager.Instance.CurrentGold < goldCost)
         {
             Debug.Log("Not enough gold to start placement.");
@@ -71,7 +67,6 @@ public class BuildingButton : MonoBehaviour
         DisableColliders(previewObject);
 
         CalculatePreviewHeightOffset();
-
         isPlacing = true;
     }
 
@@ -79,23 +74,21 @@ public class BuildingButton : MonoBehaviour
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
-        {
-            if (hit.collider.GetComponent<Terrain>() == null)
-                return;
+        if (!Physics.Raycast(ray, out RaycastHit hit, 1000f))
+            return;
 
-            Vector3 alignedPos = hit.point;
-            alignedPos.y += previewHeightOffset;
-            previewObject.transform.position = alignedPos;
+        if (hit.collider.GetComponent<Terrain>() == null)
+            return;
 
-            // Check if placement is valid
-            bool withinCity = IsWithinCityRadius(alignedPos);
-            bool overlapping = IsOverlappingBuilding(alignedPos);
+        Vector3 alignedPos = hit.point;
+        alignedPos.y += previewHeightOffset;
+        previewObject.transform.position = alignedPos;
 
-            canPlaceHere = withinCity && !overlapping;
+        bool withinCity = IsWithinCityRadius(alignedPos);
+        bool overlapping = IsOverlappingBuilding();
 
-            SetPreviewColor(canPlaceHere);
-        }
+        canPlaceHere = withinCity && !overlapping;
+        SetPreviewColor(canPlaceHere);
     }
 
     void PlaceBuilding()
@@ -103,15 +96,10 @@ public class BuildingButton : MonoBehaviour
         int goldCost = database.GetGoldCostByID(objectIDToSpawn);
 
         if (!GoldManager.Instance.SpendGold(goldCost))
-        {
-            Debug.Log("Not enough gold!");
             return;
-        }
 
-        Vector3 spawnPos = previewObject.transform.position;
         GameObject prefab = database.GetPrefabByID(objectIDToSpawn);
-
-        Instantiate(prefab, spawnPos, Quaternion.identity);
+        Instantiate(prefab, previewObject.transform.position, Quaternion.identity);
 
         Destroy(previewObject);
         isPlacing = false;
@@ -126,7 +114,6 @@ public class BuildingButton : MonoBehaviour
     void CalculatePreviewHeightOffset()
     {
         Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
-
         if (renderers.Length == 0)
         {
             previewHeightOffset = 0f;
@@ -135,51 +122,40 @@ public class BuildingButton : MonoBehaviour
 
         Bounds bounds = renderers[0].bounds;
         for (int i = 1; i < renderers.Length; i++)
-        {
             bounds.Encapsulate(renderers[i].bounds);
-        }
 
         previewHeightOffset = bounds.extents.y;
     }
 
     void DisableColliders(GameObject obj)
     {
-        Collider[] colliders = obj.GetComponentsInChildren<Collider>();
-        foreach (Collider c in colliders)
+        foreach (Collider c in obj.GetComponentsInChildren<Collider>())
             c.enabled = false;
     }
 
     bool IsWithinCityRadius(Vector3 position)
     {
-        Collider[] hits = Physics.OverlapSphere(position, cityRadius, cityLayer);
-        return hits.Length > 0;
+        return Physics.OverlapSphere(position, cityRadius, cityLayer).Length > 0;
     }
 
-    bool IsOverlappingBuilding(Vector3 position)
+    bool IsOverlappingBuilding()
     {
         Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
-        if (renderers.Length == 0) return false;
+        if (renderers.Length == 0)
+            return false;
 
-        // Calculate bounds for placement check
         Bounds bounds = renderers[0].bounds;
         for (int i = 1; i < renderers.Length; i++)
-        {
             bounds.Encapsulate(renderers[i].bounds);
-        }
 
-        // Check for overlaps with building layer
-        Collider[] hits = Physics.OverlapBox(bounds.center, bounds.extents, Quaternion.identity, buildingLayer);
-        return hits.Length > 0;
+        return Physics.OverlapBox(bounds.center, bounds.extents, Quaternion.identity, buildingLayer).Length > 0;
     }
 
     void SetPreviewColor(bool valid)
     {
-        if (previewObject == null) return;
-
         Color color = valid ? Color.green : Color.red;
 
-        Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
-        foreach (Renderer r in renderers)
+        foreach (Renderer r in previewObject.GetComponentsInChildren<Renderer>())
         {
             foreach (Material m in r.materials)
                 m.color = color;

@@ -44,7 +44,7 @@ MonoBehaviour:
     <ID>k__BackingField: 4
     <Size>k__BackingField: {x: 2, y: 2}
     <Prefab>k__BackingField: {fileID: 3813753915969858596, guid: 9db08cbc7192dd445ae588cb04af53d6, type: 3}
-    <PopulationCost>k__BackingField: 7
+    <PopulationCost>k__BackingField: 0
     <GoldCost>k__BackingField: 125
     <Cooldown>k__BackingField: 1
     <Stealth>k__BackingField: 5
@@ -54,6 +54,15 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 4323641092637380009, guid: 0ac8b21001e24405da5b6b5ec41dc36e, type: 3}
     <PopulationCost>k__BackingField: 3
+    <GoldCost>k__BackingField: 150
+    <Cooldown>k__BackingField: 3
+    <Stealth>k__BackingField: 5
+    <CardCover>k__BackingField: {fileID: 21300000, guid: 52ef342a76c117d4ea2b8f90ccc81690, type: 3}
+  - <Name>k__BackingField: Gold Mine
+    <ID>k__BackingField: 6
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2363604914908516518, guid: 166d28c3174e7464f94f0516682083ae, type: 3}
+    <PopulationCost>k__BackingField: 0
     <GoldCost>k__BackingField: 150
     <Cooldown>k__BackingField: 3
     <Stealth>k__BackingField: 5
