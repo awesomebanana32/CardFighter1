@@ -4621,7 +4621,7 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: 21f1423b568c13c409f8fb4ab180176b, type: 2}
   objectIDToSpawn: 4
   mainCamera: {fileID: 330585545}
-  cityRadius: 70
+  cityRadius: 50
   cityLayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -8733,7 +8733,7 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: 21f1423b568c13c409f8fb4ab180176b, type: 2}
   objectIDToSpawn: 6
   mainCamera: {fileID: 330585545}
-  cityRadius: 70
+  cityRadius: 50
   cityLayer:
     serializedVersion: 2
     m_Bits: 2048

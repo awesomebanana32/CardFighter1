@@ -38,7 +38,7 @@ public class BuildingButton : MonoBehaviour
         }
     }
 
-    // CALLED ONLY BY UI BUTTON
+    // Called only by UI button
     public void StartPlacement()
     {
         if (isPlacing)
@@ -74,10 +74,7 @@ public class BuildingButton : MonoBehaviour
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (!Physics.Raycast(ray, out RaycastHit hit, 1000f))
-            return;
-
-        if (hit.collider.GetComponent<Terrain>() == null)
+        if (!Physics.Raycast(ray, out RaycastHit hit, 1000f, LayerMask.GetMask("ground")))
             return;
 
         Vector3 alignedPos = hit.point;
