@@ -8740,7 +8740,7 @@ MonoBehaviour:
   buildingLayer:
     serializedVersion: 2
     m_Bits: 512
-  previewPrefab: {fileID: 2363604914908516518, guid: 166d28c3174e7464f94f0516682083ae, type: 3}
+  previewPrefab: {fileID: 2363604914908516518, guid: b524b3a03ec7b514e95751511256e486, type: 3}
 --- !u!114 &1843704073
 MonoBehaviour:
   m_ObjectHideFlags: 0
